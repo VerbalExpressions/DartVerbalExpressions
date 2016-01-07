@@ -14,18 +14,16 @@ class SanitizeTests {
 
       test('Should throw exception if null or empty', () {
         expect(() => verbalExpressions.sanitize(null), throwsA(predicate((e) => e is ArgumentError)));
+        expect(() => verbalExpressions.sanitize(null), throwsA(predicate((e) => e is ArgumentError)));
         expect(() => verbalExpressions.sanitize(''), throwsA(predicate((e) => e is ArgumentError)));
       });
 
-      //TODO write correct test and implementation
       test('Should return escaped string', () {
-        var value = "*+?";
-        var result = '';
-        var expected = "\*\+\?";
+        var value = ". \$ ^ { [ ( | ) * + ? \\";
+        var expected = "\\. \\\$ \\^ \\{ \\[ \\( \\| \\) \\* \\+ \\? \\\\";
 
-        result = verbalExpressions.sanitize(value);
-
-      expect(expected, result);
+        var result = verbalExpressions.sanitize(value);
+        expect(result, expected);
       });
     });
   }

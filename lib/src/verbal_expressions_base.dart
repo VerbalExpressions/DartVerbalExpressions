@@ -13,7 +13,14 @@ class VerbalExpressions {
       throw new ArgumentError('Value is empty');
     }
 
-    return value;
+    return _escape(value);
+  }
+
+  String _escape(String value){
+    var pattern = '[\\.|\\\$|\\^|\\{|\\[|\\(|\\||\\)|\\*|\\+|\\?|\\\\]';
+    return value.replaceAllMapped(new RegExp(pattern), (match) {
+      return '\\${match.group(0)}';
+    });
   }
 
   VerbalExpressions startOfLine([bool enable = true]) {
@@ -26,26 +33,35 @@ class VerbalExpressions {
     return this;
   }
 
-  String toString(){
-    return '$_prefixes$_source$_suffixes';
-  }
-
-  bool isMatch(String value) {
-    return true;
-  }
-
-  VerbalExpressions add(String value) {
+  VerbalExpressions add(String value, [bool toSanitize = true]) {
+    value = toSanitize ? sanitize(value) : value;
     _source += value;
     return this;
   }
 
   VerbalExpressions maybe(String value, [bool toSanitize = true]) {
     value = toSanitize ? sanitize(value) : value;
-    return add('($value)?');
+    return add('($value)?', false);
   }
 
   VerbalExpressions then(String value, [bool toSanitize = true]) {
     value = toSanitize ? sanitize(value) : value;
-    return add('($value)');
+    return add('($value)', false);
+  } 
+
+  VerbalExpressions find(String value, [bool toSanitize = true]) {
+    return then(value, toSanitize);
+  }
+
+  VerbalExpressions anything() {
+    return add('(.*)', false);
+  }
+
+  String toString(){
+    return '$_prefixes$_source$_suffixes';
+  }
+
+  bool isMatch(String value) {
+    return true;
   }
 }
