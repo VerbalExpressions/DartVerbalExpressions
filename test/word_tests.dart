@@ -1,11 +1,11 @@
-library verbal_expressions.anything_tests;
+library verbal_expressions.word_tests;
 
 import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
-class AnythingTests {
+class WordTests {
   static run(){
-    group('Anything', () {
+    group('Word', () {
 
       VerbalExpressions verbalExpressions;
 
@@ -16,27 +16,26 @@ class AnythingTests {
       test('Should return correct regex', () {
         verbalExpressions
         .startOfLine()
-        .anything()
+        .word()
         .endOfLine();
 
-        expect(verbalExpressions.toString(), '^(.*)\$', reason: 'Regex should be "^(.*)\$"');
+        expect(verbalExpressions.toString(), '^\\w+\$', reason: 'Regex should be "^\\t\$"');
       });
 
       test('Should match', () {
         verbalExpressions
         .startOfLine()
-        .anything()
+        .word()
         .endOfLine();
 
         var matcher = new RegExp(verbalExpressions.toString());
-        expect(matcher.hasMatch('what'), isTrue);
-        expect(matcher.hasMatch(' '), isTrue);
-        expect(matcher.hasMatch(''), isTrue);
+        expect(matcher.hasMatch('abc123'), isTrue, reason: 'word');
+        expect(matcher.hasMatch('@#'), isFalse, reason: 'non-word');
       });
     });
   }
 }
 
 void main() {
-  AnythingTests.run();
+  WordTests.run();
 }

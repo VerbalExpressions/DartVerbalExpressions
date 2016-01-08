@@ -1,11 +1,11 @@
-library verbal_expressions.anything_tests;
+library verbal_expressions.something_tests;
 
 import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
-class AnythingTests {
+class SomethingTests {
   static run(){
-    group('Anything', () {
+    group('Something', () {
 
       VerbalExpressions verbalExpressions;
 
@@ -16,27 +16,27 @@ class AnythingTests {
       test('Should return correct regex', () {
         verbalExpressions
         .startOfLine()
-        .anything()
+        .something()
         .endOfLine();
 
-        expect(verbalExpressions.toString(), '^(.*)\$', reason: 'Regex should be "^(.*)\$"');
+        expect(verbalExpressions.toString(), '^(.+)\$', reason: 'Regex should be "^(.+)\$"');
       });
 
       test('Should match', () {
         verbalExpressions
         .startOfLine()
-        .anything()
+        .something()
         .endOfLine();
 
         var matcher = new RegExp(verbalExpressions.toString());
-        expect(matcher.hasMatch('what'), isTrue);
-        expect(matcher.hasMatch(' '), isTrue);
-        expect(matcher.hasMatch(''), isTrue);
+        expect(matcher.hasMatch('what'), isTrue, reason: 'what');
+        expect(matcher.hasMatch(' '), isTrue, reason: 'Space');
+        expect(matcher.hasMatch(''), isFalse, reason: 'empty string doesn\'t have something');
       });
     });
   }
 }
 
 void main() {
-  AnythingTests.run();
+  SomethingTests.run();
 }

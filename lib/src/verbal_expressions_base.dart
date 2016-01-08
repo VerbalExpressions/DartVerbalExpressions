@@ -62,6 +62,40 @@ class VerbalExpressions {
     return _addWithoutSanitize('(.*)');
   }
 
+  VerbalExpressions anythingBut(String value) {
+    value = sanitize(value);
+    return _addWithoutSanitize('([^$value]*)');
+  }
+
+  VerbalExpressions something() {
+    return _addWithoutSanitize('(.+)');
+  }
+
+  VerbalExpressions somethingBut(String value) {
+    value = sanitize(value);
+    return _addWithoutSanitize('([^$value]+)');
+  }
+
+  VerbalExpressions lineBreak() {
+    return _addWithoutSanitize('(\\r\\n|\\r|\\n)'); // Unix + Windows CRLF
+  }
+
+  VerbalExpressions br() {
+    return lineBreak(); // Unix + Windows CRLF
+  }
+
+  VerbalExpressions tab() {
+    return _addWithoutSanitize('\\t');
+  }
+
+  VerbalExpressions word() {
+    return _addWithoutSanitize('\\w+');
+  }
+
+  VerbalExpressions whitespace() {
+    return _addWithoutSanitize('\\s');
+  }
+
   String toString(){
     return '$_prefixes$_source$_suffixes';
   }

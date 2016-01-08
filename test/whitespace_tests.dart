@@ -1,11 +1,11 @@
-library verbal_expressions.anything_tests;
+library verbal_expressions.whitespace_tests;
 
 import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
-class AnythingTests {
+class WhitespaceTests {
   static run(){
-    group('Anything', () {
+    group('Whitespace', () {
 
       VerbalExpressions verbalExpressions;
 
@@ -16,27 +16,26 @@ class AnythingTests {
       test('Should return correct regex', () {
         verbalExpressions
         .startOfLine()
-        .anything()
+        .whitespace()
         .endOfLine();
 
-        expect(verbalExpressions.toString(), '^(.*)\$', reason: 'Regex should be "^(.*)\$"');
+        expect(verbalExpressions.toString(), '^\\s\$', reason: 'Regex should be "^\\s\$"');
       });
 
       test('Should match', () {
         verbalExpressions
         .startOfLine()
-        .anything()
+        .whitespace()
         .endOfLine();
 
         var matcher = new RegExp(verbalExpressions.toString());
-        expect(matcher.hasMatch('what'), isTrue);
-        expect(matcher.hasMatch(' '), isTrue);
-        expect(matcher.hasMatch(''), isTrue);
+        expect(matcher.hasMatch(' '), isTrue, reason: 'whitespace');
+        expect(matcher.hasMatch('1'), isFalse, reason: 'non whitespace');
       });
     });
   }
 }
 
 void main() {
-  AnythingTests.run();
+  WhitespaceTests.run();
 }
