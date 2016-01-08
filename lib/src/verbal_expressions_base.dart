@@ -33,28 +33,33 @@ class VerbalExpressions {
     return this;
   }
 
-  VerbalExpressions add(String value, [bool toSanitize = true]) {
+  VerbalExpressions add(String value) {
+    _source += sanitize(value);
+    return this;
+  }
+
+  VerbalExpressions _addWithoutSanitize(String value, [bool toSanitize = false]) {
     value = toSanitize ? sanitize(value) : value;
     _source += value;
     return this;
   }
 
-  VerbalExpressions maybe(String value, [bool toSanitize = true]) {
-    value = toSanitize ? sanitize(value) : value;
-    return add('($value)?', false);
+  VerbalExpressions maybe(String value) {
+    value = sanitize(value);
+    return _addWithoutSanitize('($value)?');
   }
 
-  VerbalExpressions then(String value, [bool toSanitize = true]) {
-    value = toSanitize ? sanitize(value) : value;
-    return add('($value)', false);
-  } 
+  VerbalExpressions then(String value) {
+    value = sanitize(value);
+    return _addWithoutSanitize('($value)');
+  }
 
-  VerbalExpressions find(String value, [bool toSanitize = true]) {
-    return then(value, toSanitize);
+  VerbalExpressions find(String value) {
+    return then(value);
   }
 
   VerbalExpressions anything() {
-    return add('(.*)', false);
+    return _addWithoutSanitize('(.*)');
   }
 
   String toString(){
