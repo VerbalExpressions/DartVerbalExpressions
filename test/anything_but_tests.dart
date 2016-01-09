@@ -19,7 +19,7 @@ class AnythingButTests {
         .anythingBut('test')
         .endOfLine();
 
-        expect(verbalExpressions.toString(), '^([^test]*)\$', reason: 'Regex should be "^([^test]*)\$"');
+        expect(verbalExpressions.toRegExp().pattern, '^([^test]*)\$', reason: 'Regex should be "^([^test]*)\$"');
       });
 
       test('Should match', () {
@@ -28,7 +28,7 @@ class AnythingButTests {
         .anythingBut('w')
         .endOfLine();
 
-        var matcher = new RegExp(verbalExpressions.toString());
+        var matcher = verbalExpressions.toRegExp();
         expect(matcher.hasMatch('what'), isFalse, reason: 'starts with w');
         expect(matcher.hasMatch('that'), isTrue, reason: 'Not contain w');
         expect(matcher.hasMatch(' '), isTrue, reason: 'Not contain w');

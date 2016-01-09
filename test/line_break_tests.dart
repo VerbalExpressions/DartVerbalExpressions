@@ -19,7 +19,7 @@ class LineBreakTests {
         .lineBreak()
         .endOfLine();
 
-        expect(verbalExpressions.toString(), '^(\\r\\n|\\r|\\n)\$', reason: 'Regex should be "^(\\r\\n|\\r|\\n)\$"');
+        expect(verbalExpressions.toRegExp().pattern, '^(\\r\\n|\\r|\\n)\$', reason: 'Regex should be "^(\\r\\n|\\r|\\n)\$"');
       });
 
       test('Should match', () {
@@ -30,7 +30,7 @@ class LineBreakTests {
         .then("def")
         .endOfLine();
 
-        var matcher = new RegExp(verbalExpressions.toString());
+        var matcher = verbalExpressions.toRegExp();
         expect(matcher.hasMatch('abc\r\ndef'), isTrue, reason: 'abc then line break then def');
         expect(matcher.hasMatch('abc\ndef'), isTrue, reason: 'abc then line break then def');
         expect(matcher.hasMatch('abc\r\n def'), isFalse, reason: 'abc then line break then space then def');

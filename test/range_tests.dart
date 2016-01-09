@@ -26,7 +26,7 @@ class RangeTests {
         .range([new Range('a', 'b'), new Range('0', '9')])
         .endOfLine();
 
-        expect(verbalExpressions.toString(), '^[a-b0-9]\$', reason: 'Regex should be "^[a-b0-9]\$"');
+        expect(verbalExpressions.toRegExp().pattern, '^[a-b0-9]\$', reason: 'Regex should be "^[a-b0-9]\$"');
       });
 
       test('Should match with multiple ranges', () {
@@ -35,7 +35,7 @@ class RangeTests {
         .range([new Range('a', 'z'), new Range('0', '5')])
         .endOfLine();
 
-        var matcher = new RegExp(verbalExpressions.toString());
+        var matcher = verbalExpressions.toRegExp();
         expect(matcher.hasMatch('b'), isTrue, reason: 'Regex don\'t matches letter');
         expect(matcher.hasMatch('A'), isFalse, reason: 'Regex matches capital leters, but should match only lower case');
       });

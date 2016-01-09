@@ -15,12 +15,12 @@ class StartOfLineTests {
 
       test('Should add "^" in the beginning when is enable', () {
         verbalExpressions.startOfLine(true);
-        expect(verbalExpressions.toString(), '^', reason: 'missing start of line regex');
+        expect(verbalExpressions.toRegExp().pattern, '^', reason: 'missing start of line regex');
       });
 
       test('Should not add "^" in the beginning when is not enable', () {
         verbalExpressions.startOfLine(false);
-        expect(verbalExpressions.toString(), '', reason: 'missing start of line regex');
+        expect(verbalExpressions.toRegExp().pattern, '', reason: 'missing start of line regex');
       });
 
       test('Should append in the beginning of the expression when placed in random order', () {
@@ -29,7 +29,7 @@ class StartOfLineTests {
           .add('ing')
           .startOfLine();
 
-        var matcher = new RegExp(verbalExpressions.toString());
+        var matcher = verbalExpressions.toRegExp();
         expect(matcher.hasMatch('testing1234'), isTrue, reason: 'Should match that the text starts with test');
       });
 
@@ -39,7 +39,7 @@ class StartOfLineTests {
         .then('http')
         .maybe('www');
 
-        var matcher = new RegExp(verbalExpressions.toString());
+        var matcher = verbalExpressions.toRegExp();
         expect(matcher.hasMatch('http'), isTrue, reason: 'Should match http in start');
       });
 
@@ -49,7 +49,7 @@ class StartOfLineTests {
         .then('http')
         .maybe('www');
 
-        var matcher = new RegExp(verbalExpressions.toString());
+        var matcher = verbalExpressions.toRegExp();
         expect(matcher.hasMatch('www'), isFalse, reason: 'Should not match www in start');
       });
     });

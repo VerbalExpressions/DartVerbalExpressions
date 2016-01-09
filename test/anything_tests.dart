@@ -19,7 +19,7 @@ class AnythingTests {
         .anything()
         .endOfLine();
 
-        expect(verbalExpressions.toString(), '^(.*)\$', reason: 'Regex should be "^(.*)\$"');
+        expect(verbalExpressions.toRegExp().pattern, '^(.*)\$', reason: 'Regex should be "^(.*)\$"');
       });
 
       test('Should match', () {
@@ -28,7 +28,7 @@ class AnythingTests {
         .anything()
         .endOfLine();
 
-        var matcher = new RegExp(verbalExpressions.toString());
+        var matcher = verbalExpressions.toRegExp();
         expect(matcher.hasMatch('what'), isTrue);
         expect(matcher.hasMatch(' '), isTrue);
         expect(matcher.hasMatch(''), isTrue);

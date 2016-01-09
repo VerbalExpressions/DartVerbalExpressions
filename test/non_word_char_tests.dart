@@ -19,7 +19,7 @@ class NonWordCharTests {
         .nonWordChar()
         .endOfLine();
 
-        expect(verbalExpressions.toString(), '^\\W\$', reason: 'Regex should be "^\\W\$"');
+        expect(verbalExpressions.toRegExp().pattern, '^\\W\$', reason: 'Regex should be "^\\W\$"');
       });
 
       test('Should match', () {
@@ -28,7 +28,7 @@ class NonWordCharTests {
         .nonWordChar()
         .endOfLine();
 
-        var matcher = new RegExp(verbalExpressions.toString());
+        var matcher = verbalExpressions.toRegExp();
         expect(matcher.hasMatch('a'), isFalse, reason: 'word character');
         expect(matcher.hasMatch('5'), isFalse, reason: 'word character');
         expect(matcher.hasMatch('@'), isTrue, reason: 'non word character');

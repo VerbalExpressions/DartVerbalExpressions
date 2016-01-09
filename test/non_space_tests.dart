@@ -19,7 +19,7 @@ class NonSpaceTests {
         .nonSpace()
         .endOfLine();
 
-        expect(verbalExpressions.toString(), '^\\S\$', reason: 'Regex should be "^\\S\$"');
+        expect(verbalExpressions.toRegExp().pattern, '^\\S\$', reason: 'Regex should be "^\\S\$"');
       });
 
       test('Should match', () {
@@ -28,7 +28,7 @@ class NonSpaceTests {
         .nonSpace()
         .endOfLine();
 
-        var matcher = new RegExp(verbalExpressions.toString());
+        var matcher = verbalExpressions.toRegExp();
         expect(matcher.hasMatch(' '), isFalse, reason: 'whitespace');
         expect(matcher.hasMatch('1'), isTrue, reason: 'non whitespace');
       });

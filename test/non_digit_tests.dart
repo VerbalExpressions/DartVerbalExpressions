@@ -19,7 +19,7 @@ class NonDigitTests {
         .nonDigit()
         .endOfLine();
 
-        expect(verbalExpressions.toString(), '^\\D\$', reason: 'Regex should be "^\\D\$"');
+        expect(verbalExpressions.toRegExp().pattern, '^\\D\$', reason: 'Regex should be "^\\D\$"');
       });
 
       test('Should match', () {
@@ -28,7 +28,7 @@ class NonDigitTests {
         .nonDigit()
         .endOfLine();
 
-        var matcher = new RegExp(verbalExpressions.toString());
+        var matcher = verbalExpressions.toRegExp();
         expect(matcher.hasMatch('5'), isFalse, reason: 'digit');
         expect(matcher.hasMatch('a'), isTrue, reason: 'non digit');
       });

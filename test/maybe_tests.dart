@@ -19,7 +19,7 @@ class MaybeTests {
         .then('a')
         .maybe('b');
 
-        expect(verbalExpressions.toString(), '^(a)(b)?', reason: 'Regex should be "^(a)(b)?"');
+        expect(verbalExpressions.toRegExp().pattern, '^(a)(b)?', reason: 'Regex should be "^(a)(b)?"');
       });
 
       test('Should match', () {
@@ -28,7 +28,7 @@ class MaybeTests {
         .then('a')
         .maybe('b');
 
-        var matcher = new RegExp(verbalExpressions.toString());
+        var matcher = verbalExpressions.toRegExp();
         expect(matcher.hasMatch('acb'), isTrue, reason: 'Maybe has a "b" after an "a"');
         expect(matcher.hasMatch('abc'), isTrue, reason: 'Maybe has a "b" after an "a"');
         expect(matcher.hasMatch('cab'), isFalse, reason: 'Maybe has a "b" after an "a"');

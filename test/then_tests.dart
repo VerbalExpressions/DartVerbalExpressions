@@ -19,7 +19,7 @@ class ThenTests {
         .then("a")
         .then("new");
 
-        expect(verbalExpressions.toString(), "^(a)(new)", reason: 'Regex should be "^(a)(new)"');
+        expect(verbalExpressions.toRegExp().pattern, "^(a)(new)", reason: 'Regex should be "^(a)(new)"');
       });
 
       test('Should match', () {
@@ -29,7 +29,7 @@ class ThenTests {
         .then("b")
         .then("c");
 
-        var matcher = new RegExp(verbalExpressions.toString());
+        var matcher = verbalExpressions.toRegExp();
         expect(matcher.hasMatch('acb'), isFalse, reason: 'Correct order should be "a", "b", "c"');
         expect(matcher.hasMatch('abc'), isTrue, reason: 'Correct order should be "a", "b", "c"');
         expect(matcher.hasMatch('cab'), isFalse, reason: 'Correct order should be "a", "b", "c"');

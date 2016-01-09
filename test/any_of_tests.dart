@@ -19,7 +19,7 @@ class AnyOfTests {
         .anyOf('xyz')
         .endOfLine();
 
-        expect(verbalExpressions.toString(), '^[xyz]\$', reason: 'Regex should be "^[xyz]\$"');
+        expect(verbalExpressions.toRegExp().pattern, '^[xyz]\$', reason: 'Regex should be "^[xyz]\$"');
       });
 
       test('Should match', () {
@@ -29,7 +29,7 @@ class AnyOfTests {
         .anyOf('xyz')
         .endOfLine();
 
-        var matcher = new RegExp(verbalExpressions.toString());
+        var matcher = verbalExpressions.toRegExp();
         expect(matcher.hasMatch('ay'), isTrue, reason: 'Has an x, y, or z after a');
         expect(matcher.hasMatch('abc'), isFalse, reason: 'Doesn\'t have an x, y, or z after a');
       });

@@ -18,7 +18,7 @@ class EndOfLineTests {
         .add('.com')
         .endOfLine();
 
-        var matcher = new RegExp(verbalExpressions.toString());
+        var matcher = verbalExpressions.toRegExp();
         expect(matcher.hasMatch('www.google.com'), isTrue, reason: 'Should match ".com" in end');
       });
 
@@ -27,7 +27,7 @@ class EndOfLineTests {
         .add('.com')
         .endOfLine();
 
-        var matcher = new RegExp(verbalExpressions.toString());
+        var matcher = verbalExpressions.toRegExp();
         expect(matcher.hasMatch('www.google.com/'), isFalse, reason: 'Should not match "/" in end');
       });
     });

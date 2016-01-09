@@ -132,8 +132,8 @@ class VerbalExpressions {
     return _addWithoutSanitize(result);
   }
 
-  String toString(){
-    return '$_prefixes$_source$_suffixes';
+  RegExp toRegExp(){
+    return new RegExp('$_prefixes$_source$_suffixes');
   }
 
   bool isMatch(String value) {

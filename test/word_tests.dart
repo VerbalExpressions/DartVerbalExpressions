@@ -19,7 +19,7 @@ class WordTests {
         .word()
         .endOfLine();
 
-        expect(verbalExpressions.toString(), '^\\w+\$', reason: 'Regex should be "^\\t\$"');
+        expect(verbalExpressions.toRegExp().pattern, '^\\w+\$', reason: 'Regex should be "^\\t\$"');
       });
 
       test('Should match', () {
@@ -28,7 +28,7 @@ class WordTests {
         .word()
         .endOfLine();
 
-        var matcher = new RegExp(verbalExpressions.toString());
+        var matcher = verbalExpressions.toRegExp();
         expect(matcher.hasMatch('abc123'), isTrue, reason: 'word');
         expect(matcher.hasMatch('@#'), isFalse, reason: 'non-word');
       });

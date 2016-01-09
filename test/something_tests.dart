@@ -19,7 +19,7 @@ class SomethingTests {
         .something()
         .endOfLine();
 
-        expect(verbalExpressions.toString(), '^(.+)\$', reason: 'Regex should be "^(.+)\$"');
+        expect(verbalExpressions.toRegExp().pattern, '^(.+)\$', reason: 'Regex should be "^(.+)\$"');
       });
 
       test('Should match', () {
@@ -28,7 +28,7 @@ class SomethingTests {
         .something()
         .endOfLine();
 
-        var matcher = new RegExp(verbalExpressions.toString());
+        var matcher = verbalExpressions.toRegExp();
         expect(matcher.hasMatch('what'), isTrue, reason: 'what');
         expect(matcher.hasMatch(' '), isTrue, reason: 'Space');
         expect(matcher.hasMatch(''), isFalse, reason: 'empty string doesn\'t have something');
