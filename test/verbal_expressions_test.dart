@@ -13,10 +13,15 @@ import 'line_break_tests.dart';
 import 'br_tests.dart';
 import 'tab_tests.dart';
 import 'word_tests.dart';
-import 'whitespace_tests.dart';
+import 'space_tests.dart';
 import 'any_of_tests.dart';
 import 'any_tests.dart';
 import 'range_tests.dart';
+import 'word_char_tests.dart';
+import 'non_word_char_tests.dart';
+import 'digit_tests.dart';
+import 'non_digit_tests.dart';
+import 'non_space_tests.dart';
 
 void main() {
   StartOfLineTests.run();
@@ -32,8 +37,13 @@ void main() {
   BrTests.run();
   TabTests.run();
   WordTests.run();
-  WhitespaceTests.run();
+  SpaceTests.run();
   AnyOfTests.run();
   AnyTests.run();
   RangeTests.run();
+  DigitTests.run();
+  NonDigitTests.run();
+  WordCharTests.run();
+  NonWordCharTests.run();
+  NonSpaceTests.run();
 }

@@ -88,8 +88,28 @@ class VerbalExpressions {
     return _addWithoutSanitize('\\w+');
   }
 
-  VerbalExpressions whitespace() {
+  VerbalExpressions wordChar() {
+    return _addWithoutSanitize('\\w');
+  }
+
+  VerbalExpressions nonWordChar() {
+    return _addWithoutSanitize('\\W');
+  }
+
+  VerbalExpressions digit() {
+    return _addWithoutSanitize('\\d');
+  }
+
+  VerbalExpressions nonDigit() {
+    return _addWithoutSanitize('\\D');
+  }
+
+  VerbalExpressions space() {
     return _addWithoutSanitize('\\s');
+  }
+
+  VerbalExpressions nonSpace() {
+    return _addWithoutSanitize('\\S');
   }
 
   VerbalExpressions anyOf(String value) {
