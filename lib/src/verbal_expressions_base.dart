@@ -45,13 +45,11 @@ class VerbalExpressions {
   }
 
   VerbalExpressions maybe(String value) {
-    value = sanitize(value);
-    return _addWithoutSanitize('($value)?');
+    return _addWithoutSanitize('(${sanitize(value)})?');
   }
 
   VerbalExpressions then(String value) {
-    value = sanitize(value);
-    return _addWithoutSanitize('($value)');
+    return _addWithoutSanitize('(${sanitize(value)})');
   }
 
   VerbalExpressions find(String value) {
@@ -63,8 +61,7 @@ class VerbalExpressions {
   }
 
   VerbalExpressions anythingBut(String value) {
-    value = sanitize(value);
-    return _addWithoutSanitize('([^$value]*)');
+    return _addWithoutSanitize('([^${sanitize(value)}]*)');
   }
 
   VerbalExpressions something() {
@@ -72,8 +69,7 @@ class VerbalExpressions {
   }
 
   VerbalExpressions somethingBut(String value) {
-    value = sanitize(value);
-    return _addWithoutSanitize('([^$value]+)');
+    return _addWithoutSanitize('([^${sanitize(value)}]+)');
   }
 
   VerbalExpressions lineBreak() {
@@ -96,11 +92,47 @@ class VerbalExpressions {
     return _addWithoutSanitize('\\s');
   }
 
+  VerbalExpressions anyOf(String value) {
+    return _addWithoutSanitize('[${sanitize(value)}]');
+  }
+
+  VerbalExpressions any(String value) {
+    return anyOf(value);
+  }
+
+  VerbalExpressions range(List<Range> ranges) {
+
+    var result = '[';
+    ranges.forEach((range){
+      result += '${sanitize(range.from)}-${sanitize(range.to)}';
+    });
+
+    result += ']';
+
+    return _addWithoutSanitize(result);
+  }
+
   String toString(){
     return '$_prefixes$_source$_suffixes';
   }
 
   bool isMatch(String value) {
     return true;
+  }
+}
+
+class Range {
+  String from;
+  String to;
+
+  Range(this.from, this.to){
+
+    if (from == null || from.isEmpty){
+      throw new ArgumentError.notNull('from');
+    }
+
+    if (to == null || to.isEmpty){
+      throw new ArgumentError.notNull('to');
+    }
   }
 }

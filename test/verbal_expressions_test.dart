@@ -14,6 +14,9 @@ import 'br_tests.dart';
 import 'tab_tests.dart';
 import 'word_tests.dart';
 import 'whitespace_tests.dart';
+import 'any_of_tests.dart';
+import 'any_tests.dart';
+import 'range_tests.dart';
 
 void main() {
   StartOfLineTests.run();
@@ -30,4 +33,7 @@ void main() {
   TabTests.run();
   WordTests.run();
   WhitespaceTests.run();
+  AnyOfTests.run();
+  AnyTests.run();
+  RangeTests.run();
 }
