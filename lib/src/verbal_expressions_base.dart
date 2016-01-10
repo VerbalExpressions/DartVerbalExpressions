@@ -41,8 +41,7 @@ class VerbalExpressions {
     return this;
   }
 
-  VerbalExpressions _addWithoutSanitize(String value, [bool toSanitize = false]) {
-    value = toSanitize ? sanitize(value) : value;
+  VerbalExpressions _addWithoutSanitize(String value) {
     _source += value;
     return this;
   }
@@ -165,6 +164,18 @@ class VerbalExpressions {
 
   VerbalExpressions multiLineSearch([bool enable=true]){
     return _applyModifier('m', enable);
+  }
+
+  VerbalExpressions oneOrMore(){
+    return _addWithoutSanitize('+');
+  }
+
+  VerbalExpressions zeroOrMore(){
+    return _addWithoutSanitize('*');
+  }
+
+  VerbalExpressions count(int count){
+    return _addWithoutSanitize('{$count}');
   }
 
   RegExp toRegExp(){

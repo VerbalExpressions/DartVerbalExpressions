@@ -23,6 +23,9 @@ import 'digit_tests.dart';
 import 'non_digit_tests.dart';
 import 'non_space_tests.dart';
 import 'modifiers_tests.dart';
+import 'one_or_more_tests.dart';
+import 'zero_or_more_tests.dart';
+import 'count_tests.dart';
 
 void main() {
   StartOfLineTests.run();
@@ -48,4 +51,7 @@ void main() {
   NonWordCharTests.run();
   NonSpaceTests.run();
   ModifiersTests.run();
+  OneOrMoreTests.run();
+  ZeroOrMoreTests.run();
+  CountTests.run();
 }
