@@ -15,12 +15,12 @@ class StartOfLineTests {
 
       test('Should add "^" in the beginning when is enable', () {
         verbalExpressions.startOfLine(true);
-        expect(verbalExpressions.toRegExp().pattern, '^', reason: 'missing start of line regex');
+        expect(verbalExpressions.toString(), '^', reason: 'missing start of line regex');
       });
 
       test('Should not add "^" in the beginning when is not enable', () {
         verbalExpressions.startOfLine(false);
-        expect(verbalExpressions.toRegExp().pattern, '', reason: 'missing start of line regex');
+        expect(verbalExpressions.toString(), '', reason: 'missing start of line regex');
       });
 
       test('Should append in the beginning of the expression when placed in random order', () {

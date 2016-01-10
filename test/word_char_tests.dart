@@ -19,7 +19,7 @@ class WordCharTests {
         .wordChar()
         .endOfLine();
 
-        expect(verbalExpressions.toRegExp().pattern, '^\\w\$', reason: 'Regex should be "^\\w\$"');
+        expect(verbalExpressions.toString(), '^\\w\$', reason: 'Regex should be "^\\w\$"');
       });
 
       test('Should match', () {

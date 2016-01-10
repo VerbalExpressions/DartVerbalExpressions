@@ -19,7 +19,7 @@ class SomethingButTests {
         .somethingBut('test')
         .endOfLine();
 
-        expect(verbalExpressions.toRegExp().pattern, '^([^test]+)\$', reason: 'Regex should be "^([^test]+)\$"');
+        expect(verbalExpressions.toString(), '^([^test]+)\$', reason: 'Regex should be "^([^test]+)\$"');
       });
 
       test('Should match', () {

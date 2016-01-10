@@ -19,7 +19,7 @@ class TabTests {
         .tab()
         .endOfLine();
 
-        expect(verbalExpressions.toRegExp().pattern, '^\\t\$', reason: 'Regex should be "^\\t\$"');
+        expect(verbalExpressions.toString(), '^\\t\$', reason: 'Regex should be "^\\t\$"');
       });
 
       test('Should match', () {

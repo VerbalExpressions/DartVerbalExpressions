@@ -19,7 +19,7 @@ class DigitTests {
         .digit()
         .endOfLine();
 
-        expect(verbalExpressions.toRegExp().pattern, '^\\d\$', reason: 'Regex should be "^\\D\$"');
+        expect(verbalExpressions.toString(), '^\\d\$', reason: 'Regex should be "^\\D\$"');
       });
 
       test('Should match', () {

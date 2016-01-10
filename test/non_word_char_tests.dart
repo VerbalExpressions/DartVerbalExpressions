@@ -19,7 +19,7 @@ class NonWordCharTests {
         .nonWordChar()
         .endOfLine();
 
-        expect(verbalExpressions.toRegExp().pattern, '^\\W\$', reason: 'Regex should be "^\\W\$"');
+        expect(verbalExpressions.toString(), '^\\W\$', reason: 'Regex should be "^\\W\$"');
       });
 
       test('Should match', () {

@@ -19,7 +19,7 @@ class AnyOfTests {
         .anyOf('xyz')
         .endOfLine();
 
-        expect(verbalExpressions.toRegExp().pattern, '^[xyz]\$', reason: 'Regex should be "^[xyz]\$"');
+        expect(verbalExpressions.toString(), '^[xyz]\$', reason: 'Regex should be "^[xyz]\$"');
       });
 
       test('Should match', () {

@@ -19,7 +19,7 @@ class AnythingTests {
         .anything()
         .endOfLine();
 
-        expect(verbalExpressions.toRegExp().pattern, '^(.*)\$', reason: 'Regex should be "^(.*)\$"');
+        expect(verbalExpressions.toString(), '^(.*)\$', reason: 'Regex should be "^(.*)\$"');
       });
 
       test('Should match', () {

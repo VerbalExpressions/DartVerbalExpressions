@@ -26,7 +26,7 @@ class RangeTests {
         .range([new Range('a', 'b'), new Range('0', '9')])
         .endOfLine();
 
-        expect(verbalExpressions.toRegExp().pattern, '^[a-b0-9]\$', reason: 'Regex should be "^[a-b0-9]\$"');
+        expect(verbalExpressions.toString(), '^[a-b0-9]\$', reason: 'Regex should be "^[a-b0-9]\$"');
       });
 
       test('Should match with multiple ranges', () {

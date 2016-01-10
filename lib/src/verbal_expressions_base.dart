@@ -6,6 +6,9 @@ class VerbalExpressions {
   String _source = '';
   String _suffixes = '';
 
+  bool _ignoreCase = false;
+  bool _isMultiLine = false;
+
   String sanitize(String value)
   {
     if (value == null || value.isEmpty)
@@ -132,8 +135,44 @@ class VerbalExpressions {
     return _addWithoutSanitize(result);
   }
 
+  VerbalExpressions addModifier(String modifier){
+    return _applyModifier(modifier, true);
+  }
+
+  VerbalExpressions removeModifier(String modifier){
+    return _applyModifier(modifier, false);
+  }
+
+  VerbalExpressions _applyModifier(String modifier, bool enable){
+
+    switch(modifier){
+      case 'i':
+        _ignoreCase = enable;
+        break;
+      case 'm':
+        _isMultiLine = enable;
+        break;
+      default:
+        throw new ArgumentError('Unsupported modifier "$modifier"');
+    }
+
+    return this;
+  }
+
+  VerbalExpressions withAnyCase(){
+    return addModifier('i');
+  }
+
+  VerbalExpressions multiLineSearch(){
+    return addModifier('m');
+  }
+
   RegExp toRegExp(){
-    return new RegExp('$_prefixes$_source$_suffixes');
+    return new RegExp('$_prefixes$_source$_suffixes', caseSensitive: !_ignoreCase, multiLine: _isMultiLine);
+  }
+
+  String toString(){
+    return toRegExp().pattern;
   }
 
   bool isMatch(String value) {
