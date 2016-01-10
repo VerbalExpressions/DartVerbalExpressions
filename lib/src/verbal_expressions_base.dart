@@ -159,12 +159,12 @@ class VerbalExpressions {
     return this;
   }
 
-  VerbalExpressions withAnyCase(){
-    return addModifier('i');
+  VerbalExpressions withAnyCase([bool enable=true]){
+    return _applyModifier('i', enable);
   }
 
-  VerbalExpressions multiLineSearch(){
-    return addModifier('m');
+  VerbalExpressions multiLineSearch([bool enable=true]){
+    return _applyModifier('m', enable);
   }
 
   RegExp toRegExp(){

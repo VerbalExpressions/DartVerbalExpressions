@@ -35,7 +35,7 @@ class ModifiersTests {
         verbalExpressions = new VerbalExpressions();
       });
 
-      test('Should ignore case when withAnyCase is added', () {
+      test('Should ignore case when withAnyCase is enabled', () {
         verbalExpressions
         .startOfLine()
         .find('test')
@@ -46,10 +46,11 @@ class ModifiersTests {
         expect(matcher.hasMatch('TeSt'), isTrue, reason: 'Should ignore case');
       });
 
-      test('Should not ignore case when withAnyCase is not added', () {
+      test('Should not ignore case when withAnyCase is disabled', () {
         verbalExpressions
         .startOfLine()
         .find('test')
+        .withAnyCase(false)
         .endOfLine();
 
         var matcher = verbalExpressions.toRegExp();
@@ -89,7 +90,7 @@ class ModifiersTests {
         verbalExpressions = new VerbalExpressions();
       });
 
-      test('Should do multiline search when multiLineSearch is added', () {
+      test('Should do multiline search when multiLineSearch is enabled', () {
         verbalExpressions
         .startOfLine()
         .anything()
@@ -102,12 +103,13 @@ class ModifiersTests {
         expect(matcher.hasMatch(multiLineText), isTrue, reason: 'Should search in multiple lines');
       });
 
-      test('Should not do multiline search when multiLineSearch is not added', () {
+      test('Should not do multiline search when multiLineSearch is disabled', () {
         verbalExpressions
         .startOfLine()
         .anything()
         .then('text')
         .anything()
+        .multiLineSearch(false)
         .endOfLine();
 
         var matcher = verbalExpressions.toRegExp();
