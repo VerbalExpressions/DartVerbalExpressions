@@ -16,13 +16,13 @@ class ModifiersTests {
       test('Should throw exception if add incorrect modifier', () {
         expect(() => verbalExpressions.addModifier('u'), throwsA(predicate((e) => e is ArgumentError)));
         expect(() => verbalExpressions.addModifier('unknown'), throwsA(predicate((e) => e is ArgumentError)));
-        expect(() => verbalExpressions.addModifier('g'), throwsA(predicate((e) => e is ArgumentError)));
+        expect(() => verbalExpressions.addModifier('n'), throwsA(predicate((e) => e is ArgumentError)));
       });
 
       test('Should throw exception if remove incorrect modifier', () {
         expect(() => verbalExpressions.removeModifier('u'), throwsA(predicate((e) => e is ArgumentError)));
         expect(() => verbalExpressions.removeModifier('unknown'), throwsA(predicate((e) => e is ArgumentError)));
-        expect(() => verbalExpressions.removeModifier('g'), throwsA(predicate((e) => e is ArgumentError)));
+        expect(() => verbalExpressions.removeModifier('n'), throwsA(predicate((e) => e is ArgumentError)));
       });
 
     });
@@ -33,6 +33,16 @@ class ModifiersTests {
 
       setUp(() {
         verbalExpressions = new VerbalExpressions();
+      });
+
+      test('Should not ignore case by default', () {
+        verbalExpressions
+        .startOfLine()
+        .find('test')
+        .endOfLine();
+
+        var matcher = verbalExpressions.toRegExp();
+        expect(matcher.hasMatch('TeSt'), isFalse, reason: 'Should ignore case');
       });
 
       test('Should ignore case when withAnyCase is enabled', () {
@@ -90,26 +100,38 @@ class ModifiersTests {
         verbalExpressions = new VerbalExpressions();
       });
 
-      test('Should do multiline search when multiLineSearch is enabled', () {
+      test('Should be multiline search by default', () {
         verbalExpressions
         .startOfLine()
         .anything()
         .then('text')
         .anything()
-        .multiLineSearch()
         .endOfLine();
 
         var matcher = verbalExpressions.toRegExp();
         expect(matcher.hasMatch(multiLineText), isTrue, reason: 'Should search in multiple lines');
       });
 
-      test('Should not do multiline search when multiLineSearch is disabled', () {
+      test('Should do multiline search when searchOneLine is disabled', () {
         verbalExpressions
         .startOfLine()
         .anything()
         .then('text')
         .anything()
-        .multiLineSearch(false)
+        .searchOneLine(false)
+        .endOfLine();
+
+        var matcher = verbalExpressions.toRegExp();
+        expect(matcher.hasMatch(multiLineText), isTrue, reason: 'Should search in multiple lines');
+      });
+
+      test('Should not do multiline search when searchOneLine is enabled', () {
+        verbalExpressions
+        .startOfLine()
+        .anything()
+        .then('text')
+        .anything()
+        .searchOneLine(true)
         .endOfLine();
 
         var matcher = verbalExpressions.toRegExp();
@@ -142,6 +164,37 @@ class ModifiersTests {
         var matcher = verbalExpressions.toRegExp();
         expect(matcher.hasMatch(multiLineText), isFalse, reason: 'Should search in multiple lines');
       });
+    });
+
+    group('Global modifier', () {
+
+      VerbalExpressions verbalExpressions;
+
+      setUp(() {
+        verbalExpressions = new VerbalExpressions();
+      });
+
+      test('Should be replace first', () {
+        verbalExpressions.find('test').stopAtFirst(true);
+        expect(verbalExpressions.replace('test test test', 'done'), 'done test test');
+      });
+
+      test('Should be replace all', () {
+        verbalExpressions.find('test').stopAtFirst(false);
+        expect(verbalExpressions.replace('test test test', 'done'), 'done done done');
+      });
+
+      test('Should be replace first', () {
+        verbalExpressions.find('test').stopAtFirst(false).removeModifier('g');
+        expect(verbalExpressions.replace('test test test', 'done'), 'done test test');
+      });
+
+      test('Should be replace all', () {
+        verbalExpressions.find('test').addModifier('g');
+        expect(verbalExpressions.replace('test test test', 'done'), 'done done done');
+      });
+
+
     });
   }
 }

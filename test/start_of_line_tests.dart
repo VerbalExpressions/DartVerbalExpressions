@@ -25,8 +25,8 @@ class StartOfLineTests {
 
       test('Should append in the beginning of the expression when placed in random order', () {
         verbalExpressions
-          .add('test')
-          .add('ing')
+          .find('test')
+          .then('ing')
           .startOfLine();
 
         var matcher = verbalExpressions.toRegExp();

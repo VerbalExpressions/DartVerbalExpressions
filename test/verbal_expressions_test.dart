@@ -26,6 +26,7 @@ import 'modifiers_tests.dart';
 import 'one_or_more_tests.dart';
 import 'zero_or_more_tests.dart';
 import 'count_tests.dart';
+import 'replace_tests.dart';
 
 void main() {
   StartOfLineTests.run();
@@ -54,4 +55,5 @@ void main() {
   OneOrMoreTests.run();
   ZeroOrMoreTests.run();
   CountTests.run();
+  ReplaceTests.run();
 }

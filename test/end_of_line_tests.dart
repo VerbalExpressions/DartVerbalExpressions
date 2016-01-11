@@ -15,7 +15,7 @@ class EndOfLineTests {
 
       test('Should match .com in the end when add .comm in the end', () {
         verbalExpressions
-        .add('.com')
+        .find('.com')
         .endOfLine();
 
         var matcher = verbalExpressions.toRegExp();
@@ -24,7 +24,7 @@ class EndOfLineTests {
 
       test('Should not match "/" in the end when add .comm in the end', () {
         verbalExpressions
-        .add('.com')
+        .find('.com')
         .endOfLine();
 
         var matcher = verbalExpressions.toRegExp();

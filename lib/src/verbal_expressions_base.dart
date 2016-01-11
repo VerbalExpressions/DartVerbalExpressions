@@ -7,7 +7,8 @@ class VerbalExpressions {
   String _suffixes = '';
 
   bool _ignoreCase = false;
-  bool _isMultiLine = false;
+  bool _isMultiLine = true;
+  bool _isGlobal = false;
 
   String sanitize(String value)
   {
@@ -36,22 +37,17 @@ class VerbalExpressions {
     return this;
   }
 
-  VerbalExpressions add(String value) {
-    _source += sanitize(value);
-    return this;
-  }
-
-  VerbalExpressions _addWithoutSanitize(String value) {
-    _source += value;
+  VerbalExpressions _add(String expression) {
+    _source += expression;
     return this;
   }
 
   VerbalExpressions maybe(String value) {
-    return _addWithoutSanitize('(${sanitize(value)})?');
+    return _add('(${sanitize(value)})?');
   }
 
   VerbalExpressions then(String value) {
-    return _addWithoutSanitize('(${sanitize(value)})');
+    return _add('(${sanitize(value)})');
   }
 
   VerbalExpressions find(String value) {
@@ -59,23 +55,23 @@ class VerbalExpressions {
   }
 
   VerbalExpressions anything() {
-    return _addWithoutSanitize('(.*)');
+    return _add('(.*)');
   }
 
   VerbalExpressions anythingBut(String value) {
-    return _addWithoutSanitize('([^${sanitize(value)}]*)');
+    return _add('([^${sanitize(value)}]*)');
   }
 
   VerbalExpressions something() {
-    return _addWithoutSanitize('(.+)');
+    return _add('(.+)');
   }
 
   VerbalExpressions somethingBut(String value) {
-    return _addWithoutSanitize('([^${sanitize(value)}]+)');
+    return _add('([^${sanitize(value)}]+)');
   }
 
   VerbalExpressions lineBreak() {
-    return _addWithoutSanitize('(\\r\\n|\\r|\\n)'); // Unix + Windows CRLF
+    return _add('(\\r\\n|\\r|\\n)'); // Unix + Windows CRLF
   }
 
   VerbalExpressions br() {
@@ -83,39 +79,39 @@ class VerbalExpressions {
   }
 
   VerbalExpressions tab() {
-    return _addWithoutSanitize('\\t');
+    return _add('\\t');
   }
 
   VerbalExpressions word() {
-    return _addWithoutSanitize('\\w+');
+    return _add('\\w+');
   }
 
   VerbalExpressions wordChar() {
-    return _addWithoutSanitize('\\w');
+    return _add('\\w');
   }
 
   VerbalExpressions nonWordChar() {
-    return _addWithoutSanitize('\\W');
+    return _add('\\W');
   }
 
   VerbalExpressions digit() {
-    return _addWithoutSanitize('\\d');
+    return _add('\\d');
   }
 
   VerbalExpressions nonDigit() {
-    return _addWithoutSanitize('\\D');
+    return _add('\\D');
   }
 
   VerbalExpressions space() {
-    return _addWithoutSanitize('\\s');
+    return _add('\\s');
   }
 
   VerbalExpressions nonSpace() {
-    return _addWithoutSanitize('\\S');
+    return _add('\\S');
   }
 
   VerbalExpressions anyOf(String value) {
-    return _addWithoutSanitize('[${sanitize(value)}]');
+    return _add('[${sanitize(value)}]');
   }
 
   VerbalExpressions any(String value) {
@@ -131,7 +127,7 @@ class VerbalExpressions {
 
     result += ']';
 
-    return _addWithoutSanitize(result);
+    return _add(result);
   }
 
   VerbalExpressions addModifier(String modifier){
@@ -151,6 +147,9 @@ class VerbalExpressions {
       case 'm':
         _isMultiLine = enable;
         break;
+      case 'g':
+        _isGlobal = enable;
+        break;
       default:
         throw new ArgumentError('Unsupported modifier "$modifier"');
     }
@@ -162,20 +161,35 @@ class VerbalExpressions {
     return _applyModifier('i', enable);
   }
 
-  VerbalExpressions multiLineSearch([bool enable=true]){
-    return _applyModifier('m', enable);
+  VerbalExpressions searchOneLine([bool enable=true]){
+    return _applyModifier('m', !enable);
+  }
+
+  VerbalExpressions stopAtFirst([bool enable=true]){
+    return _applyModifier('g', !enable);
   }
 
   VerbalExpressions oneOrMore(){
-    return _addWithoutSanitize('+');
+    return _add('+');
   }
 
   VerbalExpressions zeroOrMore(){
-    return _addWithoutSanitize('*');
+    return _add('*');
   }
 
   VerbalExpressions count(int count){
-    return _addWithoutSanitize('{$count}');
+    return _add('{$count}');
+  }
+
+  String replace(String source, String value){
+
+    if (source == null) throw new ArgumentError.notNull('source');
+    if (value == null) throw new ArgumentError.notNull('value');
+
+    if (_isGlobal)
+      return source.replaceAll(this.toRegExp(), value);
+
+    return source.replaceFirst(this.toRegExp(), value);
   }
 
   RegExp toRegExp(){
