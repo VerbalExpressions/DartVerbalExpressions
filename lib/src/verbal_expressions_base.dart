@@ -34,7 +34,7 @@ class VerbalExpressions {
   }
 
   VerbalExpressions endOfLine([bool enable = true]) {
-    this._suffixes = enable ? '\$' : '';
+    this._suffixes += enable ? '\$' : '';
     return this;
   }
 
@@ -202,6 +202,12 @@ class VerbalExpressions {
       return then(value).countRange(1, max);
 
     return then(value).countRange(min, max);
+  }
+
+  VerbalExpressions or(String value){
+    _prefixes += '(?:';
+    _suffixes = ')$_suffixes';
+    return _add(')|(?:').then(value);
   }
 
   String replace(String source, String value){
