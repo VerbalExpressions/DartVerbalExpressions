@@ -1,4 +1,5 @@
 library verbal_expressions.base;
+import 'package:verbal_expressions/src/range.dart';
 
 class VerbalExpressions {
 
@@ -181,12 +182,26 @@ class VerbalExpressions {
     return _add('{$count}');
   }
 
-  VerbalExpressions countRange(int from, int to){
-    return _add('{$from,$to}');
+  VerbalExpressions countRange(int min, int max){
+    return _add('{$min,$max}');
   }
 
-  VerbalExpressions atLeast(int from){
-    return _add('{$from,}');
+  VerbalExpressions atLeast(int min){
+    return _add('{$min,}');
+  }
+
+  VerbalExpressions multiple(String value, {int min, int max}){
+
+    if (min == null && max == null)
+      return then(value).oneOrMore();
+
+    if (max == null)
+      return then(value).count(min);
+
+    if (min == null)
+      return then(value).countRange(1, max);
+
+    return then(value).countRange(min, max);
   }
 
   String replace(String source, String value){
@@ -209,22 +224,6 @@ class VerbalExpressions {
   }
 
   bool isMatch(String value) {
-    return true;
-  }
-}
-
-class Range {
-  String from;
-  String to;
-
-  Range(this.from, this.to){
-
-    if (from == null || from.isEmpty){
-      throw new ArgumentError.notNull('from');
-    }
-
-    if (to == null || to.isEmpty){
-      throw new ArgumentError.notNull('to');
-    }
+    return toRegExp().hasMatch(value);
   }
 }

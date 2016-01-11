@@ -29,6 +29,7 @@ import 'count_tests.dart';
 import 'count_range_tests.dart';
 import 'at_least_tests.dart';
 import 'replace_tests.dart';
+import 'multiple_tests.dart';
 
 void main() {
   StartOfLineTests.run();
@@ -60,4 +61,5 @@ void main() {
   CountRangeTests.run();
   AtLeastTests.run();
   ReplaceTests.run();
+  MultipleTests.run();
 }

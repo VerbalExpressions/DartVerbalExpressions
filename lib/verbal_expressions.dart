@@ -4,3 +4,4 @@
 library verbal_expressions;
 
 export 'src/verbal_expressions_base.dart';
+export 'src/range.dart';
