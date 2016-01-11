@@ -19,7 +19,7 @@ class SomethingTests {
         .something()
         .endOfLine();
 
-        expect(verbalExpressions.toString(), '^(.+)\$', reason: 'Regex should be "^(.+)\$"');
+        expect(verbalExpressions.toString(), '^(?:.+)\$', reason: 'Regex should be "^(?:.+)\$"');
       });
 
       test('Should match', () {

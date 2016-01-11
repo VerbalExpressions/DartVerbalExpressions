@@ -19,7 +19,7 @@ class MaybeTests {
         .then('a')
         .maybe('b');
 
-        expect(verbalExpressions.toString(), '^(a)(b)?', reason: 'Regex should be "^(a)(b)?"');
+        expect(verbalExpressions.toString(), '^(?:a)(?:b)?', reason: 'Regex should be "^(?:a)(?:b)?"');
       });
 
       test('Should match', () {

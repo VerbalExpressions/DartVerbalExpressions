@@ -19,7 +19,7 @@ class BrTests {
         .br()
         .endOfLine();
 
-        expect(verbalExpressions.toString(), '^(\\r\\n|\\r|\\n)\$', reason: 'Regex should be "^(\\r\\n|\\r|\\n)\$"');
+        expect(verbalExpressions.toString(), '^(?:\\r\\n|\\r|\\n)\$', reason: 'Regex should be "^(?:\\r\\n|\\r|\\n)\$"');
       });
 
       test('Should match', () {

@@ -19,7 +19,7 @@ class ThenTests {
         .then("a")
         .then("new");
 
-        expect(verbalExpressions.toString(), "^(a)(new)", reason: 'Regex should be "^(a)(new)"');
+        expect(verbalExpressions.toString(), "^(?:a)(?:new)", reason: 'Regex should be "^(?:a)(?:new)"');
       });
 
       test('Should match', () {

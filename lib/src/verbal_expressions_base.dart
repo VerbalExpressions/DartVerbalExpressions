@@ -44,11 +44,11 @@ class VerbalExpressions {
   }
 
   VerbalExpressions maybe(String value) {
-    return _add('(${sanitize(value)})?');
+    return _add('(?:${sanitize(value)})?');
   }
 
   VerbalExpressions then(String value) {
-    return _add('(${sanitize(value)})');
+    return _add('(?:${sanitize(value)})');
   }
 
   VerbalExpressions find(String value) {
@@ -56,23 +56,23 @@ class VerbalExpressions {
   }
 
   VerbalExpressions anything() {
-    return _add('(.*)');
+    return _add('(?:.*)');
   }
 
   VerbalExpressions anythingBut(String value) {
-    return _add('([^${sanitize(value)}]*)');
+    return _add('(?:[^${sanitize(value)}]*)');
   }
 
   VerbalExpressions something() {
-    return _add('(.+)');
+    return _add('(?:.+)');
   }
 
   VerbalExpressions somethingBut(String value) {
-    return _add('([^${sanitize(value)}]+)');
+    return _add('(?:[^${sanitize(value)}]+)');
   }
 
   VerbalExpressions lineBreak() {
-    return _add('(\\r\\n|\\r|\\n)'); // Unix + Windows CRLF
+    return _add('(?:\\r\\n|\\r|\\n)'); // Unix + Windows CRLF
   }
 
   VerbalExpressions br() {
