@@ -181,6 +181,14 @@ class VerbalExpressions {
     return _add('{$count}');
   }
 
+  VerbalExpressions countRange(int from, int to){
+    return _add('{$from,$to}');
+  }
+
+  VerbalExpressions atLeast(int from){
+    return _add('{$from,}');
+  }
+
   String replace(String source, String value){
 
     if (source == null) throw new ArgumentError.notNull('source');
