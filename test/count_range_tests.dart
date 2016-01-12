@@ -20,7 +20,7 @@ class CountRangeTests {
         .countRange(2,5)
         .endOfLine();
 
-        expect(verbalExpressions.toString(), '^(?:a){2,5}\$', reason: 'Regex should be "^(?:a){2,5}\$"');
+        expect(verbalExpressions.toString(), '^a{2,5}\$', reason: 'Regex should be "^a{2,5}\$"');
       });
 
       test('Should match', () {

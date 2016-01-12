@@ -20,7 +20,7 @@ class ZeroOrMoreTests {
         .zeroOrMore()
         .endOfLine();
 
-        expect(verbalExpressions.toString(), '^(?:a)*\$', reason: 'Regex should be "^(?:a)*\$"');
+        expect(verbalExpressions.toString(), '^a*\$', reason: 'Regex should be "^a*\$"');
       });
 
       test('Should match', () {

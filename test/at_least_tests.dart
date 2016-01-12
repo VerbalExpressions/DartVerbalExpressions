@@ -20,7 +20,7 @@ class AtLeastTests {
         .atLeast(3)
         .endOfLine();
 
-        expect(verbalExpressions.toString(), '^(?:a){3,}\$', reason: 'Regex should be "^(?:a){3,}\$"');
+        expect(verbalExpressions.toString(), '^a{3,}\$', reason: 'Regex should be "^a{3,}\$"');
       });
 
       test('Should match', () {

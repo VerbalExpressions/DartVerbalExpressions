@@ -44,11 +44,11 @@ class VerbalExpressions {
   }
 
   VerbalExpressions maybe(String value) {
-    return _add('(?:${sanitize(value)})?');
+    return _add('(${sanitize(value)})?');
   }
 
   VerbalExpressions then(String value) {
-    return _add('(?:${sanitize(value)})');
+    return _add('${sanitize(value)}');
   }
 
   VerbalExpressions find(String value) {
@@ -56,23 +56,23 @@ class VerbalExpressions {
   }
 
   VerbalExpressions anything() {
-    return _add('(?:.*)');
+    return _add('(.*)');
   }
 
   VerbalExpressions anythingBut(String value) {
-    return _add('(?:[^${sanitize(value)}]*)');
+    return _add('([^${sanitize(value)}]*)');
   }
 
   VerbalExpressions something() {
-    return _add('(?:.+)');
+    return _add('(.+)');
   }
 
   VerbalExpressions somethingBut(String value) {
-    return _add('(?:[^${sanitize(value)}]+)');
+    return _add('([^${sanitize(value)}]+)');
   }
 
   VerbalExpressions lineBreak() {
-    return _add('(?:\\r\\n|\\r|\\n)'); // Unix + Windows CRLF
+    return _add('(\\r\\n|\\r|\\n)'); // Unix + Windows CRLF
   }
 
   VerbalExpressions br() {
@@ -204,10 +204,21 @@ class VerbalExpressions {
     return then(value).countRange(min, max);
   }
 
-  VerbalExpressions or(String value){
-    _prefixes += '(?:';
+  VerbalExpressions beginCapture(){
     _suffixes = ')$_suffixes';
-    return _add(')|(?:').then(value);
+    return _add('(');
+  }
+
+  VerbalExpressions endCapture(){
+    // Remove the last parentheses from the _suffixes and add to the regex itself
+    _suffixes = _suffixes.substring(0, _suffixes.length - 1);
+    return _add(')');
+  }
+
+  VerbalExpressions or(String value){
+    _prefixes += '(';
+    _suffixes = ')$_suffixes';
+    return _add(')|(').then(value);
   }
 
   String replace(String source, String value){

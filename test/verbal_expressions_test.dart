@@ -31,6 +31,7 @@ import 'at_least_tests.dart';
 import 'replace_tests.dart';
 import 'multiple_tests.dart';
 import 'or_tests.dart';
+import 'capture_tests.dart';
 
 void main() {
   StartOfLineTests.run();
@@ -64,4 +65,5 @@ void main() {
   ReplaceTests.run();
   MultipleTests.run();
   OrTests.run();
+  CaptureTests.run();
 }

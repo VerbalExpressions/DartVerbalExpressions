@@ -20,7 +20,7 @@ class OrTests {
         .or("def")
         .endOfLine();
 
-        expect(verbalExpressions.toString(), '^(?:(?:abc))|(?:(?:def))\$', reason: 'Regex should be "^(?:(?:abc))|(?:(?:def))\$"');
+        expect(verbalExpressions.toString(), '^(abc)|(def)\$', reason: 'Regex should be "^(abc)|(def)\$"');
       });
 
       test('Should match', () {
