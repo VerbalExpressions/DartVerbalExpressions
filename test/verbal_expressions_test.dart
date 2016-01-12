@@ -32,6 +32,7 @@ import 'replace_tests.dart';
 import 'multiple_tests.dart';
 import 'or_tests.dart';
 import 'capture_tests.dart';
+import 'real_world_tests.dart';
 
 void main() {
   StartOfLineTests.run();
@@ -66,4 +67,5 @@ void main() {
   MultipleTests.run();
   OrTests.run();
   CaptureTests.run();
+  RealWorldTests.run();
 }
