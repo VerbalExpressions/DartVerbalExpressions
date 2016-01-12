@@ -1,16 +1,16 @@
 library verbal_expressions.range_tests;
 
 import 'package:test/test.dart';
-import 'package:verbal_expressions/verbal_expressions.dart';
+import 'package:verbal_expressions/verbal_expression.dart';
 
 class RangeTests {
   static run(){
     group('Range', () {
 
-      VerbalExpressions verbalExpressions;
+      VerbalExpression verbalExpression;
 
       setUp(() {
-        verbalExpressions = new VerbalExpressions();
+        verbalExpression = new VerbalExpression();
       });
 
       test('Should throw exception if range arguments are null or empty', () {
@@ -21,21 +21,21 @@ class RangeTests {
       });
 
       test('Should return correct regex', () {
-        verbalExpressions
+        verbalExpression
         .startOfLine()
         .range([new Range('a', 'b'), new Range('0', '9')])
         .endOfLine();
 
-        expect(verbalExpressions.toString(), '^[a-b0-9]\$', reason: 'Regex should be "^[a-b0-9]\$"');
+        expect(verbalExpression.toString(), '^[a-b0-9]\$', reason: 'Regex should be "^[a-b0-9]\$"');
       });
 
       test('Should match with multiple ranges', () {
-        verbalExpressions
+        verbalExpression
         .startOfLine()
         .range([new Range('a', 'z'), new Range('0', '5')])
         .endOfLine();
 
-        var matcher = verbalExpressions.toRegExp();
+        var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('b'), isTrue, reason: 'Regex don\'t matches letter');
         expect(matcher.hasMatch('A'), isFalse, reason: 'Regex matches capital leters, but should match only lower case');
       });

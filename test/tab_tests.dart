@@ -1,35 +1,35 @@
 library verbal_expressions.tab_tests;
 
 import 'package:test/test.dart';
-import 'package:verbal_expressions/verbal_expressions.dart';
+import 'package:verbal_expressions/verbal_expression.dart';
 
 class TabTests {
   static run(){
     group('tab', () {
 
-      VerbalExpressions verbalExpressions;
+      VerbalExpression verbalExpression;
 
       setUp(() {
-        verbalExpressions = new VerbalExpressions();
+        verbalExpression = new VerbalExpression();
       });
 
       test('Should return correct regex', () {
-        verbalExpressions
+        verbalExpression
         .startOfLine()
         .tab()
         .endOfLine();
 
-        expect(verbalExpressions.toString(), '^\\t\$', reason: 'Regex should be "^\\t\$"');
+        expect(verbalExpression.toString(), '^\\t\$', reason: 'Regex should be "^\\t\$"');
       });
 
       test('Should match', () {
-        verbalExpressions
+        verbalExpression
         .startOfLine()
         .tab()
         .then("abc")
         .endOfLine();
 
-        var matcher = verbalExpressions.toRegExp();
+        var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('\tabc'), isTrue, reason: 'tab then abc');
         expect(matcher.hasMatch('abc'), isFalse, reason: 'no tab then abc');
       });

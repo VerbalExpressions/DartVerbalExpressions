@@ -1,26 +1,26 @@
 library verbal_expressions.capture_tests;
 
 import 'package:test/test.dart';
-import 'package:verbal_expressions/verbal_expressions.dart';
+import 'package:verbal_expressions/verbal_expression.dart';
 
 class CaptureTests {
   static run(){
     group('Capture', () {
 
-      VerbalExpressions verbalExpressions;
+      VerbalExpression verbalExpression;
 
       setUp(() {
-        verbalExpressions = new VerbalExpressions();
+        verbalExpression = new VerbalExpression();
       });
 
       test('Should return correct regex', () {
-        verbalExpressions
+        verbalExpression
         .beginCapture()
         .find('com')
         .or('org')
         .endCapture();
 
-        expect(verbalExpressions.toString(), '((com)|(org))', reason: 'Regex should be "(((com))|((org)))"');
+        expect(verbalExpression.toString(), '((com)|(org))', reason: 'Regex should be "(((com))|((org)))"');
       });
 
       test('Should match', () {
@@ -28,12 +28,12 @@ class CaptureTests {
         const String testString = 'aaabcd';
 
         // Act
-        verbalExpressions
+        verbalExpression
         .find('a')
         .beginCapture().find("a").count(2).endCapture()
         .beginCapture().find("b").anything().endCapture();
 
-        var matcher = verbalExpressions.toRegExp();
+        var matcher = verbalExpression.toRegExp();
         expect(matcher.firstMatch(testString).group(0), 'aaabcd');
         expect(matcher.firstMatch(testString).group(1), 'aa');
         expect(matcher.firstMatch(testString).group(2), 'bcd');

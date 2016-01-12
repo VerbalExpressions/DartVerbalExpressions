@@ -1,34 +1,34 @@
 library verbal_expressions.word_char_tests;
 
 import 'package:test/test.dart';
-import 'package:verbal_expressions/verbal_expressions.dart';
+import 'package:verbal_expressions/verbal_expression.dart';
 
 class WordCharTests {
   static run(){
     group('WordChar', () {
 
-      VerbalExpressions verbalExpressions;
+      VerbalExpression verbalExpression;
 
       setUp(() {
-        verbalExpressions = new VerbalExpressions();
+        verbalExpression = new VerbalExpression();
       });
 
       test('Should return correct regex', () {
-        verbalExpressions
+        verbalExpression
         .startOfLine()
         .wordChar()
         .endOfLine();
 
-        expect(verbalExpressions.toString(), '^\\w\$', reason: 'Regex should be "^\\w\$"');
+        expect(verbalExpression.toString(), '^\\w\$', reason: 'Regex should be "^\\w\$"');
       });
 
       test('Should match', () {
-        verbalExpressions
+        verbalExpression
         .startOfLine()
         .word()
         .endOfLine();
 
-        var matcher = verbalExpressions.toRegExp();
+        var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('a'), isTrue, reason: 'word character');
         expect(matcher.hasMatch('5'), isTrue, reason: 'word character');
         expect(matcher.hasMatch('@'), isFalse, reason: 'non word character');

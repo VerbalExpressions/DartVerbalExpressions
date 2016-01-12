@@ -1,34 +1,34 @@
 library verbal_expressions.non_word_char_tests;
 
 import 'package:test/test.dart';
-import 'package:verbal_expressions/verbal_expressions.dart';
+import 'package:verbal_expressions/verbal_expression.dart';
 
 class NonWordCharTests {
   static run(){
     group('NonWordChar', () {
 
-      VerbalExpressions verbalExpressions;
+      VerbalExpression verbalExpression;
 
       setUp(() {
-        verbalExpressions = new VerbalExpressions();
+        verbalExpression = new VerbalExpression();
       });
 
       test('Should return correct regex', () {
-        verbalExpressions
+        verbalExpression
         .startOfLine()
         .nonWordChar()
         .endOfLine();
 
-        expect(verbalExpressions.toString(), '^\\W\$', reason: 'Regex should be "^\\W\$"');
+        expect(verbalExpression.toString(), '^\\W\$', reason: 'Regex should be "^\\W\$"');
       });
 
       test('Should match', () {
-        verbalExpressions
+        verbalExpression
         .startOfLine()
         .nonWordChar()
         .endOfLine();
 
-        var matcher = verbalExpressions.toRegExp();
+        var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('a'), isFalse, reason: 'word character');
         expect(matcher.hasMatch('5'), isFalse, reason: 'word character');
         expect(matcher.hasMatch('@'), isTrue, reason: 'non word character');

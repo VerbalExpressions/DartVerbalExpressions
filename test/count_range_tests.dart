@@ -1,36 +1,36 @@
 library verbal_expressions.count_range_tests;
 
 import 'package:test/test.dart';
-import 'package:verbal_expressions/verbal_expressions.dart';
+import 'package:verbal_expressions/verbal_expression.dart';
 
 class CountRangeTests {
   static run(){
     group('CountRange', () {
 
-      VerbalExpressions verbalExpressions;
+      VerbalExpression verbalExpression;
 
       setUp(() {
-        verbalExpressions = new VerbalExpressions();
+        verbalExpression = new VerbalExpression();
       });
 
       test('Should return correct regex', () {
-        verbalExpressions
+        verbalExpression
         .startOfLine()
         .find('a')
         .countRange(2,5)
         .endOfLine();
 
-        expect(verbalExpressions.toString(), '^a{2,5}\$', reason: 'Regex should be "^a{2,5}\$"');
+        expect(verbalExpression.toString(), '^a{2,5}\$', reason: 'Regex should be "^a{2,5}\$"');
       });
 
       test('Should match', () {
-        verbalExpressions
+        verbalExpression
         .startOfLine()
         .find('a')
         .countRange(2,5)
         .endOfLine();
 
-        var matcher = verbalExpressions.toRegExp();
+        var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('a'), isFalse);
         expect(matcher.hasMatch('aaaaa'), isTrue);
         expect(matcher.hasMatch('aa'), isTrue);

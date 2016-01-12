@@ -1,36 +1,36 @@
 library verbal_expressions.line_break_tests;
 
 import 'package:test/test.dart';
-import 'package:verbal_expressions/verbal_expressions.dart';
+import 'package:verbal_expressions/verbal_expression.dart';
 
 class LineBreakTests {
   static run(){
     group('LineBreak', () {
 
-      VerbalExpressions verbalExpressions;
+      VerbalExpression verbalExpression;
 
       setUp(() {
-        verbalExpressions = new VerbalExpressions();
+        verbalExpression = new VerbalExpression();
       });
 
       test('Should return correct regex', () {
-        verbalExpressions
+        verbalExpression
         .startOfLine()
         .lineBreak()
         .endOfLine();
 
-        expect(verbalExpressions.toString(), '^(\\r\\n|\\r|\\n)\$', reason: 'Regex should be "^(\\r\\n|\\r|\\n)\$"');
+        expect(verbalExpression.toString(), '^(\\r\\n|\\r|\\n)\$', reason: 'Regex should be "^(\\r\\n|\\r|\\n)\$"');
       });
 
       test('Should match', () {
-        verbalExpressions
+        verbalExpression
         .startOfLine()
         .then("abc")
         .lineBreak()
         .then("def")
         .endOfLine();
 
-        var matcher = verbalExpressions.toRegExp();
+        var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('abc\r\ndef'), isTrue, reason: 'abc then line break then def');
         expect(matcher.hasMatch('abc\ndef'), isTrue, reason: 'abc then line break then def');
         expect(matcher.hasMatch('abc\r\n def'), isFalse, reason: 'abc then line break then space then def');

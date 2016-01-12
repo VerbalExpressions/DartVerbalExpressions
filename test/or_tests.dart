@@ -1,35 +1,35 @@
 library verbal_expressions.or_tests;
 
 import 'package:test/test.dart';
-import 'package:verbal_expressions/verbal_expressions.dart';
+import 'package:verbal_expressions/verbal_expression.dart';
 
 class OrTests {
   static run(){
     group('Or', () {
 
-      VerbalExpressions verbalExpressions;
+      VerbalExpression verbalExpression;
 
       setUp(() {
-        verbalExpressions = new VerbalExpressions();
+        verbalExpression = new VerbalExpression();
       });
 
       test('Should return correct regex', () {
-        verbalExpressions
+        verbalExpression
         .startOfLine()
         .then("abc")
         .or("def")
         .endOfLine();
 
-        expect(verbalExpressions.toString(), '^(abc)|(def)\$', reason: 'Regex should be "^(abc)|(def)\$"');
+        expect(verbalExpression.toString(), '^(abc)|(def)\$', reason: 'Regex should be "^(abc)|(def)\$"');
       });
 
       test('Should match', () {
-        verbalExpressions
+        verbalExpression
         .startOfLine()
         .then("abc")
         .or("def");
 
-        var matcher = verbalExpressions.toRegExp();
+        var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('defzzz'), isTrue, reason: 'Starts with abc or def');
         expect(matcher.hasMatch('xyzabc'), isFalse, reason: 'Doesn\'t start with abc or def');
       });

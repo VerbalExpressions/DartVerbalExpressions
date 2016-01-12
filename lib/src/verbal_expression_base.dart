@@ -1,7 +1,7 @@
 library verbal_expressions.base;
 import 'package:verbal_expressions/src/range.dart';
 
-class VerbalExpressions {
+class VerbalExpression {
 
   String _prefixes = '';
   String _source = '';
@@ -28,98 +28,98 @@ class VerbalExpressions {
     });
   }
 
-  VerbalExpressions startOfLine([bool enable = true]) {
+  VerbalExpression startOfLine([bool enable = true]) {
     this._prefixes = enable ? '^' : '';
     return this;
   }
 
-  VerbalExpressions endOfLine([bool enable = true]) {
+  VerbalExpression endOfLine([bool enable = true]) {
     this._suffixes += enable ? '\$' : '';
     return this;
   }
 
-  VerbalExpressions add(String expression) {
+  VerbalExpression add(String expression) {
     _source += expression;
     return this;
   }
 
-  VerbalExpressions maybe(String value) {
+  VerbalExpression maybe(String value) {
     return add('(${sanitize(value)})?');
   }
 
-  VerbalExpressions then(String value) {
+  VerbalExpression then(String value) {
     return add('${sanitize(value)}');
   }
 
-  VerbalExpressions find(String value) {
+  VerbalExpression find(String value) {
     return then(value);
   }
 
-  VerbalExpressions anything() {
+  VerbalExpression anything() {
     return add('(.*)');
   }
 
-  VerbalExpressions anythingBut(String value) {
+  VerbalExpression anythingBut(String value) {
     return add('([^${sanitize(value)}]*)');
   }
 
-  VerbalExpressions something() {
+  VerbalExpression something() {
     return add('(.+)');
   }
 
-  VerbalExpressions somethingBut(String value) {
+  VerbalExpression somethingBut(String value) {
     return add('([^${sanitize(value)}]+)');
   }
 
-  VerbalExpressions lineBreak() {
+  VerbalExpression lineBreak() {
     return add('(\\r\\n|\\r|\\n)'); // Unix + Windows CRLF
   }
 
-  VerbalExpressions br() {
+  VerbalExpression br() {
     return lineBreak(); // Unix + Windows CRLF
   }
 
-  VerbalExpressions tab() {
+  VerbalExpression tab() {
     return add('\\t');
   }
 
-  VerbalExpressions word() {
+  VerbalExpression word() {
     return add('\\w+');
   }
 
-  VerbalExpressions wordChar() {
+  VerbalExpression wordChar() {
     return add('\\w');
   }
 
-  VerbalExpressions nonWordChar() {
+  VerbalExpression nonWordChar() {
     return add('\\W');
   }
 
-  VerbalExpressions digit() {
+  VerbalExpression digit() {
     return add('\\d');
   }
 
-  VerbalExpressions nonDigit() {
+  VerbalExpression nonDigit() {
     return add('\\D');
   }
 
-  VerbalExpressions space() {
+  VerbalExpression space() {
     return add('\\s');
   }
 
-  VerbalExpressions nonSpace() {
+  VerbalExpression nonSpace() {
     return add('\\S');
   }
 
-  VerbalExpressions anyOf(String value) {
+  VerbalExpression anyOf(String value) {
     return add('[${sanitize(value)}]');
   }
 
-  VerbalExpressions any(String value) {
+  VerbalExpression any(String value) {
     return anyOf(value);
   }
 
-  VerbalExpressions range(List<Range> ranges) {
+  VerbalExpression range(List<Range> ranges) {
 
     var result = '[';
     ranges.forEach((range){
@@ -131,15 +131,15 @@ class VerbalExpressions {
     return add(result);
   }
 
-  VerbalExpressions addModifier(String modifier){
+  VerbalExpression addModifier(String modifier){
     return _applyModifier(modifier, true);
   }
 
-  VerbalExpressions removeModifier(String modifier){
+  VerbalExpression removeModifier(String modifier){
     return _applyModifier(modifier, false);
   }
 
-  VerbalExpressions _applyModifier(String modifier, bool enable){
+  VerbalExpression _applyModifier(String modifier, bool enable){
 
     switch(modifier){
       case 'i':
@@ -158,39 +158,39 @@ class VerbalExpressions {
     return this;
   }
 
-  VerbalExpressions withAnyCase([bool enable=true]){
+  VerbalExpression withAnyCase([bool enable=true]){
     return _applyModifier('i', enable);
   }
 
-  VerbalExpressions searchOneLine([bool enable=true]){
+  VerbalExpression searchOneLine([bool enable=true]){
     return _applyModifier('m', !enable);
   }
 
-  VerbalExpressions stopAtFirst([bool enable=true]){
+  VerbalExpression stopAtFirst([bool enable=true]){
     return _applyModifier('g', !enable);
   }
 
-  VerbalExpressions oneOrMore(){
+  VerbalExpression oneOrMore(){
     return add('+');
   }
 
-  VerbalExpressions zeroOrMore(){
+  VerbalExpression zeroOrMore(){
     return add('*');
   }
 
-  VerbalExpressions count(int count){
+  VerbalExpression count(int count){
     return add('{$count}');
   }
 
-  VerbalExpressions countRange(int min, int max){
+  VerbalExpression countRange(int min, int max){
     return add('{$min,$max}');
   }
 
-  VerbalExpressions atLeast(int min){
+  VerbalExpression atLeast(int min){
     return add('{$min,}');
   }
 
-  VerbalExpressions multiple(String value, {int min, int max}){
+  VerbalExpression multiple(String value, {int min, int max}){
 
     if (min == null && max == null)
       return then(value).oneOrMore();
@@ -204,18 +204,18 @@ class VerbalExpressions {
     return then(value).countRange(min, max);
   }
 
-  VerbalExpressions beginCapture(){
+  VerbalExpression beginCapture(){
     _suffixes = ')$_suffixes';
     return add('(');
   }
 
-  VerbalExpressions endCapture(){
+  VerbalExpression endCapture(){
     // Remove the last parentheses from the _suffixes and add to the regex itself
     _suffixes = _suffixes.substring(0, _suffixes.length - 1);
     return add(')');
   }
 
-  VerbalExpressions or(String value){
+  VerbalExpression or(String value){
     _prefixes += '(';
     _suffixes = ')$_suffixes';
     return add(')|(').then(value);

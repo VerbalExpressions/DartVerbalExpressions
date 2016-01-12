@@ -1,34 +1,34 @@
 library verbal_expressions.whitespace_tests;
 
 import 'package:test/test.dart';
-import 'package:verbal_expressions/verbal_expressions.dart';
+import 'package:verbal_expressions/verbal_expression.dart';
 
 class SpaceTests {
   static run(){
     group('Space', () {
 
-      VerbalExpressions verbalExpressions;
+      VerbalExpression verbalExpression;
 
       setUp(() {
-        verbalExpressions = new VerbalExpressions();
+        verbalExpression = new VerbalExpression();
       });
 
       test('Should return correct regex', () {
-        verbalExpressions
+        verbalExpression
         .startOfLine()
         .space()
         .endOfLine();
 
-        expect(verbalExpressions.toString(), '^\\s\$', reason: 'Regex should be "^\\s\$"');
+        expect(verbalExpression.toString(), '^\\s\$', reason: 'Regex should be "^\\s\$"');
       });
 
       test('Should match', () {
-        verbalExpressions
+        verbalExpression
         .startOfLine()
         .space()
         .endOfLine();
 
-        var matcher = verbalExpressions.toRegExp();
+        var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch(' '), isTrue, reason: 'whitespace');
         expect(matcher.hasMatch('1'), isFalse, reason: 'non whitespace');
       });

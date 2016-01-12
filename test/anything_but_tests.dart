@@ -1,34 +1,34 @@
 library verbal_expressions.anything_but_tests;
 
 import 'package:test/test.dart';
-import 'package:verbal_expressions/verbal_expressions.dart';
+import 'package:verbal_expressions/verbal_expression.dart';
 
 class AnythingButTests {
   static run(){
     group('AnythingBut', () {
 
-      VerbalExpressions verbalExpressions;
+      VerbalExpression verbalExpression;
 
       setUp(() {
-        verbalExpressions = new VerbalExpressions();
+        verbalExpression = new VerbalExpression();
       });
 
       test('Should return correct regex', () {
-        verbalExpressions
+        verbalExpression
         .startOfLine()
         .anythingBut('test')
         .endOfLine();
 
-        expect(verbalExpressions.toString(), '^([^test]*)\$', reason: 'Regex should be "^([^test]*)\$"');
+        expect(verbalExpression.toString(), '^([^test]*)\$', reason: 'Regex should be "^([^test]*)\$"');
       });
 
       test('Should match', () {
-        verbalExpressions
+        verbalExpression
         .startOfLine()
         .anythingBut('w')
         .endOfLine();
 
-        var matcher = verbalExpressions.toRegExp();
+        var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('what'), isFalse, reason: 'starts with w');
         expect(matcher.hasMatch('that'), isTrue, reason: 'Not contain w');
         expect(matcher.hasMatch(' '), isTrue, reason: 'Not contain w');

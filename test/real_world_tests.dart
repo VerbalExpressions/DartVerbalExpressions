@@ -1,20 +1,20 @@
 library verbal_expressions.real_world_tests;
 
 import 'package:test/test.dart';
-import 'package:verbal_expressions/verbal_expressions.dart';
+import 'package:verbal_expressions/verbal_expression.dart';
 
 class RealWorldTests {
   static run(){
     group('Real World', () {
 
-      VerbalExpressions verbalExpressions;
+      VerbalExpression verbalExpression;
 
       setUp(() {
-        verbalExpressions = new VerbalExpressions();
+        verbalExpression = new VerbalExpression();
       });
 
       test('test url', () {
-        verbalExpressions
+        verbalExpression
         .startOfLine()
         .then("http")
         .maybe("s")
@@ -25,12 +25,12 @@ class RealWorldTests {
 
         String testUrl = "https://www.google.com";
 
-        expect(verbalExpressions.toRegExp().hasMatch(testUrl), isTrue, reason: 'Matches Google\'s url');
-        expect(verbalExpressions.toString(), '^http(s)?://(www\\.)?([^ ]*)\$', reason: 'Regex doesn\'t match same regex as in example');
+        expect(verbalExpression.toRegExp().hasMatch(testUrl), isTrue, reason: 'Matches Google\'s url');
+        expect(verbalExpression.toString(), '^http(s)?://(www\\.)?([^ ]*)\$', reason: 'Regex doesn\'t match same regex as in example');
       });
 
       test('test telephone number', () {
-        verbalExpressions
+        verbalExpression
         .startOfLine()
         .then("+")
         .beginCapture().range([new Range('0','9')]).count(3).maybe("-").maybe(" ").endCapture()
@@ -41,15 +41,15 @@ class RealWorldTests {
         String phoneWithoutSpace = "+097234243";
         String phoneWithDash = "+097-234-243";
 
-        expect(verbalExpressions.toRegExp().hasMatch(phoneWithSpace), isTrue);
-        expect(verbalExpressions.toRegExp().hasMatch(phoneWithoutSpace), isTrue);
-        expect(verbalExpressions.toRegExp().hasMatch(phoneWithDash), isTrue);
+        expect(verbalExpression.toRegExp().hasMatch(phoneWithSpace), isTrue);
+        expect(verbalExpression.toRegExp().hasMatch(phoneWithoutSpace), isTrue);
+        expect(verbalExpression.toRegExp().hasMatch(phoneWithDash), isTrue);
       });
 
       test('complex pattern with multiply captures', () {
         String logLine = "3\t4\t1\thttp://localhost:20001\t1\t63528800\t0\t63528800\t1000000000\t0\t63528800\tSTR1";
 
-        verbalExpressions
+        verbalExpression
         .beginCapture().digit().oneOrMore().endCapture().tab()
         .beginCapture().digit().oneOrMore().endCapture().tab()
         .beginCapture().range([new Range('0', '1')]).count(1).endCapture().tab()
@@ -63,7 +63,7 @@ class RealWorldTests {
         .beginCapture().digit().oneOrMore().endCapture().tab()
         .beginCapture().find("STR").range([new Range('0', '2')]).count(1).endCapture();
 
-        expect(verbalExpressions.toRegExp().hasMatch(logLine), isTrue);
+        expect(verbalExpression.toRegExp().hasMatch(logLine), isTrue);
         //(\\d+)\\t(\\d+)\\t([0-1]{1})\\t(http://localhost:20\\d{3})\\t([0-1]{1})
         // \\t(\\d+)\\t([0-1]{1})\\t(\\d+)\\t(\\d+)\\t([0-1]{1})\\t(\\d+)\\t(FAKE[1-2]{1})
         /*
@@ -79,18 +79,18 @@ class RealWorldTests {
       test('complex pattern with multiply captures 2', () {
         String logLine = "3\t4\t1\thttp://localhost:20001\t1\t63528800\t0\t63528800\t1000000000\t0\t63528800\tSTR1";
 
-        var digits = new VerbalExpressions().beginCapture().digit().oneOrMore().endCapture().tab().toString();
-        var range = new VerbalExpressions().beginCapture().range([new Range('0', '1')]).count(1).endCapture().tab().toString();
-        var host = new VerbalExpressions().beginCapture().find("http://localhost:20").digit().count(3).endCapture().tab().toString();
-        var fake = new VerbalExpressions().beginCapture().find("STR").range([new Range('0', '2')]).count(1).toString();
+        var digits = new VerbalExpression().beginCapture().digit().oneOrMore().endCapture().tab().toString();
+        var range = new VerbalExpression().beginCapture().range([new Range('0', '1')]).count(1).endCapture().tab().toString();
+        var host = new VerbalExpression().beginCapture().find("http://localhost:20").digit().count(3).endCapture().tab().toString();
+        var fake = new VerbalExpression().beginCapture().find("STR").range([new Range('0', '2')]).count(1).toString();
 
-        verbalExpressions
+        verbalExpression
         .add(digits).add(digits)
         .add(range).add(host).add(range).add(digits).add(range)
         .add(digits).add(digits)
         .add(range).add(digits).add(fake);
 
-        expect(verbalExpressions.toRegExp().hasMatch(logLine), isTrue);
+        expect(verbalExpression.toRegExp().hasMatch(logLine), isTrue);
 
 
       //(\\d+)\\t(\\d+)\\t([0-1]{1})\\t(http://localhost:20\\d{3})\\t([0-1]{1})
@@ -106,7 +106,7 @@ class RealWorldTests {
       });
 
       test('unusual regex', () {
-        expect(verbalExpressions.add("[A-Z0-1!-|]").toString(), '[A-Z0-1!-|]');
+        expect(verbalExpression.add("[A-Z0-1!-|]").toString(), '[A-Z0-1!-|]');
       });
     });
   }

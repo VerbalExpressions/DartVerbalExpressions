@@ -1,36 +1,36 @@
 library verbal_expressions.at_least_tests;
 
 import 'package:test/test.dart';
-import 'package:verbal_expressions/verbal_expressions.dart';
+import 'package:verbal_expressions/verbal_expression.dart';
 
 class AtLeastTests {
   static run(){
     group('AtLeast', () {
 
-      VerbalExpressions verbalExpressions;
+      VerbalExpression verbalExpression;
 
       setUp(() {
-        verbalExpressions = new VerbalExpressions();
+        verbalExpression = new VerbalExpression();
       });
 
       test('Should return correct regex', () {
-        verbalExpressions
+        verbalExpression
         .startOfLine()
         .find('a')
         .atLeast(3)
         .endOfLine();
 
-        expect(verbalExpressions.toString(), '^a{3,}\$', reason: 'Regex should be "^a{3,}\$"');
+        expect(verbalExpression.toString(), '^a{3,}\$', reason: 'Regex should be "^a{3,}\$"');
       });
 
       test('Should match', () {
-        verbalExpressions
+        verbalExpression
         .startOfLine()
         .find('a')
         .atLeast(3)
         .endOfLine();
 
-        var matcher = verbalExpressions.toRegExp();
+        var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('a'), isFalse);
         expect(matcher.hasMatch('aaa'), isTrue);
         expect(matcher.hasMatch('aaaaaaaaaa'), isTrue);

@@ -1,34 +1,34 @@
 library verbal_expressions.something_tests;
 
 import 'package:test/test.dart';
-import 'package:verbal_expressions/verbal_expressions.dart';
+import 'package:verbal_expressions/verbal_expression.dart';
 
 class SomethingTests {
   static run(){
     group('Something', () {
 
-      VerbalExpressions verbalExpressions;
+      VerbalExpression verbalExpression;
 
       setUp(() {
-        verbalExpressions = new VerbalExpressions();
+        verbalExpression = new VerbalExpression();
       });
 
       test('Should return correct regex', () {
-        verbalExpressions
+        verbalExpression
         .startOfLine()
         .something()
         .endOfLine();
 
-        expect(verbalExpressions.toString(), '^(.+)\$', reason: 'Regex should be "^(.+)\$"');
+        expect(verbalExpression.toString(), '^(.+)\$', reason: 'Regex should be "^(.+)\$"');
       });
 
       test('Should match', () {
-        verbalExpressions
+        verbalExpression
         .startOfLine()
         .something()
         .endOfLine();
 
-        var matcher = verbalExpressions.toRegExp();
+        var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('what'), isTrue, reason: 'what');
         expect(matcher.hasMatch(' '), isTrue, reason: 'Space');
         expect(matcher.hasMatch(''), isFalse, reason: 'empty string doesn\'t have something');

@@ -1,34 +1,34 @@
 library verbal_expressions.digit_tests;
 
 import 'package:test/test.dart';
-import 'package:verbal_expressions/verbal_expressions.dart';
+import 'package:verbal_expressions/verbal_expression.dart';
 
 class DigitTests {
   static run(){
     group('Digit', () {
 
-      VerbalExpressions verbalExpressions;
+      VerbalExpression verbalExpression;
 
       setUp(() {
-        verbalExpressions = new VerbalExpressions();
+        verbalExpression = new VerbalExpression();
       });
 
       test('Should return correct regex', () {
-        verbalExpressions
+        verbalExpression
         .startOfLine()
         .digit()
         .endOfLine();
 
-        expect(verbalExpressions.toString(), '^\\d\$', reason: 'Regex should be "^\\D\$"');
+        expect(verbalExpression.toString(), '^\\d\$', reason: 'Regex should be "^\\D\$"');
       });
 
       test('Should match', () {
-        verbalExpressions
+        verbalExpression
         .startOfLine()
         .digit()
         .endOfLine();
 
-        var matcher = verbalExpressions.toRegExp();
+        var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('5'), isTrue, reason: 'digit');
         expect(matcher.hasMatch('a'), isFalse, reason: 'non digit');
       });

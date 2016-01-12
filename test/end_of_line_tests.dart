@@ -1,33 +1,33 @@
 library verbal_expressions.end_of_line_tests;
 
 import 'package:test/test.dart';
-import 'package:verbal_expressions/verbal_expressions.dart';
+import 'package:verbal_expressions/verbal_expression.dart';
 
 class EndOfLineTests {
   static run(){
     group('End of line', () {
 
-      VerbalExpressions verbalExpressions;
+      VerbalExpression verbalExpression;
 
       setUp(() {
-        verbalExpressions = new VerbalExpressions();
+        verbalExpression = new VerbalExpression();
       });
 
       test('Should match .com in the end when add .comm in the end', () {
-        verbalExpressions
+        verbalExpression
         .find('.com')
         .endOfLine();
 
-        var matcher = verbalExpressions.toRegExp();
+        var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('www.google.com'), isTrue, reason: 'Should match ".com" in end');
       });
 
       test('Should not match "/" in the end when add .comm in the end', () {
-        verbalExpressions
+        verbalExpression
         .find('.com')
         .endOfLine();
 
-        var matcher = verbalExpressions.toRegExp();
+        var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('www.google.com/'), isFalse, reason: 'Should not match "/" in end');
       });
     });

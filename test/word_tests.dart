@@ -1,34 +1,34 @@
 library verbal_expressions.word_tests;
 
 import 'package:test/test.dart';
-import 'package:verbal_expressions/verbal_expressions.dart';
+import 'package:verbal_expressions/verbal_expression.dart';
 
 class WordTests {
   static run(){
     group('Word', () {
 
-      VerbalExpressions verbalExpressions;
+      VerbalExpression verbalExpression;
 
       setUp(() {
-        verbalExpressions = new VerbalExpressions();
+        verbalExpression = new VerbalExpression();
       });
 
       test('Should return correct regex', () {
-        verbalExpressions
+        verbalExpression
         .startOfLine()
         .word()
         .endOfLine();
 
-        expect(verbalExpressions.toString(), '^\\w+\$', reason: 'Regex should be "^\\t\$"');
+        expect(verbalExpression.toString(), '^\\w+\$', reason: 'Regex should be "^\\t\$"');
       });
 
       test('Should match', () {
-        verbalExpressions
+        verbalExpression
         .startOfLine()
         .word()
         .endOfLine();
 
-        var matcher = verbalExpressions.toRegExp();
+        var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('abc123'), isTrue, reason: 'word');
         expect(matcher.hasMatch('@#'), isFalse, reason: 'non-word');
       });
