@@ -1,6 +1,7 @@
 # verbal_expressions
 
-A library for Dart developers that helps to construct difficult regular expressions
+A library for Dart developers that helps to construct difficult regular expressions.
+
 Dart package info is here: https://pub.dartlang.org/packages/verbal_expressions
 
 ## Quick start
