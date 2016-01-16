@@ -1,7 +1,7 @@
 library verbal_expressions.at_least_tests;
 
 import 'package:test/test.dart';
-import 'package:verbal_expressions/verbal_expression.dart';
+import 'package:verbal_expressions/verbal_expressions.dart';
 
 class AtLeastTests {
   static run() {

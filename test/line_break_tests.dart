@@ -1,7 +1,7 @@
 library verbal_expressions.line_break_tests;
 
 import 'package:test/test.dart';
-import 'package:verbal_expressions/verbal_expression.dart';
+import 'package:verbal_expressions/verbal_expressions.dart';
 
 class LineBreakTests {
   static run() {

@@ -1,4 +1,4 @@
-library verbal_expressions.base;
+library verbal_expressions.verbal_expression;
 
 import 'package:verbal_expressions/src/range.dart';
 

@@ -1,6 +1,6 @@
 library verbal_expressions_example.example;
 
-import 'package:verbal_expressions/verbal_expression.dart';
+import 'package:verbal_expressions/verbal_expressions.dart';
 
 main() {
   var result = matchUrl('https://www.google.com'); // true

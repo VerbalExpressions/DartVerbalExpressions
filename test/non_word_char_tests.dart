@@ -1,7 +1,7 @@
 library verbal_expressions.non_word_char_tests;
 
 import 'package:test/test.dart';
-import 'package:verbal_expressions/verbal_expression.dart';
+import 'package:verbal_expressions/verbal_expressions.dart';
 
 class NonWordCharTests {
   static run() {

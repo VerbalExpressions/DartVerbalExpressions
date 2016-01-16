@@ -1,7 +1,7 @@
 library verbal_expressions.zero_or_more_tests;
 
 import 'package:test/test.dart';
-import 'package:verbal_expressions/verbal_expression.dart';
+import 'package:verbal_expressions/verbal_expressions.dart';
 
 class ZeroOrMoreTests {
   static run() {

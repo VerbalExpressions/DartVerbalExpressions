@@ -1,7 +1,7 @@
 library verbal_expressions.word_tests;
 
 import 'package:test/test.dart';
-import 'package:verbal_expressions/verbal_expression.dart';
+import 'package:verbal_expressions/verbal_expressions.dart';
 
 class WordTests {
   static run() {
