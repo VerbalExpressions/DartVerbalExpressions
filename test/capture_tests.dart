@@ -27,7 +27,6 @@ class CaptureTests {
 
         const String testString = 'aaabcd';
 
-        // Act
         verbalExpression
         .find('a')
         .beginCapture().find("a").count(2).endCapture()

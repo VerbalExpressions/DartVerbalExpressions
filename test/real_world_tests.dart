@@ -25,7 +25,7 @@ class RealWorldTests {
 
         String testUrl = "https://www.google.com";
 
-        expect(verbalExpression.toRegExp().hasMatch(testUrl), isTrue, reason: 'Matches Google\'s url');
+        expect(verbalExpression.hasMatch(testUrl), isTrue, reason: 'Matches Google\'s url');
         expect(verbalExpression.toString(), '^http(s)?\\:\\/\\/(www\\.)?([^\\ ]*)\$', reason: 'Regex doesn\'t match same regex as in example');
       });
 
@@ -41,9 +41,9 @@ class RealWorldTests {
         String phoneWithoutSpace = "+097234243";
         String phoneWithDash = "+097-234-243";
 
-        expect(verbalExpression.toRegExp().hasMatch(phoneWithSpace), isTrue);
-        expect(verbalExpression.toRegExp().hasMatch(phoneWithoutSpace), isTrue);
-        expect(verbalExpression.toRegExp().hasMatch(phoneWithDash), isTrue);
+        expect(verbalExpression.hasMatch(phoneWithSpace), isTrue);
+        expect(verbalExpression.hasMatch(phoneWithoutSpace), isTrue);
+        expect(verbalExpression.hasMatch(phoneWithDash), isTrue);
       });
 
       test('complex pattern with multiply captures', () {
@@ -63,7 +63,7 @@ class RealWorldTests {
         .beginCapture().digit().oneOrMore().endCapture().tab()
         .beginCapture().find("STR").range([new Range('0', '2')]).count(1).endCapture();
 
-        expect(verbalExpression.toRegExp().hasMatch(logLine), isTrue);
+        expect(verbalExpression.hasMatch(logLine), isTrue);
         //(\\d+)\\t(\\d+)\\t([0-1]{1})\\t(http://localhost:20\\d{3})\\t([0-1]{1})
         // \\t(\\d+)\\t([0-1]{1})\\t(\\d+)\\t(\\d+)\\t([0-1]{1})\\t(\\d+)\\t(FAKE[1-2]{1})
         /*
@@ -90,7 +90,7 @@ class RealWorldTests {
         .add(digits).add(digits)
         .add(range).add(digits).add(fake);
 
-        expect(verbalExpression.toRegExp().hasMatch(logLine), isTrue);
+        expect(verbalExpression.hasMatch(logLine), isTrue);
 
 
       //(\\d+)\\t(\\d+)\\t([0-1]{1})\\t(http://localhost:20\\d{3})\\t([0-1]{1})

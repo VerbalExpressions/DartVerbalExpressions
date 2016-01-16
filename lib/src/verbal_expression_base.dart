@@ -482,7 +482,7 @@ class VerbalExpression {
   /// Shorthand function for the Regex.hasMatch function
   ///
   /// Returns matching result.
-  bool isMatch(String value) {
+  bool hasMatch(String value) {
     return toRegExp().hasMatch(value);
   }
 }
