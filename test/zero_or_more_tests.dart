@@ -4,9 +4,8 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expression.dart';
 
 class ZeroOrMoreTests {
-  static run(){
+  static run() {
     group('Zero or more', () {
-
       VerbalExpression verbalExpression;
 
       setUp(() {
@@ -14,21 +13,14 @@ class ZeroOrMoreTests {
       });
 
       test('Should return correct regex', () {
-        verbalExpression
-        .startOfLine()
-        .find('a')
-        .zeroOrMore()
-        .endOfLine();
+        verbalExpression.startOfLine().find('a').zeroOrMore().endOfLine();
 
-        expect(verbalExpression.toString(), '^a*\$', reason: 'Regex should be "^a*\$"');
+        expect(verbalExpression.toString(), '^a*\$',
+            reason: 'Regex should be "^a*\$"');
       });
 
       test('Should match', () {
-        verbalExpression
-        .startOfLine()
-        .find('a')
-        .zeroOrMore()
-        .endOfLine();
+        verbalExpression.startOfLine().find('a').zeroOrMore().endOfLine();
 
         var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('a'), isTrue);

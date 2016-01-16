@@ -4,9 +4,8 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expression.dart';
 
 class RealWorldTests {
-  static run(){
+  static run() {
     group('Real World', () {
-
       VerbalExpression verbalExpression;
 
       setUp(() {
@@ -15,27 +14,35 @@ class RealWorldTests {
 
       test('test url', () {
         verbalExpression
-        .startOfLine()
-        .then("http")
-        .maybe("s")
-        .then("://")
-        .maybe("www.")
-        .anythingBut(" ")
-        .endOfLine();
+            .startOfLine()
+            .then("http")
+            .maybe("s")
+            .then("://")
+            .maybe("www.")
+            .anythingBut(" ")
+            .endOfLine();
 
         String testUrl = "https://www.google.com";
 
-        expect(verbalExpression.hasMatch(testUrl), isTrue, reason: 'Matches Google\'s url');
-        expect(verbalExpression.toString(), '^http(s)?\\:\\/\\/(www\\.)?([^\\ ]*)\$', reason: 'Regex doesn\'t match same regex as in example');
+        expect(verbalExpression.hasMatch(testUrl), isTrue,
+            reason: 'Matches Google\'s url');
+        expect(verbalExpression.toString(),
+            '^http(s)?\\:\\/\\/(www\\.)?([^\\ ]*)\$',
+            reason: 'Regex doesn\'t match same regex as in example');
       });
 
       test('test telephone number', () {
         verbalExpression
-        .startOfLine()
-        .then("+")
-        .beginCapture().range([new Range('0','9')]).count(3).maybe("-").maybe(" ").endCapture()
-        .count(3)
-        .endOfLine();
+            .startOfLine()
+            .then("+")
+            .beginCapture()
+            .range([new Range('0', '9')])
+            .count(3)
+            .maybe("-")
+            .maybe(" ")
+            .endCapture()
+            .count(3)
+            .endOfLine();
 
         String phoneWithSpace = "+097 234 243";
         String phoneWithoutSpace = "+097234243";
@@ -47,21 +54,69 @@ class RealWorldTests {
       });
 
       test('complex pattern with multiply captures', () {
-        String logLine = "3\t4\t1\thttp://localhost:20001\t1\t63528800\t0\t63528800\t1000000000\t0\t63528800\tSTR1";
+        String logLine =
+            "3\t4\t1\thttp://localhost:20001\t1\t63528800\t0\t63528800\t1000000000\t0\t63528800\tSTR1";
 
         verbalExpression
-        .beginCapture().digit().oneOrMore().endCapture().tab()
-        .beginCapture().digit().oneOrMore().endCapture().tab()
-        .beginCapture().range([new Range('0', '1')]).count(1).endCapture().tab()
-        .beginCapture().find("http://localhost:20").digit().count(3).endCapture().tab()
-        .beginCapture().range([new Range('0', '1')]).count(1).endCapture().tab()
-        .beginCapture().digit().oneOrMore().endCapture().tab()
-        .beginCapture().range([new Range('0', '1')]).count(1).endCapture().tab()
-        .beginCapture().digit().oneOrMore().endCapture().tab()
-        .beginCapture().digit().oneOrMore().endCapture().tab()
-        .beginCapture().range([new Range('0', '1')]).count(1).endCapture().tab()
-        .beginCapture().digit().oneOrMore().endCapture().tab()
-        .beginCapture().find("STR").range([new Range('0', '2')]).count(1).endCapture();
+            .beginCapture()
+            .digit()
+            .oneOrMore()
+            .endCapture()
+            .tab()
+            .beginCapture()
+            .digit()
+            .oneOrMore()
+            .endCapture()
+            .tab()
+            .beginCapture()
+            .range([new Range('0', '1')])
+            .count(1)
+            .endCapture()
+            .tab()
+            .beginCapture()
+            .find("http://localhost:20")
+            .digit()
+            .count(3)
+            .endCapture()
+            .tab()
+            .beginCapture()
+            .range([new Range('0', '1')])
+            .count(1)
+            .endCapture()
+            .tab()
+            .beginCapture()
+            .digit()
+            .oneOrMore()
+            .endCapture()
+            .tab()
+            .beginCapture()
+            .range([new Range('0', '1')])
+            .count(1)
+            .endCapture()
+            .tab()
+            .beginCapture()
+            .digit()
+            .oneOrMore()
+            .endCapture()
+            .tab()
+            .beginCapture()
+            .digit()
+            .oneOrMore()
+            .endCapture()
+            .tab()
+            .beginCapture()
+            .range([new Range('0', '1')])
+            .count(1)
+            .endCapture()
+            .tab()
+            .beginCapture()
+            .digit()
+            .oneOrMore()
+            .endCapture()
+            .tab()
+            .beginCapture()
+            .find("STR")
+            .range([new Range('0', '2')]).count(1).endCapture();
 
         expect(verbalExpression.hasMatch(logLine), isTrue);
         //(\\d+)\\t(\\d+)\\t([0-1]{1})\\t(http://localhost:20\\d{3})\\t([0-1]{1})
@@ -77,23 +132,53 @@ class RealWorldTests {
       });
 
       test('complex pattern with multiply captures 2', () {
-        String logLine = "3\t4\t1\thttp://localhost:20001\t1\t63528800\t0\t63528800\t1000000000\t0\t63528800\tSTR1";
+        String logLine =
+            "3\t4\t1\thttp://localhost:20001\t1\t63528800\t0\t63528800\t1000000000\t0\t63528800\tSTR1";
 
-        var digits = new VerbalExpression().beginCapture().digit().oneOrMore().endCapture().tab().toString();
-        var range = new VerbalExpression().beginCapture().range([new Range('0', '1')]).count(1).endCapture().tab().toString();
-        var host = new VerbalExpression().beginCapture().find("http://localhost:20").digit().count(3).endCapture().tab().toString();
-        var fake = new VerbalExpression().beginCapture().find("STR").range([new Range('0', '2')]).count(1).toString();
+        var digits = new VerbalExpression()
+            .beginCapture()
+            .digit()
+            .oneOrMore()
+            .endCapture()
+            .tab()
+            .toString();
+        var range = new VerbalExpression()
+            .beginCapture()
+            .range([new Range('0', '1')])
+            .count(1)
+            .endCapture()
+            .tab()
+            .toString();
+        var host = new VerbalExpression()
+            .beginCapture()
+            .find("http://localhost:20")
+            .digit()
+            .count(3)
+            .endCapture()
+            .tab()
+            .toString();
+        var fake = new VerbalExpression()
+            .beginCapture()
+            .find("STR")
+            .range([new Range('0', '2')]).count(1).toString();
 
         verbalExpression
-        .add(digits).add(digits)
-        .add(range).add(host).add(range).add(digits).add(range)
-        .add(digits).add(digits)
-        .add(range).add(digits).add(fake);
+            .add(digits)
+            .add(digits)
+            .add(range)
+            .add(host)
+            .add(range)
+            .add(digits)
+            .add(range)
+            .add(digits)
+            .add(digits)
+            .add(range)
+            .add(digits)
+            .add(fake);
 
         expect(verbalExpression.hasMatch(logLine), isTrue);
 
-
-      //(\\d+)\\t(\\d+)\\t([0-1]{1})\\t(http://localhost:20\\d{3})\\t([0-1]{1})
+        //(\\d+)\\t(\\d+)\\t([0-1]{1})\\t(http://localhost:20\\d{3})\\t([0-1]{1})
         // \\t(\\d+)\\t([0-1]{1})\\t(\\d+)\\t(\\d+)\\t([0-1]{1})\\t(\\d+)\\t(FAKE[1-2]{1})
         /*
         3    4    1    http://localhost:20001    1    28800    0    528800    1000000000    0    528800    STR1

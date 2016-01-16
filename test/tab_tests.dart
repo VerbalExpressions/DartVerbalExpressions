@@ -4,9 +4,8 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expression.dart';
 
 class TabTests {
-  static run(){
+  static run() {
     group('tab', () {
-
       VerbalExpression verbalExpression;
 
       setUp(() {
@@ -14,20 +13,14 @@ class TabTests {
       });
 
       test('Should return correct regex', () {
-        verbalExpression
-        .startOfLine()
-        .tab()
-        .endOfLine();
+        verbalExpression.startOfLine().tab().endOfLine();
 
-        expect(verbalExpression.toString(), '^\\t\$', reason: 'Regex should be "^\\t\$"');
+        expect(verbalExpression.toString(), '^\\t\$',
+            reason: 'Regex should be "^\\t\$"');
       });
 
       test('Should match', () {
-        verbalExpression
-        .startOfLine()
-        .tab()
-        .then("abc")
-        .endOfLine();
+        verbalExpression.startOfLine().tab().then("abc").endOfLine();
 
         var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('\tabc'), isTrue, reason: 'tab then abc');

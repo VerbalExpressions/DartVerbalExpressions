@@ -13,9 +13,12 @@ class SanitizeTests {
       });
 
       test('Should throw exception if null or empty', () {
-        expect(() => verbalExpression.sanitize(null), throwsA(predicate((e) => e is ArgumentError)));
-        expect(() => verbalExpression.sanitize(null), throwsA(predicate((e) => e is ArgumentError)));
-        expect(() => verbalExpression.sanitize(''), throwsA(predicate((e) => e is ArgumentError)));
+        expect(() => verbalExpression.sanitize(null),
+            throwsA(predicate((e) => e is ArgumentError)));
+        expect(() => verbalExpression.sanitize(null),
+            throwsA(predicate((e) => e is ArgumentError)));
+        expect(() => verbalExpression.sanitize(''),
+            throwsA(predicate((e) => e is ArgumentError)));
       });
 
       test('Should return escaped string', () {

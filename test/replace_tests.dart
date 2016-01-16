@@ -13,26 +13,41 @@ class ReplaceTests {
       });
 
       test('Should throw exception if null or empty', () {
-        expect(() => verbalExpression.replace(null, 'value'), throwsA(predicate((e) => e is ArgumentError)));
-        expect(() => verbalExpression.replace('source', null), throwsA(predicate((e) => e is ArgumentError)));
+        expect(() => verbalExpression.replace(null, 'value'),
+            throwsA(predicate((e) => e is ArgumentError)));
+        expect(() => verbalExpression.replace('source', null),
+            throwsA(predicate((e) => e is ArgumentError)));
       });
 
       test('Should replace first', () {
+        verbalExpression
+            .find('test')
+            .maybe('abc')
+            .anythingBut(' ')
+            .withAnyCase();
 
-        verbalExpression.find('test').maybe('abc').anythingBut(' ').withAnyCase();
-
-        expect(verbalExpression.replace('This is test here test', 'passed'), 'This is passed here test');
-        expect(verbalExpression.replace('This is test_here test', 'passed'), 'This is passed test');
-        expect(verbalExpression.replace('Testabc me test', 'passed'), 'passed me test');
+        expect(verbalExpression.replace('This is test here test', 'passed'),
+            'This is passed here test');
+        expect(verbalExpression.replace('This is test_here test', 'passed'),
+            'This is passed test');
+        expect(verbalExpression.replace('Testabc me test', 'passed'),
+            'passed me test');
       });
 
       test('Should replace all', () {
+        verbalExpression
+            .find('test')
+            .maybe('abc')
+            .anythingBut(' ')
+            .withAnyCase()
+            .stopAtFirst(false);
 
-        verbalExpression.find('test').maybe('abc').anythingBut(' ').withAnyCase().stopAtFirst(false);
-
-        expect(verbalExpression.replace('This is test here test', 'passed'), 'This is passed here passed');
-        expect(verbalExpression.replace('This is test_here test', 'passed'), 'This is passed passed');
-        expect(verbalExpression.replace('Testabc me test', 'passed'), 'passed me passed');
+        expect(verbalExpression.replace('This is test here test', 'passed'),
+            'This is passed here passed');
+        expect(verbalExpression.replace('This is test_here test', 'passed'),
+            'This is passed passed');
+        expect(verbalExpression.replace('Testabc me test', 'passed'),
+            'passed me passed');
       });
     });
   }

@@ -4,9 +4,8 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expression.dart';
 
 class NonDigitTests {
-  static run(){
+  static run() {
     group('NonDigit', () {
-
       VerbalExpression verbalExpression;
 
       setUp(() {
@@ -14,19 +13,14 @@ class NonDigitTests {
       });
 
       test('Should return correct regex', () {
-        verbalExpression
-        .startOfLine()
-        .nonDigit()
-        .endOfLine();
+        verbalExpression.startOfLine().nonDigit().endOfLine();
 
-        expect(verbalExpression.toString(), '^\\D\$', reason: 'Regex should be "^\\D\$"');
+        expect(verbalExpression.toString(), '^\\D\$',
+            reason: 'Regex should be "^\\D\$"');
       });
 
       test('Should match', () {
-        verbalExpression
-        .startOfLine()
-        .nonDigit()
-        .endOfLine();
+        verbalExpression.startOfLine().nonDigit().endOfLine();
 
         var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('5'), isFalse, reason: 'digit');

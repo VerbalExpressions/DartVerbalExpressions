@@ -1,8 +1,8 @@
 library verbal_expressions.base;
+
 import 'package:verbal_expressions/src/range.dart';
 
 class VerbalExpression {
-
   String _prefixes = '';
   String _source = '';
   String _suffixes = '';
@@ -19,17 +19,15 @@ class VerbalExpression {
   /// Example:
   ///   sanitize('.\$^{abc 123'); // \\.\\$\\^\\{abc\\ 123
   ///
-  String sanitize(String value)
-  {
-    if (value == null || value.isEmpty)
-    {
+  String sanitize(String value) {
+    if (value == null || value.isEmpty) {
       throw new ArgumentError('Value is empty');
     }
 
     return _escape(value);
   }
 
-  String _escape(String value){
+  String _escape(String value) {
     var pattern = '[\\W]';
     return value.replaceAllMapped(new RegExp(pattern), (match) {
       return '\\${match.group(0)}';
@@ -247,9 +245,8 @@ class VerbalExpression {
   ///  .toRegExp(); // produce [a-f0-5]
   ///
   VerbalExpression range(List<Range> ranges) {
-
     var result = '[';
-    ranges.forEach((range){
+    ranges.forEach((range) {
       result += '${sanitize(range.from)}-${sanitize(range.to)}';
     });
 
@@ -258,17 +255,16 @@ class VerbalExpression {
     return add(result);
   }
 
-  VerbalExpression addModifier(String modifier){
+  VerbalExpression addModifier(String modifier) {
     return _applyModifier(modifier, true);
   }
 
-  VerbalExpression removeModifier(String modifier){
+  VerbalExpression removeModifier(String modifier) {
     return _applyModifier(modifier, false);
   }
 
-  VerbalExpression _applyModifier(String modifier, bool enable){
-
-    switch(modifier){
+  VerbalExpression _applyModifier(String modifier, bool enable) {
+    switch (modifier) {
       case 'i':
         _ignoreCase = enable;
         break;
@@ -294,7 +290,7 @@ class VerbalExpression {
   ///   regex.hasMatch('a')   //true
   ///   regex.hasMatch('A')   //true
   ///
-  VerbalExpression withAnyCase([bool enable=true]){
+  VerbalExpression withAnyCase([bool enable = true]) {
     return _applyModifier('i', enable);
   }
 
@@ -308,7 +304,7 @@ class VerbalExpression {
   ///   regex.hasMatch('first line \n a') //false
   ///   regex.hasMatch('a')               //true
   ///
-  VerbalExpression searchOneLine([bool enable=true]){
+  VerbalExpression searchOneLine([bool enable = true]) {
     return _applyModifier('m', !enable);
   }
 
@@ -321,7 +317,7 @@ class VerbalExpression {
   ///   new VerbalExpression().find('a').stopAtFirst().replace('b') // baa
   ///   new VerbalExpression().find('a').stopAtFirst(false).replace('b') // bbb
   ///
-  VerbalExpression stopAtFirst([bool enable=true]){
+  VerbalExpression stopAtFirst([bool enable = true]) {
     return _applyModifier('g', !enable);
   }
 
@@ -329,7 +325,7 @@ class VerbalExpression {
   ///
   /// Same effect as [this.atLeast(1)]
   /// Returns this verbal expression object.
-  VerbalExpression oneOrMore(){
+  VerbalExpression oneOrMore() {
     return add('+');
   }
 
@@ -337,7 +333,7 @@ class VerbalExpression {
   ///
   /// Same effect as [this.atLeast(0)]
   /// Returns this verbal expression object.
-  VerbalExpression zeroOrMore(){
+  VerbalExpression zeroOrMore() {
     return add('*');
   }
 
@@ -355,7 +351,7 @@ class VerbalExpression {
   ///   regex.hasMatch('aa')  //false
   ///   regex.hasMatch('aaa') //true
   ///
-  VerbalExpression count(int count){
+  VerbalExpression count(int count) {
     return add('{$count}');
   }
 
@@ -374,7 +370,7 @@ class VerbalExpression {
   ///   regex.hasMatch('aaaa')  //true
   ///   regex.hasMatch('aaaaa') //false
   ///
-  VerbalExpression countRange(int min, int max){
+  VerbalExpression countRange(int min, int max) {
     return add('{$min,$max}');
   }
 
@@ -393,7 +389,7 @@ class VerbalExpression {
   ///   regex.hasMatch('a')    //false
   ///   regex.hasMatch('aaa')  //true
   ///
-  VerbalExpression atLeast(int min){
+  VerbalExpression atLeast(int min) {
     return add('{$min,}');
   }
 
@@ -408,16 +404,12 @@ class VerbalExpression {
   /// .multiply('abc', max: 5)            // Produces (abc){,5}
   /// .multiply('abc', min: 2, max: 5)    // Produces (abc){2,5}
   ///
-  VerbalExpression multiple(String value, {int min, int max}){
+  VerbalExpression multiple(String value, {int min, int max}) {
+    if (min == null && max == null) return then(value).oneOrMore();
 
-    if (min == null && max == null)
-      return then(value).oneOrMore();
+    if (max == null) return then(value).count(min);
 
-    if (max == null)
-      return then(value).count(min);
-
-    if (min == null)
-      return then(value).countRange(1, max);
+    if (min == null) return then(value).countRange(1, max);
 
     return then(value).countRange(min, max);
   }
@@ -425,7 +417,7 @@ class VerbalExpression {
   /// Starts a capturing group
   ///
   /// Returns this verbal expression object.
-  VerbalExpression beginCapture(){
+  VerbalExpression beginCapture() {
     _suffixes = ')$_suffixes';
     return add('(');
   }
@@ -433,7 +425,7 @@ class VerbalExpression {
   /// Ends a capturing group
   ///
   /// Returns this verbal expression object.
-  VerbalExpression endCapture(){
+  VerbalExpression endCapture() {
     // Remove the last parentheses from the _suffixes and add to the regex itself
     _suffixes = _suffixes.substring(0, _suffixes.length - 1);
     return add(')');
@@ -443,7 +435,7 @@ class VerbalExpression {
   ///
   /// Throws an [ArgumentError] if [value] is null or empty.
   /// Returns this verbal expression object.
-  VerbalExpression or(String value){
+  VerbalExpression or(String value) {
     _prefixes += '(';
     _suffixes = ')$_suffixes';
     return add(')|(').then(value);
@@ -454,13 +446,11 @@ class VerbalExpression {
   /// Takes into account global modifier
   /// Throws an [ArgumentError] if [value] or [source] is null or empty.
   /// Returns this verbal expression object.
-  String replace(String source, String value){
-
+  String replace(String source, String value) {
     if (source == null) throw new ArgumentError.notNull('source');
     if (value == null) throw new ArgumentError.notNull('value');
 
-    if (_isGlobal)
-      return source.replaceAll(this.toRegExp(), value);
+    if (_isGlobal) return source.replaceAll(this.toRegExp(), value);
 
     return source.replaceFirst(this.toRegExp(), value);
   }
@@ -468,14 +458,15 @@ class VerbalExpression {
   /// Convert to RegExp
   ///
   /// Returns resulting regex object
-  RegExp toRegExp(){
-    return new RegExp('$_prefixes$_source$_suffixes', caseSensitive: !_ignoreCase, multiLine: _isMultiLine);
+  RegExp toRegExp() {
+    return new RegExp('$_prefixes$_source$_suffixes',
+        caseSensitive: !_ignoreCase, multiLine: _isMultiLine);
   }
 
   /// Overrides toString
   ///
   /// Returns resulting regex pattern
-  String toString(){
+  String toString() {
     return toRegExp().pattern;
   }
 

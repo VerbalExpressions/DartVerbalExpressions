@@ -4,9 +4,8 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expression.dart';
 
 class NonSpaceTests {
-  static run(){
+  static run() {
     group('NonSpace', () {
-
       VerbalExpression verbalExpression;
 
       setUp(() {
@@ -14,19 +13,14 @@ class NonSpaceTests {
       });
 
       test('Should return correct regex', () {
-        verbalExpression
-        .startOfLine()
-        .nonSpace()
-        .endOfLine();
+        verbalExpression.startOfLine().nonSpace().endOfLine();
 
-        expect(verbalExpression.toString(), '^\\S\$', reason: 'Regex should be "^\\S\$"');
+        expect(verbalExpression.toString(), '^\\S\$',
+            reason: 'Regex should be "^\\S\$"');
       });
 
       test('Should match', () {
-        verbalExpression
-        .startOfLine()
-        .nonSpace()
-        .endOfLine();
+        verbalExpression.startOfLine().nonSpace().endOfLine();
 
         var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch(' '), isFalse, reason: 'whitespace');

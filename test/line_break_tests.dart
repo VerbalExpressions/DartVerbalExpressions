@@ -4,9 +4,8 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expression.dart';
 
 class LineBreakTests {
-  static run(){
+  static run() {
     group('LineBreak', () {
-
       VerbalExpression verbalExpression;
 
       setUp(() {
@@ -14,26 +13,27 @@ class LineBreakTests {
       });
 
       test('Should return correct regex', () {
-        verbalExpression
-        .startOfLine()
-        .lineBreak()
-        .endOfLine();
+        verbalExpression.startOfLine().lineBreak().endOfLine();
 
-        expect(verbalExpression.toString(), '^(\\r\\n|\\r|\\n)\$', reason: 'Regex should be "^(\\r\\n|\\r|\\n)\$"');
+        expect(verbalExpression.toString(), '^(\\r\\n|\\r|\\n)\$',
+            reason: 'Regex should be "^(\\r\\n|\\r|\\n)\$"');
       });
 
       test('Should match', () {
         verbalExpression
-        .startOfLine()
-        .then("abc")
-        .lineBreak()
-        .then("def")
-        .endOfLine();
+            .startOfLine()
+            .then("abc")
+            .lineBreak()
+            .then("def")
+            .endOfLine();
 
         var matcher = verbalExpression.toRegExp();
-        expect(matcher.hasMatch('abc\r\ndef'), isTrue, reason: 'abc then line break then def');
-        expect(matcher.hasMatch('abc\ndef'), isTrue, reason: 'abc then line break then def');
-        expect(matcher.hasMatch('abc\r\n def'), isFalse, reason: 'abc then line break then space then def');
+        expect(matcher.hasMatch('abc\r\ndef'), isTrue,
+            reason: 'abc then line break then def');
+        expect(matcher.hasMatch('abc\ndef'), isTrue,
+            reason: 'abc then line break then def');
+        expect(matcher.hasMatch('abc\r\n def'), isFalse,
+            reason: 'abc then line break then space then def');
       });
     });
   }

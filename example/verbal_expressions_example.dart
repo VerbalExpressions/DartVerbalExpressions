@@ -1,4 +1,5 @@
 library verbal_expressions_example.example;
+
 import 'package:verbal_expressions/verbal_expression.dart';
 
 main() {
@@ -24,51 +25,60 @@ main() {
   print(domain); // .org
 
   var testString = new VerbalExpression()
-  .find('dog').stopAtFirst().withAnyCase()
-  .replace('Replace first DoG in the sentence but do not touch second dog', 'cat');
+      .find('dog')
+      .stopAtFirst()
+      .withAnyCase()
+      .replace('Replace first DoG in the sentence but do not touch second dog',
+          'cat');
 
-  print(testString); // Replace first cat in the sentence but do not touch second dog
+  print(
+      testString); // Replace first cat in the sentence but do not touch second dog
 }
 
 String getDomain(String url) {
   var regex = new VerbalExpression()
-  .startOfLine()
-  .then("http")
-  .maybe("s")
-  .then("://")
-  .maybe("www.")
-  .anythingBut(" ")
-  .beginCapture()
-  .then('.')
-  .anythingBut('/')
-  .endCapture()
-  .anything()
-  .endOfLine()
-  .toRegExp();
+      .startOfLine()
+      .then("http")
+      .maybe("s")
+      .then("://")
+      .maybe("www.")
+      .anythingBut(" ")
+      .beginCapture()
+      .then('.')
+      .anythingBut('/')
+      .endCapture()
+      .anything()
+      .endOfLine()
+      .toRegExp();
 
   return regex.firstMatch(url).group(4);
 }
 
 bool matchTelephoneNumber(String number) {
   var regex = new VerbalExpression()
-  .startOfLine()
-  .then("+")
-  .beginCapture().range([new Range('0','9')]).count(3).maybe("-").maybe(" ").endCapture()
-  .count(3)
-  .endOfLine();
+      .startOfLine()
+      .then("+")
+      .beginCapture()
+      .range([new Range('0', '9')])
+      .count(3)
+      .maybe("-")
+      .maybe(" ")
+      .endCapture()
+      .count(3)
+      .endOfLine();
 
   return regex.hasMatch(number);
 }
 
 bool matchUrl(String url) {
   var regex = new VerbalExpression()
-  .startOfLine()
-  .then("http")
-  .maybe("s")
-  .then("://")
-  .maybe("www.")
-  .anythingBut(" ")
-  .endOfLine();
+      .startOfLine()
+      .then("http")
+      .maybe("s")
+      .then("://")
+      .maybe("www.")
+      .anythingBut(" ")
+      .endOfLine();
 
   return regex.hasMatch(url);
 }

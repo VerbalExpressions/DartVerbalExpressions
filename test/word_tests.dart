@@ -4,9 +4,8 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expression.dart';
 
 class WordTests {
-  static run(){
+  static run() {
     group('Word', () {
-
       VerbalExpression verbalExpression;
 
       setUp(() {
@@ -14,19 +13,14 @@ class WordTests {
       });
 
       test('Should return correct regex', () {
-        verbalExpression
-        .startOfLine()
-        .word()
-        .endOfLine();
+        verbalExpression.startOfLine().word().endOfLine();
 
-        expect(verbalExpression.toString(), '^\\w+\$', reason: 'Regex should be "^\\t\$"');
+        expect(verbalExpression.toString(), '^\\w+\$',
+            reason: 'Regex should be "^\\t\$"');
       });
 
       test('Should match', () {
-        verbalExpression
-        .startOfLine()
-        .word()
-        .endOfLine();
+        verbalExpression.startOfLine().word().endOfLine();
 
         var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('abc123'), isTrue, reason: 'word');

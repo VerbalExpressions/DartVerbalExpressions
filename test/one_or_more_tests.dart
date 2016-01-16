@@ -4,9 +4,8 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expression.dart';
 
 class OneOrMoreTests {
-  static run(){
+  static run() {
     group('One or more', () {
-
       VerbalExpression verbalExpression;
 
       setUp(() {
@@ -14,21 +13,14 @@ class OneOrMoreTests {
       });
 
       test('Should return correct regex', () {
-        verbalExpression
-        .startOfLine()
-        .find('a')
-        .oneOrMore()
-        .endOfLine();
+        verbalExpression.startOfLine().find('a').oneOrMore().endOfLine();
 
-        expect(verbalExpression.toString(), '^a+\$', reason: 'Regex should be "^a+\$"');
+        expect(verbalExpression.toString(), '^a+\$',
+            reason: 'Regex should be "^a+\$"');
       });
 
       test('Should match', () {
-        verbalExpression
-        .startOfLine()
-        .find('a')
-        .oneOrMore()
-        .endOfLine();
+        verbalExpression.startOfLine().find('a').oneOrMore().endOfLine();
 
         var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('a'), isTrue);

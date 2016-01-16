@@ -4,9 +4,8 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expression.dart';
 
 class AnythingTests {
-  static run(){
+  static run() {
     group('Anything', () {
-
       VerbalExpression verbalExpression;
 
       setUp(() {
@@ -14,19 +13,14 @@ class AnythingTests {
       });
 
       test('Should return correct regex', () {
-        verbalExpression
-        .startOfLine()
-        .anything()
-        .endOfLine();
+        verbalExpression.startOfLine().anything().endOfLine();
 
-        expect(verbalExpression.toString(), '^(.*)\$', reason: 'Regex should be "^(.*)\$"');
+        expect(verbalExpression.toString(), '^(.*)\$',
+            reason: 'Regex should be "^(.*)\$"');
       });
 
       test('Should match', () {
-        verbalExpression
-        .startOfLine()
-        .anything()
-        .endOfLine();
+        verbalExpression.startOfLine().anything().endOfLine();
 
         var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('what'), isTrue);

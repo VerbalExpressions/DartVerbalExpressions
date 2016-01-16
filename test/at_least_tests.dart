@@ -4,9 +4,8 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expression.dart';
 
 class AtLeastTests {
-  static run(){
+  static run() {
     group('AtLeast', () {
-
       VerbalExpression verbalExpression;
 
       setUp(() {
@@ -14,21 +13,14 @@ class AtLeastTests {
       });
 
       test('Should return correct regex', () {
-        verbalExpression
-        .startOfLine()
-        .find('a')
-        .atLeast(3)
-        .endOfLine();
+        verbalExpression.startOfLine().find('a').atLeast(3).endOfLine();
 
-        expect(verbalExpression.toString(), '^a{3,}\$', reason: 'Regex should be "^a{3,}\$"');
+        expect(verbalExpression.toString(), '^a{3,}\$',
+            reason: 'Regex should be "^a{3,}\$"');
       });
 
       test('Should match', () {
-        verbalExpression
-        .startOfLine()
-        .find('a')
-        .atLeast(3)
-        .endOfLine();
+        verbalExpression.startOfLine().find('a').atLeast(3).endOfLine();
 
         var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('a'), isFalse);

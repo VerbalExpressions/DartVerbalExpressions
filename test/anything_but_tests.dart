@@ -4,9 +4,8 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expression.dart';
 
 class AnythingButTests {
-  static run(){
+  static run() {
     group('AnythingBut', () {
-
       VerbalExpression verbalExpression;
 
       setUp(() {
@@ -14,19 +13,14 @@ class AnythingButTests {
       });
 
       test('Should return correct regex', () {
-        verbalExpression
-        .startOfLine()
-        .anythingBut('test')
-        .endOfLine();
+        verbalExpression.startOfLine().anythingBut('test').endOfLine();
 
-        expect(verbalExpression.toString(), '^([^test]*)\$', reason: 'Regex should be "^([^test]*)\$"');
+        expect(verbalExpression.toString(), '^([^test]*)\$',
+            reason: 'Regex should be "^([^test]*)\$"');
       });
 
       test('Should match', () {
-        verbalExpression
-        .startOfLine()
-        .anythingBut('w')
-        .endOfLine();
+        verbalExpression.startOfLine().anythingBut('w').endOfLine();
 
         var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('what'), isFalse, reason: 'starts with w');
