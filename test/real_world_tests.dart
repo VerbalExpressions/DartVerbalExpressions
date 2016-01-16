@@ -26,7 +26,7 @@ class RealWorldTests {
         String testUrl = "https://www.google.com";
 
         expect(verbalExpression.toRegExp().hasMatch(testUrl), isTrue, reason: 'Matches Google\'s url');
-        expect(verbalExpression.toString(), '^http(s)?://(www\\.)?([^ ]*)\$', reason: 'Regex doesn\'t match same regex as in example');
+        expect(verbalExpression.toString(), '^http(s)?\\:\\/\\/(www\\.)?([^\\ ]*)\$', reason: 'Regex doesn\'t match same regex as in example');
       });
 
       test('test telephone number', () {

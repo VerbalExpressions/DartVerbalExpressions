@@ -19,8 +19,8 @@ class SanitizeTests {
       });
 
       test('Should return escaped string', () {
-        var value = ". \$ ^ { [ ( | ) * + ? \\";
-        var expected = "\\. \\\$ \\^ \\{ \\[ \\( \\| \\) \\* \\+ \\? \\\\";
+        var value = ".\$^{[(|)*+?\\non ecaped1234";
+        var expected = "\\.\\\$\\^\\{\\[\\(\\|\\)\\*\\+\\?\\\\non\\ ecaped1234";
 
         var result = verbalExpression.sanitize(value);
         expect(result, expected);

@@ -11,6 +11,12 @@ class VerbalExpression {
   bool _isMultiLine = true;
   bool _isGlobal = false;
 
+  /// Escapes any non-word char with two backslashes used by any method, except [this.add]
+  ///
+  /// Throws an [ArgumentError] if [value] is null or empty.
+  /// Returns escaped string.
+  ///
+  ///   sanitize('.\$^{abc 123'); // \\.\\$\\^\\{abc\\ 123
   String sanitize(String value)
   {
     if (value == null || value.isEmpty)
@@ -22,7 +28,7 @@ class VerbalExpression {
   }
 
   String _escape(String value){
-    var pattern = '[\\.|\\\$|\\^|\\{|\\[|\\(|\\||\\)|\\*|\\+|\\?|\\\\]';
+    var pattern = '[\\W]';
     return value.replaceAllMapped(new RegExp(pattern), (match) {
       return '\\${match.group(0)}';
     });
