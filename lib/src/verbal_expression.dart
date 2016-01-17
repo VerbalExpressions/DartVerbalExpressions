@@ -9,7 +9,7 @@ class VerbalExpression {
 
   bool _ignoreCase = false;
   bool _isMultiLine = true;
-  bool _isGlobal = false;
+  bool _isGlobal = true;
 
   /// Escapes any non-word char with two backslashes used by any method, except [this.add]
   ///
@@ -255,10 +255,22 @@ class VerbalExpression {
     return add(result);
   }
 
+  /// Adds modifier flag
+  ///
+  /// Allows to set 'g', 'm' and 'i' flags in the regex
+  /// Throws an [ArgumentError] if [modifier] is other then 'g', 'm' or 'i'.
+  /// 'gm' is default.
+  /// Returns this verbal expression object.
   VerbalExpression addModifier(String modifier) {
     return _applyModifier(modifier, true);
   }
 
+  /// Removes modifier flag
+  ///
+  /// Allows to unset 'g', 'm' and 'i' flags in the regex
+  /// Throws an [ArgumentError] if [modifier] is other then 'g', 'm' or 'i'.
+  /// 'gm' is default.
+  /// Returns this verbal expression object.
   VerbalExpression removeModifier(String modifier) {
     return _applyModifier(modifier, false);
   }
@@ -283,6 +295,7 @@ class VerbalExpression {
 
   /// Enable or disable matching with ignoring case according to [enable] flag.
   ///
+  /// Case sensitive matching is default.
   /// Returns this verbal expression object.
   ///
   /// Example:
@@ -297,6 +310,7 @@ class VerbalExpression {
   /// Enable or disable search in one line in prior
   /// to multi line search according to [enable] flag.
   ///
+  /// Multi line search is default.
   /// Returns this verbal expression object.
   ///
   /// Example:
@@ -311,6 +325,7 @@ class VerbalExpression {
   /// Enable or disable search only for a first match in prior
   /// to all matches according to [enable] flag.
   ///
+  /// Global (all matches) search is default.
   /// Returns this verbal expression object.
   ///
   /// Example:
