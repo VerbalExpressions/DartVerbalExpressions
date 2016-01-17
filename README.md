@@ -64,3 +64,17 @@ More examples are in [example file](https://github.com/VerbalExpressions/DartVer
 Please find feature requests and bugs at the [issue tracker][tracker].
 
 [tracker]: https://github.com/VerbalExpressions/DartVerbalExpressions/issues
+
+## Other implementations  
+You can view all implementations on [VerbalExpressions.github.io](http://VerbalExpressions.github.io) 
+
+[
+[Javascript](https://github.com/VerbalExpressions/JSVerbalExpressions) - 
+[PHP](https://github.com/VerbalExpressions/PHPVerbalExpressions) - 
+[Python](https://github.com/VerbalExpressions/PythonVerbalExpressions) - 
+[C#](https://github.com/VerbalExpressions/CSharpVerbalExpressions) - 
+[Objective-C](https://github.com/VerbalExpressions/ObjectiveCVerbalExpressions) - 
+[Ruby](https://github.com/ryan-endacott/verbal_expressions) - 
+[Groovy](https://github.com/VerbalExpressions/GroovyVerbalExpressions) - 
+[Haskell](https://github.com/VerbalExpressions/HaskellVerbalExpressions) - 
+[C++](https://github.com/VerbalExpressions/CppVerbalExpressions) - ... ([moarr](https://github.com/VerbalExpressions)) ] 
