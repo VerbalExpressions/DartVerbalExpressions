@@ -1,8 +1,11 @@
 language: dart
-sudo: true
+sudo: false
 dart:
   - stable
   - dev
+
+before_script:
+  - chmod +x tool/travis.sh
 
 script:
   - ./tool/travis.sh
