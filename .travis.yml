@@ -3,5 +3,9 @@ sudo: false
 dart:
   - stable
   - dev
+
+before_script:
+  - chmod +x ./tool/travis.sh
+
 script:
   - ./tool/travis.sh
