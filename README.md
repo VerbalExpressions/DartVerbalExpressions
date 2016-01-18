@@ -1,3 +1,7 @@
+[![Pub Package](https://img.shields.io/pub/v/verbal_expressions.svg)](https://pub.dartlang.org/packages/verbal_expressions)
+[![Build Status](https://travis-ci.org/VerbalExpressions/DartVerbalExpressions.svg)](https://travis-ci.org/VerbalExpressions/DartVerbalExpressions)
+[![Github Issues](http://githubbadges.herokuapp.com/VerbalExpressions/DartVerbalExpressions/issues.svg)](https://github.com/VerbalExpressions/DartVerbalExpressions/issues)
+
 # verbal_expressions
 
 A library for Dart developers that helps to construct difficult regular expressions.
