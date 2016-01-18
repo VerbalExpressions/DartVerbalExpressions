@@ -24,7 +24,8 @@ class ReplaceTests {
             .find('test')
             .maybe('abc')
             .anythingBut(' ')
-            .withAnyCase();
+            .withAnyCase()
+            .stopAtFirst();
 
         expect(verbalExpression.replace('This is test here test', 'passed'),
             'This is passed here test');
@@ -39,8 +40,7 @@ class ReplaceTests {
             .find('test')
             .maybe('abc')
             .anythingBut(' ')
-            .withAnyCase()
-            .stopAtFirst(false);
+            .withAnyCase();
 
         expect(verbalExpression.replace('This is test here test', 'passed'),
             'This is passed here passed');
