@@ -13,14 +13,22 @@ class BrTests {
       });
 
       test('Should return correct regex', () {
-        verbalExpression.startOfLine().br().endOfLine();
+        verbalExpression
+          ..startOfLine()
+          ..br()
+          ..endOfLine();
 
         expect(verbalExpression.toString(), '^(\\r\\n|\\r|\\n)\$',
             reason: 'Regex should be "^(\\r\\n|\\r|\\n)\$"');
       });
 
       test('Should match', () {
-        verbalExpression.startOfLine().then("abc").br().then("def").endOfLine();
+        verbalExpression
+          ..startOfLine()
+          ..then("abc")
+          ..br()
+          ..then("def")
+          ..endOfLine();
 
         var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('abc\r\ndef'), isTrue,

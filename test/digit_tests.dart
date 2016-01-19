@@ -13,14 +13,20 @@ class DigitTests {
       });
 
       test('Should return correct regex', () {
-        verbalExpression.startOfLine().digit().endOfLine();
+        verbalExpression
+          ..startOfLine()
+          ..digit()
+          ..endOfLine();
 
         expect(verbalExpression.toString(), '^\\d\$',
             reason: 'Regex should be "^\\D\$"');
       });
 
       test('Should match', () {
-        verbalExpression.startOfLine().digit().endOfLine();
+        verbalExpression
+          ..startOfLine()
+          ..digit()
+          ..endOfLine();
 
         var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('5'), isTrue, reason: 'digit');

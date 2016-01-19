@@ -13,14 +13,21 @@ class ThenTests {
       });
 
       test('Should return correct regex', () {
-        verbalExpression.startOfLine().then("a").then("new");
+        verbalExpression
+          ..startOfLine()
+          ..then("a")
+          ..then("new");
 
         expect(verbalExpression.toString(), "^anew",
             reason: 'Regex should be "^(?:a)(?:new)"');
       });
 
       test('Should match', () {
-        verbalExpression.startOfLine().then("a").then("b").then("new");
+        verbalExpression
+          ..startOfLine()
+          ..then("a")
+          ..then("b")
+          ..then("new");
 
         var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('anewb'), isFalse,

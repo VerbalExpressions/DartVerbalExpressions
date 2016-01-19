@@ -13,14 +13,22 @@ class CountRangeTests {
       });
 
       test('Should return correct regex', () {
-        verbalExpression.startOfLine().find('a').countRange(2, 5).endOfLine();
+        verbalExpression
+          ..startOfLine()
+          ..find('a')
+          ..countRange(2, 5)
+          ..endOfLine();
 
         expect(verbalExpression.toString(), '^a{2,5}\$',
             reason: 'Regex should be "^a{2,5}\$"');
       });
 
       test('Should match', () {
-        verbalExpression.startOfLine().find('a').countRange(2, 5).endOfLine();
+        verbalExpression
+          ..startOfLine()
+          ..find('a')
+          ..countRange(2, 5)
+          ..endOfLine();
 
         var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('a'), isFalse);

@@ -13,11 +13,11 @@ Dart package info is here: https://pub.dartlang.org/packages/verbal_expressions
 
 ```dart
   var regex = new VerbalExpression()
-  .startOfLine()
-  .then("http").maybe("s")
-  .then("://")
-  .maybe("www.").anythingBut(" ")
-  .endOfLine();
+   ..startOfLine()
+   ..then("http").maybe("s")
+   ..then("://")
+   ..maybe("www.").anythingBut(" ")
+   ..endOfLine();
 
   // Create an example URL
   String url = "https://www.google.com";
@@ -30,8 +30,7 @@ Dart package info is here: https://pub.dartlang.org/packages/verbal_expressions
 ```
 
 ```dart
-  var regex = new VerbalExpression()
-  .startOfLine().then("abc").or("def");
+  var regex = new VerbalExpression()..startOfLine()..then("abc")..or("def");
 
   var testString = "defzzz";
   //Use VerbalExpression's hasMatch() method to test if parts if the string match the regex
@@ -41,18 +40,19 @@ Dart package info is here: https://pub.dartlang.org/packages/verbal_expressions
 Feel free to use any predefined char groups: 
 ```dart
   var regex = new VerbalExpression()
-  .wordChar().nonWordChar()
-  .space().nonSpace()
-  .digit().nonDigit();
+	  ..wordChar()..nonWordChar()
+	  ..space()..nonSpace()
+	  ..digit()..nonDigit();
 ```
 
 Define captures:
 ```dart 
-  RegExp regex = new VerbalExpression()
-  .find("a")
-  .beginCapture().find("b").anything().endCapture()
-  .then("cd")
-  .toRegExp();
+  var expression = new VerbalExpression()
+   ..find("a")
+   ..beginCapture()..find("b")..anything()..endCapture()
+   ..then("cd");
+   
+  RegExp regex = expression.toRegExp();
 
   var match = regex.firstMatch(text);
   print(match.group(0)); // returns "abcd"

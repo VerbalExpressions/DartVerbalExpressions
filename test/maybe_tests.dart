@@ -13,14 +13,20 @@ class MaybeTests {
       });
 
       test('Should return correct regex', () {
-        verbalExpression.startOfLine().then('a').maybe('b');
+        verbalExpression
+          ..startOfLine()
+          ..then('a')
+          ..maybe('b');
 
         expect(verbalExpression.toString(), '^a(b)?',
             reason: 'Regex should be "^a(b)?"');
       });
 
       test('Should match', () {
-        verbalExpression.startOfLine().then('a').maybe('b');
+        verbalExpression
+          ..startOfLine()
+          ..then('a')
+          ..maybe('b');
 
         var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('acb'), isTrue,

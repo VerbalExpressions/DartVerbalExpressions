@@ -13,14 +13,20 @@ class NonDigitTests {
       });
 
       test('Should return correct regex', () {
-        verbalExpression.startOfLine().nonDigit().endOfLine();
+        verbalExpression
+          ..startOfLine()
+          ..nonDigit()
+          ..endOfLine();
 
         expect(verbalExpression.toString(), '^\\D\$',
             reason: 'Regex should be "^\\D\$"');
       });
 
       test('Should match', () {
-        verbalExpression.startOfLine().nonDigit().endOfLine();
+        verbalExpression
+          ..startOfLine()
+          ..nonDigit()
+          ..endOfLine();
 
         var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('5'), isFalse, reason: 'digit');

@@ -13,7 +13,11 @@ class CaptureTests {
       });
 
       test('Should return correct regex', () {
-        verbalExpression.beginCapture().find('com').or('org').endCapture();
+        verbalExpression
+          ..beginCapture()
+          ..find('com')
+          ..or('org')
+          ..endCapture();
 
         expect(verbalExpression.toString(), '((com)|(org))',
             reason: 'Regex should be "(((com))|((org)))"');
@@ -23,15 +27,15 @@ class CaptureTests {
         const String testString = 'aaabcd';
 
         verbalExpression
-            .find('a')
-            .beginCapture()
-            .find("a")
-            .count(2)
-            .endCapture()
-            .beginCapture()
-            .find("b")
-            .anything()
-            .endCapture();
+          ..find('a')
+          ..beginCapture()
+          ..find("a")
+          ..count(2)
+          ..endCapture()
+          ..beginCapture()
+          ..find("b")
+          ..anything()
+          ..endCapture();
 
         var matcher = verbalExpression.toRegExp();
         expect(matcher.firstMatch(testString).group(0), 'aaabcd');

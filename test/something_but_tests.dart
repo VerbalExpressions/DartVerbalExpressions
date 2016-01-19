@@ -13,14 +13,20 @@ class SomethingButTests {
       });
 
       test('Should return correct regex', () {
-        verbalExpression.startOfLine().somethingBut('test').endOfLine();
+        verbalExpression
+          ..startOfLine()
+          ..somethingBut('test')
+          ..endOfLine();
 
         expect(verbalExpression.toString(), '^([^test]+)\$',
             reason: 'Regex should be "^([^test]+)\$"');
       });
 
       test('Should match', () {
-        verbalExpression.startOfLine().somethingBut('w').endOfLine();
+        verbalExpression
+          ..startOfLine()
+          ..somethingBut('w')
+          ..endOfLine();
 
         var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('what'), isFalse, reason: 'starts with w');

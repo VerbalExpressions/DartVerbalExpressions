@@ -13,14 +13,21 @@ class OrTests {
       });
 
       test('Should return correct regex', () {
-        verbalExpression.startOfLine().then("abc").or("def").endOfLine();
+        verbalExpression
+          ..startOfLine()
+          ..then("abc")
+          ..or("def")
+          ..endOfLine();
 
         expect(verbalExpression.toString(), '^(abc)|(def)\$',
             reason: 'Regex should be "^(abc)|(def)\$"');
       });
 
       test('Should match', () {
-        verbalExpression.startOfLine().then("abc").or("def");
+        verbalExpression
+          ..startOfLine()
+          ..then("abc")
+          ..or("def");
 
         var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('defzzz'), isTrue,

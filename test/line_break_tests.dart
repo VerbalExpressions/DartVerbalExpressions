@@ -13,7 +13,10 @@ class LineBreakTests {
       });
 
       test('Should return correct regex', () {
-        verbalExpression.startOfLine().lineBreak().endOfLine();
+        verbalExpression
+          ..startOfLine()
+          ..lineBreak()
+          ..endOfLine();
 
         expect(verbalExpression.toString(), '^(\\r\\n|\\r|\\n)\$',
             reason: 'Regex should be "^(\\r\\n|\\r|\\n)\$"');
@@ -21,11 +24,11 @@ class LineBreakTests {
 
       test('Should match', () {
         verbalExpression
-            .startOfLine()
-            .then("abc")
-            .lineBreak()
-            .then("def")
-            .endOfLine();
+          ..startOfLine()
+          ..then("abc")
+          ..lineBreak()
+          ..then("def")
+          ..endOfLine();
 
         var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('abc\r\ndef'), isTrue,

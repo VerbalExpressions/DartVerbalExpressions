@@ -13,14 +13,21 @@ class TabTests {
       });
 
       test('Should return correct regex', () {
-        verbalExpression.startOfLine().tab().endOfLine();
+        verbalExpression
+          ..startOfLine()
+          ..tab()
+          ..endOfLine();
 
         expect(verbalExpression.toString(), '^\\t\$',
             reason: 'Regex should be "^\\t\$"');
       });
 
       test('Should match', () {
-        verbalExpression.startOfLine().tab().then("abc").endOfLine();
+        verbalExpression
+          ..startOfLine()
+          ..tab()
+          ..then("abc")
+          ..endOfLine();
 
         var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('\tabc'), isTrue, reason: 'tab then abc');

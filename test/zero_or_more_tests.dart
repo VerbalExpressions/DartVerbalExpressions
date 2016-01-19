@@ -13,14 +13,22 @@ class ZeroOrMoreTests {
       });
 
       test('Should return correct regex', () {
-        verbalExpression.startOfLine().find('a').zeroOrMore().endOfLine();
+        verbalExpression
+          ..startOfLine()
+          ..find('a')
+          ..zeroOrMore()
+          ..endOfLine();
 
         expect(verbalExpression.toString(), '^a*\$',
             reason: 'Regex should be "^a*\$"');
       });
 
       test('Should match', () {
-        verbalExpression.startOfLine().find('a').zeroOrMore().endOfLine();
+        verbalExpression
+          ..startOfLine()
+          ..find('a')
+          ..zeroOrMore()
+          ..endOfLine();
 
         var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('a'), isTrue);

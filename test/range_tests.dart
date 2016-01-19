@@ -29,8 +29,9 @@ class RangeTests {
 
       test('Should return correct regex', () {
         verbalExpression
-            .startOfLine()
-            .range([new Range('a', 'b'), new Range('0', '9')]).endOfLine();
+          ..startOfLine()
+          ..range([new Range('a', 'b'), new Range('0', '9')])
+          ..endOfLine();
 
         expect(verbalExpression.toString(), '^[a-b0-9]\$',
             reason: 'Regex should be "^[a-b0-9]\$"');
@@ -38,8 +39,9 @@ class RangeTests {
 
       test('Should match with multiple ranges', () {
         verbalExpression
-            .startOfLine()
-            .range([new Range('a', 'z'), new Range('0', '5')]).endOfLine();
+          ..startOfLine()
+          ..range([new Range('a', 'z'), new Range('0', '5')])
+          ..endOfLine();
 
         var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('b'), isTrue,

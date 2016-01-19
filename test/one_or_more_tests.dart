@@ -13,14 +13,22 @@ class OneOrMoreTests {
       });
 
       test('Should return correct regex', () {
-        verbalExpression.startOfLine().find('a').oneOrMore().endOfLine();
+        verbalExpression
+          ..startOfLine()
+          ..find('a')
+          ..oneOrMore()
+          ..endOfLine();
 
         expect(verbalExpression.toString(), '^a+\$',
             reason: 'Regex should be "^a+\$"');
       });
 
       test('Should match', () {
-        verbalExpression.startOfLine().find('a').oneOrMore().endOfLine();
+        verbalExpression
+          ..startOfLine()
+          ..find('a')
+          ..oneOrMore()
+          ..endOfLine();
 
         var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('a'), isTrue);

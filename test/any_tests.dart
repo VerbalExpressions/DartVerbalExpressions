@@ -13,14 +13,21 @@ class AnyTests {
       });
 
       test('Should return correct regex', () {
-        verbalExpression.startOfLine().any('xyz').endOfLine();
+        verbalExpression
+          ..startOfLine()
+          ..any('xyz')
+          ..endOfLine();
 
         expect(verbalExpression.toString(), '^[xyz]\$',
             reason: 'Regex should be "^[xyz]\$"');
       });
 
       test('Should match', () {
-        verbalExpression.startOfLine().find('a').any('xyz').endOfLine();
+        verbalExpression
+          ..startOfLine()
+          ..find('a')
+          ..any('xyz')
+          ..endOfLine();
 
         var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('ay'), isTrue,

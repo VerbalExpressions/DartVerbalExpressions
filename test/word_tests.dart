@@ -13,14 +13,20 @@ class WordTests {
       });
 
       test('Should return correct regex', () {
-        verbalExpression.startOfLine().word().endOfLine();
+        verbalExpression
+          ..startOfLine()
+          ..word()
+          ..endOfLine();
 
         expect(verbalExpression.toString(), '^\\w+\$',
             reason: 'Regex should be "^\\t\$"');
       });
 
       test('Should match', () {
-        verbalExpression.startOfLine().word().endOfLine();
+        verbalExpression
+          ..startOfLine()
+          ..word()
+          ..endOfLine();
 
         var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('abc123'), isTrue, reason: 'word');

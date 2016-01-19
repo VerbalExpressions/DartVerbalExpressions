@@ -13,14 +13,20 @@ class NonSpaceTests {
       });
 
       test('Should return correct regex', () {
-        verbalExpression.startOfLine().nonSpace().endOfLine();
+        verbalExpression
+          ..startOfLine()
+          ..nonSpace()
+          ..endOfLine();
 
         expect(verbalExpression.toString(), '^\\S\$',
             reason: 'Regex should be "^\\S\$"');
       });
 
       test('Should match', () {
-        verbalExpression.startOfLine().nonSpace().endOfLine();
+        verbalExpression
+          ..startOfLine()
+          ..nonSpace()
+          ..endOfLine();
 
         var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch(' '), isFalse, reason: 'whitespace');

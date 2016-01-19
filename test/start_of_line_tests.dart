@@ -27,7 +27,10 @@ class StartOfLineTests {
       test(
           'Should append in the beginning of the expression when placed in random order',
           () {
-        verbalExpression.find('test').then('ing').startOfLine();
+        verbalExpression
+          ..find('test')
+          ..then('ing')
+          ..startOfLine();
 
         var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('testing1234'), isTrue,
@@ -35,7 +38,10 @@ class StartOfLineTests {
       });
 
       test('Should match http in start when Then(http).Maybe(wwww)', () {
-        verbalExpression.startOfLine().then('http').maybe('www');
+        verbalExpression
+          ..startOfLine()
+          ..then('http')
+          ..maybe('www');
 
         var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('http'), isTrue,
@@ -43,7 +49,10 @@ class StartOfLineTests {
       });
 
       test('Should not match www in start when Then(http).Maybe(wwww)', () {
-        verbalExpression.startOfLine().then('http').maybe('www');
+        verbalExpression
+          ..startOfLine()
+          ..then('http')
+          ..maybe('www');
 
         var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('www'), isFalse,

@@ -13,14 +13,20 @@ class WordCharTests {
       });
 
       test('Should return correct regex', () {
-        verbalExpression.startOfLine().wordChar().endOfLine();
+        verbalExpression
+          ..startOfLine()
+          ..wordChar()
+          ..endOfLine();
 
         expect(verbalExpression.toString(), '^\\w\$',
             reason: 'Regex should be "^\\w\$"');
       });
 
       test('Should match', () {
-        verbalExpression.startOfLine().word().endOfLine();
+        verbalExpression
+          ..startOfLine()
+          ..word()
+          ..endOfLine();
 
         var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('a'), isTrue, reason: 'word character');

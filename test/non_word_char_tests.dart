@@ -13,14 +13,20 @@ class NonWordCharTests {
       });
 
       test('Should return correct regex', () {
-        verbalExpression.startOfLine().nonWordChar().endOfLine();
+        verbalExpression
+          ..startOfLine()
+          ..nonWordChar()
+          ..endOfLine();
 
         expect(verbalExpression.toString(), '^\\W\$',
             reason: 'Regex should be "^\\W\$"');
       });
 
       test('Should match', () {
-        verbalExpression.startOfLine().nonWordChar().endOfLine();
+        verbalExpression
+          ..startOfLine()
+          ..nonWordChar()
+          ..endOfLine();
 
         var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('a'), isFalse, reason: 'word character');

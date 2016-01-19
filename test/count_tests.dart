@@ -13,14 +13,22 @@ class CountTests {
       });
 
       test('Should return correct regex', () {
-        verbalExpression.startOfLine().find('a').count(3).endOfLine();
+        verbalExpression
+          ..startOfLine()
+          ..find('a')
+          ..count(3)
+          ..endOfLine();
 
         expect(verbalExpression.toString(), '^a{3}\$',
             reason: 'Regex should be "^a{3}\$"');
       });
 
       test('Should match', () {
-        verbalExpression.startOfLine().find('a').count(3).endOfLine();
+        verbalExpression
+          ..startOfLine()
+          ..find('a')
+          ..count(3)
+          ..endOfLine();
 
         var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('a'), isFalse);

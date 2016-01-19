@@ -13,14 +13,20 @@ class AnythingTests {
       });
 
       test('Should return correct regex', () {
-        verbalExpression.startOfLine().anything().endOfLine();
+        verbalExpression
+          ..startOfLine()
+          ..anything()
+          ..endOfLine();
 
         expect(verbalExpression.toString(), '^(.*)\$',
             reason: 'Regex should be "^(.*)\$"');
       });
 
       test('Should match', () {
-        verbalExpression.startOfLine().anything().endOfLine();
+        verbalExpression
+          ..startOfLine()
+          ..anything()
+          ..endOfLine();
 
         var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('what'), isTrue);

@@ -21,11 +21,11 @@ class ReplaceTests {
 
       test('Should replace first', () {
         verbalExpression
-            .find('test')
-            .maybe('abc')
-            .anythingBut(' ')
-            .withAnyCase()
-            .stopAtFirst();
+          ..find('test')
+          ..maybe('abc')
+          ..anythingBut(' ')
+          ..withAnyCase()
+          ..stopAtFirst();
 
         expect(verbalExpression.replace('This is test here test', 'passed'),
             'This is passed here test');
@@ -37,10 +37,10 @@ class ReplaceTests {
 
       test('Should replace all', () {
         verbalExpression
-            .find('test')
-            .maybe('abc')
-            .anythingBut(' ')
-            .withAnyCase();
+          ..find('test')
+          ..maybe('abc')
+          ..anythingBut(' ')
+          ..withAnyCase();
 
         expect(verbalExpression.replace('This is test here test', 'passed'),
             'This is passed here passed');
