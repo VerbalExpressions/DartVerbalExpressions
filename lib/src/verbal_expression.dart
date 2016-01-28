@@ -116,15 +116,24 @@ class VerbalExpression {
   }
 
   /// Adds expression that matches anything (includes empty string)
-  void anything() {
-    add('(.*)');
+  ///
+  /// [isLazy] determines the type of search. Greedy search is default.
+  ///
+  /// Example:
+  ///   Input: 'greedy can be dangerous at times'
+  ///   ..add('a')..anything()..then('a')      // 'an be dangerous a'
+  ///   ..add('a')..anything(true)..then('a')  // 'an be da'
+  ///
+  void anything([bool isLazy = false]) {
+    add(isLazy ? '(.*?)' : '(.*)');
   }
 
   /// Adds expression that matches anything, but not [value]
   ///
+  /// [isLazy] determines the type of search. Greedy search is default.
   /// Throws an [ArgumentError] if [value] is null or empty.
-  void anythingBut(String value) {
-    add('([^${sanitize(value)}]*)');
+  void anythingBut(String value, [bool isLazy = false]) {
+    add('([^${sanitize(value)}]${isLazy?'*?':'*'})');
   }
 
   /// Adds expression that matches something that might appear once (or more)
@@ -303,11 +312,17 @@ class VerbalExpression {
     add('+');
   }
 
-  /// Adds '*' char to regexp, means zero or more times repeated
+  /// Adds zero or more times repeater.
   ///
-  /// Same effect as [this.atLeast(0)]
-  void zeroOrMore() {
-    add('*');
+  /// [isLazy] determines the type of search. Greedy search is default.
+  ///
+  /// Example:
+  ///   Input: 'greedy can be dangerous at times'
+  ///   ..add('a.')..zeroOrMore()..then('a')      // 'an be dangerous a'
+  ///   ..add('a.')..zeroOrMore(true)..then('a')  // 'an be da'
+  ///
+  void zeroOrMore([bool isLazy = false]) {
+    add(isLazy ? '*?' : '*');
   }
 
   /// Add count of previous group

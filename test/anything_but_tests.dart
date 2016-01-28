@@ -33,6 +33,26 @@ class AnythingButTests {
         expect(matcher.hasMatch('that'), isTrue, reason: 'Not contain w');
         expect(matcher.hasMatch(' '), isTrue, reason: 'Not contain w');
       });
+
+      test('Should be greedy', () {
+        verbalExpression
+          ..find('a')
+          ..anythingBut('i')
+          ..then('a');
+
+        var matcher = verbalExpression.toRegExp();
+        expect(matcher.firstMatch('greedy can be dangerous at times, really').group(0), 'an be dangerous a');
+      });
+
+      test('Should be lazy', () {
+        verbalExpression
+          ..find('a')
+          ..anythingBut('i', true)
+          ..then('a');
+
+        var matcher = verbalExpression.toRegExp();
+        expect(matcher.firstMatch('greedy can be dangerous at times, really').group(0), 'an be da');
+      });
     });
   }
 }

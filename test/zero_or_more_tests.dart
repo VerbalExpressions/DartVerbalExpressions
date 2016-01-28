@@ -36,6 +36,28 @@ class ZeroOrMoreTests {
         expect(matcher.hasMatch('ab'), isFalse);
         expect(matcher.hasMatch(''), isTrue);
       });
+
+      test('Should be greedy', () {
+        verbalExpression
+          ..find('a')
+          ..add('.')
+          ..zeroOrMore()
+          ..then('a');
+
+        var matcher = verbalExpression.toRegExp();
+        expect(matcher.firstMatch('greedy can be dangerous at times').group(0), 'an be dangerous a');
+      });
+
+      test('Should be lazy', () {
+        verbalExpression
+          ..find('a')
+          ..add('.')
+          ..zeroOrMore(true)
+          ..then('a');
+
+        var matcher = verbalExpression.toRegExp();
+        expect(matcher.firstMatch('greedy can be dangerous at times').group(0), 'an be da');
+      });
     });
   }
 }
