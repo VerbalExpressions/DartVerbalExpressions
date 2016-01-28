@@ -18,8 +18,8 @@ class BrTests {
           ..br()
           ..endOfLine();
 
-        expect(verbalExpression.toString(), '^(\\r\\n|\\r|\\n)\$',
-            reason: 'Regex should be "^(\\r\\n|\\r|\\n)\$"');
+        expect(verbalExpression.toString(), '^(\\r\\n|\\r|\\n|\\r\\r)\$',
+        reason: 'Regex should be "^(\\r\\n|\\r|\\n|\\r\\r)\$"');
       });
 
       test('Should match', () {
@@ -32,12 +32,15 @@ class BrTests {
 
         var matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('abc\r\ndef'), isTrue,
-            reason: 'abc then line break then def');
+        reason: 'abc then line break then def');
         expect(matcher.hasMatch('abc\ndef'), isTrue,
-            reason: 'abc then line break then def');
+        reason: 'abc then line break then def');
+        expect(matcher.hasMatch('abc\r\rdef'), isTrue,
+        reason: 'abc then line break then def');
         expect(matcher.hasMatch('abc\r\n def'), isFalse,
-            reason: 'abc then line break then space then def');
+        reason: 'abc then line break then space then def');
       });
+
     });
   }
 }
