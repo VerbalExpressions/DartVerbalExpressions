@@ -149,9 +149,9 @@ class VerbalExpression {
     add('([^${sanitize(value)}]+)');
   }
 
-  /// Adds universal (Unix + Windows CRLF) line break expression
+  /// Adds universal (Unix + Windows CRLF + Macintosh) line break expression
   void lineBreak() {
-    add('(\\r\\n|\\r|\\n)');
+    add('(\\r\\n|\\r|\\n|\\r\\r)');
   }
 
   /// Shortcut for [this.lineBreak()]
