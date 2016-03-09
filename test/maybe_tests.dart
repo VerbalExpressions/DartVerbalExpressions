@@ -18,8 +18,8 @@ class MaybeTests {
           ..then('a')
           ..maybe('b');
 
-        expect(verbalExpression.toString(), '^a(b)?',
-            reason: 'Regex should be "^a(b)?"');
+        expect(verbalExpression.toString(), '^a(?:b)?',
+            reason: 'Regex should be "^a(?:b)?"');
       });
 
       test('Should match', () {

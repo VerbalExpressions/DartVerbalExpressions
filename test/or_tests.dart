@@ -19,8 +19,8 @@ class OrTests {
           ..or("def")
           ..endOfLine();
 
-        expect(verbalExpression.toString(), '^(abc)|(def)\$',
-            reason: 'Regex should be "^(abc)|(def)\$"');
+        expect(verbalExpression.toString(), '^(?:abc)|(?:def)\$',
+            reason: 'Regex should be "^(?:abc)|(?:def)\$"');
       });
 
       test('Should match', () {

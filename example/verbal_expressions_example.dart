@@ -49,7 +49,7 @@ String getDomain(String url) {
     ..anything()
     ..endOfLine();
 
-  return expression.toRegExp().firstMatch(url).group(4);
+  return expression.toRegExp().firstMatch(url).group(1);
 }
 
 bool matchTelephoneNumber(String number) {

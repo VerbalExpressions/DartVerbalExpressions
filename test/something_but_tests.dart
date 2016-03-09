@@ -18,8 +18,8 @@ class SomethingButTests {
           ..somethingBut('test')
           ..endOfLine();
 
-        expect(verbalExpression.toString(), '^([^test]+)\$',
-            reason: 'Regex should be "^([^test]+)\$"');
+        expect(verbalExpression.toString(), '^(?:[^test]+)\$',
+            reason: 'Regex should be "^(?:[^test]+)\$"');
       });
 
       test('Should match', () {

@@ -87,7 +87,7 @@ class VerbalExpression {
   ///   expression.hasMatch('https://')   //true
   ///
   void maybe(String value) {
-    add('(${sanitize(value)})?');
+    add('(?:${sanitize(value)})?');
   }
 
   /// Adds a string to the expression
@@ -125,20 +125,21 @@ class VerbalExpression {
   ///   ..add('a')..anything(true)..then('a')  // 'an be da'
   ///
   void anything([bool isLazy = false]) {
-    add(isLazy ? '(.*?)' : '(.*)');
+    add(isLazy ? '(?:.*?)' : '(?:.*)');
   }
 
   /// Adds expression that matches anything, but not [value]
   ///
   /// [isLazy] determines the type of search. Greedy search is default.
   /// Throws an [ArgumentError] if [value] is null or empty.
+
   void anythingBut(String value, [bool isLazy = false]) {
-    add('([^${sanitize(value)}]${isLazy?'*?':'*'})');
+    add('(?:[^${sanitize(value)}]${isLazy?'*?':'*'})');
   }
 
   /// Adds expression that matches something that might appear once (or more)
   void something() {
-    add('(.+)');
+    add('(?:.+)');
   }
 
   /// Adds expression that matches something that might appear once (or more),
@@ -146,12 +147,13 @@ class VerbalExpression {
   ///
   /// Throws an [ArgumentError] if [value] is null or empty.
   void somethingBut(String value) {
-    add('([^${sanitize(value)}]+)');
+    add('(?:[^${sanitize(value)}]+)');
   }
+
 
   /// Adds universal (Unix + Windows CRLF + Macintosh) line break expression
   void lineBreak() {
-    add('(\\r\\n|\\r|\\n|\\r\\r)');
+    add('(?:\\r\\n|\\r|\\n|\\r\\r)');
   }
 
   /// Shortcut for [this.lineBreak()]
@@ -406,7 +408,7 @@ class VerbalExpression {
 
   /// Starts a capturing group
   void beginCapture() {
-    _suffixes = ')$_suffixes';
+    _suffixes = '$_suffixes)';
     add('(');
   }
 
@@ -421,9 +423,9 @@ class VerbalExpression {
   ///
   /// Throws an [ArgumentError] if [value] is null or empty.
   void or(String value) {
-    _prefixes += '(';
+    _prefixes += '(?:';
     _suffixes = ')$_suffixes';
-    add(')|(');
+    add(')|(?:');
     then(value);
   }
 

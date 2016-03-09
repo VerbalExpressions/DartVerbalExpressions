@@ -19,8 +19,8 @@ class CaptureTests {
           ..or('org')
           ..endCapture();
 
-        expect(verbalExpression.toString(), '((com)|(org))',
-            reason: 'Regex should be "(((com))|((org)))"');
+        expect(verbalExpression.toString(), '((?:com)|(?:org))',
+            reason: 'Regex should be "((?:com)|(?:org))"');
       });
 
       test('Should match', () {
@@ -38,9 +38,26 @@ class CaptureTests {
           ..endCapture();
 
         var matcher = verbalExpression.toRegExp();
-        expect(matcher.firstMatch(testString).group(0), 'aaabcd');
-        expect(matcher.firstMatch(testString).group(1), 'aa');
-        expect(matcher.firstMatch(testString).group(2), 'bcd');
+        var match = matcher.firstMatch(testString);
+        expect(match.groupCount, 2);
+        expect(match.group(0), 'aaabcd');
+        expect(match.group(1), 'aa');
+        expect(match.group(2), 'bcd');
+      });
+
+
+      test('Should not capture groups which are not set explicitly', () {
+        const String testString = 'aaabcd';
+
+        verbalExpression
+          ..find('a')
+          ..find("a")
+          ..count(2)
+          ..find("b")
+          ..anything();
+
+        var matcher = verbalExpression.toRegExp();
+        expect(matcher.firstMatch(testString).groupCount, 0);
       });
     });
   }

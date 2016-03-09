@@ -18,8 +18,8 @@ class AnythingTests {
           ..anything()
           ..endOfLine();
 
-        expect(verbalExpression.toString(), '^(.*)\$',
-            reason: 'Regex should be "^(.*)\$"');
+        expect(verbalExpression.toString(), '^(?:.*)\$',
+            reason: 'Regex should be "^(?:.*)\$"');
       });
 
       test('Should match', () {

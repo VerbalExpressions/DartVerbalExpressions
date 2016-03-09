@@ -27,7 +27,7 @@ class RealWorldTests {
         expect(verbalExpression.hasMatch(testUrl), isTrue,
             reason: 'Matches Google\'s url');
         expect(verbalExpression.toString(),
-            '^http(s)?\\:\\/\\/(www\\.)?([^\\ ]*)\$',
+            '^http(?:s)?\\:\\/\\/(?:www\\.)?(?:[^\\ ]*)\$',
             reason: 'Regex doesn\'t match same regex as in example');
       });
 

@@ -18,8 +18,8 @@ class LineBreakTests {
           ..lineBreak()
           ..endOfLine();
 
-        expect(verbalExpression.toString(), '^(\\r\\n|\\r|\\n|\\r\\r)\$',
-            reason: 'Regex should be "^(\\r\\n|\\r|\\n|\\r\\r)\$"');
+        expect(verbalExpression.toString(), '^(?:\\r\\n|\\r|\\n|\\r\\r)\$',
+            reason: 'Regex should be "^(?:\\r\\n|\\r|\\n|\\r\\r)\$"');
       });
 
       test('Should match', () {
