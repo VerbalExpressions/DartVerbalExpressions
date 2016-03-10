@@ -160,7 +160,9 @@ class RealWorldTests {
           ..beginCapture()
           ..find("STR")
           ..range([new Range('0', '2')])
-          ..count(1)).toString();
+          ..count(1)
+          ..endCapture())
+          .toString();
 
         verbalExpression
           ..add(digits)

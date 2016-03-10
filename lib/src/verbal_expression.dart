@@ -4,7 +4,7 @@ import 'package:verbal_expressions/src/range.dart';
 
 class VerbalExpression {
   String _prefixes = '';
-  String _source = '';
+  List<String> _sources = [''];
   String _suffixes = '';
 
   bool _ignoreCase = false;
@@ -45,7 +45,7 @@ class VerbalExpression {
   ///   expression.toRegExp(); // produce exact '\n.*' regexp
   ///
   void add(String expression) {
-    _source += expression;
+    _sources[_sources.length - 1] += expression;
   }
 
   /// Mark the expression to start at the beginning of the line
@@ -57,7 +57,7 @@ class VerbalExpression {
   ///   expression.toRegExp(); // produce '^abc' regexp
   ///
   void startOfLine([bool enable = true]) {
-    this._prefixes = enable ? '^' : '';
+    _prefixes = enable ? '^' : '';
   }
 
   /// Mark the expression to end at the last character of the line
@@ -69,7 +69,7 @@ class VerbalExpression {
   ///   expression.toRegExp(); // produce 'abc\$' regexp
   ///
   void endOfLine([bool enable = true]) {
-    this._suffixes += enable ? '\$' : '';
+    _suffixes += enable ? '\$' : '';
   }
 
   /// Adds a string to the expression that might appear once (or not)
@@ -134,7 +134,7 @@ class VerbalExpression {
   /// Throws an [ArgumentError] if [value] is null or empty.
 
   void anythingBut(String value, [bool isLazy = false]) {
-    add('(?:[^${sanitize(value)}]${isLazy?'*?':'*'})');
+    add('(?:[^${sanitize(value)}]${isLazy ? '*?' : '*'})');
   }
 
   /// Adds expression that matches something that might appear once (or more)
@@ -149,7 +149,6 @@ class VerbalExpression {
   void somethingBut(String value) {
     add('(?:[^${sanitize(value)}]+)');
   }
-
 
   /// Adds universal (Unix + Windows CRLF + Macintosh) line break expression
   void lineBreak() {
@@ -408,24 +407,27 @@ class VerbalExpression {
 
   /// Starts a capturing group
   void beginCapture() {
-    _suffixes = '$_suffixes)';
     add('(');
+    _sources.add('');
   }
 
   /// Ends a capturing group
+  ///
+  /// Throws an [StateError] if call this method before call beginCapture().
   void endCapture() {
-    // Remove the last parentheses from the _suffixes and add to the regex itself
-    _suffixes = _suffixes.substring(0, _suffixes.length - 1);
-    add(')');
+    if (_sources.length == 1) throw new StateError('There is no started group capture. Call beginCapture() first.');
+
+    _sources[_sources.length - 2] += '${_sources.last})';
+    _sources.removeLast();
   }
 
   /// Add a alternative expression to be matched
   ///
   /// Throws an [ArgumentError] if [value] is null or empty.
   void or(String value) {
-    _prefixes += '(?:';
-    _suffixes = ')$_suffixes';
+    _sources[_sources.length - 1] = '(?:${_sources.last}';
     add(')|(?:');
+    _suffixes += ')';
     then(value);
   }
 
@@ -438,17 +440,22 @@ class VerbalExpression {
     if (source == null) throw new ArgumentError.notNull('source');
     if (value == null) throw new ArgumentError.notNull('value');
 
-    if (_isGlobal) return source.replaceAll(this.toRegExp(), value);
+    if (_isGlobal) return source.replaceAll(toRegExp(), value);
 
-    return source.replaceFirst(this.toRegExp(), value);
+    return source.replaceFirst(toRegExp(), value);
   }
 
   /// Convert to RegExp
   ///
   /// Returns resulting regex object
   RegExp toRegExp() {
-    return new RegExp('$_prefixes$_source$_suffixes',
-        caseSensitive: !_ignoreCase, multiLine: _isMultiLine);
+    var source = _sources.reduce((result, item) => result + item);
+
+    for (var i = 0; i < _sources.length - 1; i++) {
+      source += ')';
+    }
+
+    return new RegExp('$_prefixes$source$_suffixes', caseSensitive: !_ignoreCase, multiLine: _isMultiLine);
   }
 
   /// Overrides toString
