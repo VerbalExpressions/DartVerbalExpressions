@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.3.1
+- Added .analysis_options and fixed common problems
+
 ## 0.3.0
 - breaking change: do not capture groups if it is not set explicitly using beginCapture/endCapture. [More details](https://github.com/VerbalExpressions/DartVerbalExpressions/issues/9)
 - fixed group capturing
