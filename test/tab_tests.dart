@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
 class TabTests {
-  static run() {
+   static void run() {
     group('tab', () {
       VerbalExpression verbalExpression;
 
@@ -29,7 +29,7 @@ class TabTests {
           ..then("abc")
           ..endOfLine();
 
-        var matcher = verbalExpression.toRegExp();
+        RegExp matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('\tabc'), isTrue, reason: 'tab then abc');
         expect(matcher.hasMatch('abc'), isFalse, reason: 'no tab then abc');
       });

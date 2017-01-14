@@ -2,6 +2,7 @@ library verbal_expressions.verbal_expression;
 
 import 'package:verbal_expressions/src/range.dart';
 
+/// Represents a VerbalExpression
 class VerbalExpression {
   String _prefixes = '';
   List<String> _sources = [''];
@@ -28,8 +29,8 @@ class VerbalExpression {
   }
 
   String _escape(String value) {
-    var pattern = '[\\W]';
-    return value.replaceAllMapped(new RegExp(pattern), (match) {
+    String pattern = '[\\W]';
+    return value.replaceAllMapped(new RegExp(pattern), (Match match) {
       return '\\${match.group(0)}';
     });
   }
@@ -220,8 +221,8 @@ class VerbalExpression {
   ///   expression.toRegExp(); // produce [a-f0-5]
   ///
   void range(List<Range> ranges) {
-    var result = '[';
-    ranges.forEach((range) {
+    String result = '[';
+    ranges.forEach((Range range) {
       result += '${sanitize(range.from)}-${sanitize(range.to)}';
     });
 
@@ -449,9 +450,9 @@ class VerbalExpression {
   ///
   /// Returns resulting regex object
   RegExp toRegExp() {
-    var source = _sources.reduce((result, item) => result + item);
+    String source = _sources.reduce((String result, String item) => result + item);
 
-    for (var i = 0; i < _sources.length - 1; i++) {
+    for (int i = 0; i < _sources.length - 1; i++) {
       source += ')';
     }
 
@@ -461,6 +462,7 @@ class VerbalExpression {
   /// Overrides toString
   ///
   /// Returns resulting regex pattern
+  @override
   String toString() {
     return toRegExp().pattern;
   }

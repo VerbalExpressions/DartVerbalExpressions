@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
 class AnythingTests {
-  static run() {
+   static void run() {
     group('Anything', () {
       VerbalExpression verbalExpression;
 
@@ -28,7 +28,7 @@ class AnythingTests {
           ..anything()
           ..endOfLine();
 
-        var matcher = verbalExpression.toRegExp();
+        RegExp matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('what'), isTrue);
         expect(matcher.hasMatch(' '), isTrue);
         expect(matcher.hasMatch(''), isTrue);
@@ -40,7 +40,7 @@ class AnythingTests {
           ..anything()
           ..then('a');
 
-        var matcher = verbalExpression.toRegExp();
+        RegExp matcher = verbalExpression.toRegExp();
         expect(matcher.firstMatch('greedy can be dangerous at times, really').group(0), 'an be dangerous at times, rea');
       });
 
@@ -50,7 +50,7 @@ class AnythingTests {
           ..anything(true)
           ..then('a');
 
-        var matcher = verbalExpression.toRegExp();
+        RegExp matcher = verbalExpression.toRegExp();
         expect(matcher.firstMatch('greedy can be dangerous at times, really').group(0), 'an be da');
       });
     });

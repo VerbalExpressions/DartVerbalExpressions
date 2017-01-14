@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
 class BrTests {
-  static run() {
+   static void run() {
     group('br', () {
       VerbalExpression verbalExpression;
 
@@ -30,7 +30,7 @@ class BrTests {
           ..then("def")
           ..endOfLine();
 
-        var matcher = verbalExpression.toRegExp();
+        RegExp matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('abc\r\ndef'), isTrue,
             reason: 'abc then line break then def');
         expect(matcher.hasMatch('abc\ndef'), isTrue,

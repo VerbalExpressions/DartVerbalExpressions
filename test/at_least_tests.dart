@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
 class AtLeastTests {
-  static run() {
+   static void run() {
     group('AtLeast', () {
       VerbalExpression verbalExpression;
 
@@ -30,7 +30,7 @@ class AtLeastTests {
           ..atLeast(3)
           ..endOfLine();
 
-        var matcher = verbalExpression.toRegExp();
+        RegExp matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('a'), isFalse);
         expect(matcher.hasMatch('aaa'), isTrue);
         expect(matcher.hasMatch('aaaaaaaaaa'), isTrue);

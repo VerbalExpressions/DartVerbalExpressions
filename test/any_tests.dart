@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
 class AnyTests {
-  static run() {
+   static void run() {
     group('Any', () {
       VerbalExpression verbalExpression;
 
@@ -29,7 +29,7 @@ class AnyTests {
           ..any('xyz')
           ..endOfLine();
 
-        var matcher = verbalExpression.toRegExp();
+        RegExp matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('ay'), isTrue,
             reason: 'Has an x, y, or z after a');
         expect(matcher.hasMatch('abc'), isFalse,

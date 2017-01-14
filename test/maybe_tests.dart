@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
 class MaybeTests {
-  static run() {
+   static void run() {
     group('Maybe', () {
       VerbalExpression verbalExpression;
 
@@ -28,7 +28,7 @@ class MaybeTests {
           ..then('a')
           ..maybe('b');
 
-        var matcher = verbalExpression.toRegExp();
+        RegExp matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('acb'), isTrue,
             reason: 'Maybe has a "b" after an "a"');
         expect(matcher.hasMatch('abc'), isTrue,

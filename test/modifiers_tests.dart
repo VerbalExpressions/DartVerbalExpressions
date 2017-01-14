@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
 class ModifiersTests {
-  static run() {
+   static void run() {
     group('Modifiers', () {
       VerbalExpression verbalExpression;
 
@@ -14,20 +14,20 @@ class ModifiersTests {
 
       test('Should throw exception if add incorrect modifier', () {
         expect(() => verbalExpression.addModifier('u'),
-            throwsA(predicate((e) => e is ArgumentError)));
+            throwsA(predicate((Error e) => e is ArgumentError)));
         expect(() => verbalExpression.addModifier('unknown'),
-            throwsA(predicate((e) => e is ArgumentError)));
+            throwsA(predicate((Error e) => e is ArgumentError)));
         expect(() => verbalExpression.addModifier('n'),
-            throwsA(predicate((e) => e is ArgumentError)));
+            throwsA(predicate((Error e) => e is ArgumentError)));
       });
 
       test('Should throw exception if remove incorrect modifier', () {
         expect(() => verbalExpression.removeModifier('u'),
-            throwsA(predicate((e) => e is ArgumentError)));
+            throwsA(predicate((Error e) => e is ArgumentError)));
         expect(() => verbalExpression.removeModifier('unknown'),
-            throwsA(predicate((e) => e is ArgumentError)));
+            throwsA(predicate((Error e) => e is ArgumentError)));
         expect(() => verbalExpression.removeModifier('n'),
-            throwsA(predicate((e) => e is ArgumentError)));
+            throwsA(predicate((Error e) => e is ArgumentError)));
       });
     });
 
@@ -44,7 +44,7 @@ class ModifiersTests {
           ..find('test')
           ..endOfLine();
 
-        var matcher = verbalExpression.toRegExp();
+        RegExp matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('TeSt'), isFalse, reason: 'Should ignore case');
       });
 
@@ -55,7 +55,7 @@ class ModifiersTests {
           ..withAnyCase()
           ..endOfLine();
 
-        var matcher = verbalExpression.toRegExp();
+        RegExp matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('TeSt'), isTrue, reason: 'Should ignore case');
       });
 
@@ -66,7 +66,7 @@ class ModifiersTests {
           ..withAnyCase(false)
           ..endOfLine();
 
-        var matcher = verbalExpression.toRegExp();
+        RegExp matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('TeSt'), isFalse,
             reason: 'Should not ignore case');
       });
@@ -78,7 +78,7 @@ class ModifiersTests {
           ..addModifier('i')
           ..endOfLine();
 
-        var matcher = verbalExpression.toRegExp();
+        RegExp matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('TeSt'), isTrue, reason: 'Should ignore case');
       });
 
@@ -90,7 +90,7 @@ class ModifiersTests {
           ..removeModifier('i')
           ..endOfLine();
 
-        var matcher = verbalExpression.toRegExp();
+        RegExp matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('TeSt'), isFalse,
             reason: 'Should not ignore case');
       });
@@ -112,7 +112,7 @@ class ModifiersTests {
           ..anything()
           ..endOfLine();
 
-        var matcher = verbalExpression.toRegExp();
+        RegExp matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch(multiLineText), isTrue,
             reason: 'Should search in multiple lines');
       });
@@ -126,7 +126,7 @@ class ModifiersTests {
           ..searchOneLine(false)
           ..endOfLine();
 
-        var matcher = verbalExpression.toRegExp();
+        RegExp matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch(multiLineText), isTrue,
             reason: 'Should search in multiple lines');
       });
@@ -140,7 +140,7 @@ class ModifiersTests {
           ..searchOneLine(true)
           ..endOfLine();
 
-        var matcher = verbalExpression.toRegExp();
+        RegExp matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch(multiLineText), isFalse,
             reason: 'Should search in multiple lines');
       });
@@ -154,7 +154,7 @@ class ModifiersTests {
           ..addModifier('m')
           ..endOfLine();
 
-        var matcher = verbalExpression.toRegExp();
+        RegExp matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch(multiLineText), isTrue,
             reason: 'Should search in multiple lines');
       });
@@ -169,7 +169,7 @@ class ModifiersTests {
           ..removeModifier('m')
           ..endOfLine();
 
-        var matcher = verbalExpression.toRegExp();
+        RegExp matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch(multiLineText), isFalse,
             reason: 'Should search in multiple lines');
       });

@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
 class OneOrMoreTests {
-  static run() {
+   static void run() {
     group('One or more', () {
       VerbalExpression verbalExpression;
 
@@ -30,7 +30,7 @@ class OneOrMoreTests {
           ..oneOrMore()
           ..endOfLine();
 
-        var matcher = verbalExpression.toRegExp();
+        RegExp matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('a'), isTrue);
         expect(matcher.hasMatch('aaaaaaaaaaaaa'), isTrue);
         expect(matcher.hasMatch('ab'), isFalse);

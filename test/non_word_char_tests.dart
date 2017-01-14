@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
 class NonWordCharTests {
-  static run() {
+   static void run() {
     group('NonWordChar', () {
       VerbalExpression verbalExpression;
 
@@ -28,7 +28,7 @@ class NonWordCharTests {
           ..nonWordChar()
           ..endOfLine();
 
-        var matcher = verbalExpression.toRegExp();
+        RegExp matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('a'), isFalse, reason: 'word character');
         expect(matcher.hasMatch('5'), isFalse, reason: 'word character');
         expect(matcher.hasMatch('@'), isTrue, reason: 'non word character');

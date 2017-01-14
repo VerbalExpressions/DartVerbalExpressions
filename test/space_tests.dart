@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
 class SpaceTests {
-  static run() {
+   static void run() {
     group('Space', () {
       VerbalExpression verbalExpression;
 
@@ -28,7 +28,7 @@ class SpaceTests {
           ..space()
           ..endOfLine();
 
-        var matcher = verbalExpression.toRegExp();
+        RegExp matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch(' '), isTrue, reason: 'whitespace');
         expect(matcher.hasMatch('1'), isFalse, reason: 'non whitespace');
       });

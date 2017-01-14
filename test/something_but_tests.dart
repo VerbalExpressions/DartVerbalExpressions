@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
 class SomethingButTests {
-  static run() {
+   static void run() {
     group('SomethingBut', () {
       VerbalExpression verbalExpression;
 
@@ -28,7 +28,7 @@ class SomethingButTests {
           ..somethingBut('w')
           ..endOfLine();
 
-        var matcher = verbalExpression.toRegExp();
+        RegExp matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('what'), isFalse, reason: 'starts with w');
         expect(matcher.hasMatch('that'), isTrue, reason: 'Not contain w');
         expect(matcher.hasMatch(''), isFalse,

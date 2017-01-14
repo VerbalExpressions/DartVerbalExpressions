@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
 class EndOfLineTests {
-  static run() {
+   static void run() {
     group('End of line', () {
       VerbalExpression verbalExpression;
 
@@ -17,7 +17,7 @@ class EndOfLineTests {
           ..find('.com')
           ..endOfLine();
 
-        var matcher = verbalExpression.toRegExp();
+        RegExp matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('www.google.com'), isTrue,
             reason: 'Should match ".com" in end');
       });
@@ -27,7 +27,7 @@ class EndOfLineTests {
           ..find('.com')
           ..endOfLine();
 
-        var matcher = verbalExpression.toRegExp();
+        RegExp matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('www.google.com/'), isFalse,
             reason: 'Should not match "/" in end');
       });

@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
 class ThenTests {
-  static run() {
+   static void run() {
     group('Then', () {
       VerbalExpression verbalExpression;
 
@@ -29,7 +29,7 @@ class ThenTests {
           ..then("b")
           ..then("new");
 
-        var matcher = verbalExpression.toRegExp();
+        RegExp matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('anewb'), isFalse,
             reason: 'Correct order should be "a", "b", "c"');
         expect(matcher.hasMatch('abnew'), isTrue,

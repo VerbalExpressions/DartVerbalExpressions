@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
 class WordTests {
-  static run() {
+   static void run() {
     group('Word', () {
       VerbalExpression verbalExpression;
 
@@ -28,7 +28,7 @@ class WordTests {
           ..word()
           ..endOfLine();
 
-        var matcher = verbalExpression.toRegExp();
+        RegExp matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('abc123'), isTrue, reason: 'word');
         expect(matcher.hasMatch('@#'), isFalse, reason: 'non-word');
       });

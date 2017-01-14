@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
 class NonDigitTests {
-  static run() {
+   static void run() {
     group('NonDigit', () {
       VerbalExpression verbalExpression;
 
@@ -28,7 +28,7 @@ class NonDigitTests {
           ..nonDigit()
           ..endOfLine();
 
-        var matcher = verbalExpression.toRegExp();
+        RegExp matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('5'), isFalse, reason: 'digit');
         expect(matcher.hasMatch('a'), isTrue, reason: 'non digit');
       });

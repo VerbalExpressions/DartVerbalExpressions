@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
 class CaptureTests {
-  static run() {
+   static void run() {
     group('Capture', () {
       VerbalExpression verbalExpression;
 
@@ -23,7 +23,7 @@ class CaptureTests {
       });
 
       test('Should throw exception when call endCapture() before call beginCapture()', () {
-        expect(() => verbalExpression.endCapture(), throwsA(predicate((e) => e is StateError)));
+        expect(() => verbalExpression.endCapture(), throwsA(predicate((Error e) => e is StateError)));
       });
 
       test('Should match', () {
@@ -44,8 +44,8 @@ class CaptureTests {
           ..anything()
           ..endCapture();
 
-        var matcher = verbalExpression.toRegExp();
-        var match = matcher.firstMatch(testString);
+        RegExp matcher = verbalExpression.toRegExp();
+        Match match = matcher.firstMatch(testString);
         expect(match.groupCount, 3);
         expect(match.group(0), testString);
         expect(match.group(1), 'aa');
@@ -63,7 +63,7 @@ class CaptureTests {
           ..find("b")
           ..anything();
 
-        var matcher = verbalExpression.toRegExp();
+        RegExp matcher = verbalExpression.toRegExp();
         expect(matcher.firstMatch(testString).groupCount, 0);
       });
 
@@ -79,8 +79,8 @@ class CaptureTests {
           ..find("b")
           ..anything();
 
-        var matcher = verbalExpression.toRegExp();
-        var match = matcher.firstMatch(testString);
+        RegExp matcher = verbalExpression.toRegExp();
+        Match match = matcher.firstMatch(testString);
         expect(match.groupCount, 2);
         expect(match.group(0), 'aaabcd');
         expect(match.group(1), 'aabcd');

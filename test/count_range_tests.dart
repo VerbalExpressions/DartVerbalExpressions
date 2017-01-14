@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
 class CountRangeTests {
-  static run() {
+   static void run() {
     group('CountRange', () {
       VerbalExpression verbalExpression;
 
@@ -30,7 +30,7 @@ class CountRangeTests {
           ..countRange(2, 5)
           ..endOfLine();
 
-        var matcher = verbalExpression.toRegExp();
+        RegExp matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('a'), isFalse);
         expect(matcher.hasMatch('aaaaa'), isTrue);
         expect(matcher.hasMatch('aa'), isTrue);

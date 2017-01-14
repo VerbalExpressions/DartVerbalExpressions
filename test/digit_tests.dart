@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
 class DigitTests {
-  static run() {
+   static void run() {
     group('Digit', () {
       VerbalExpression verbalExpression;
 
@@ -28,7 +28,7 @@ class DigitTests {
           ..digit()
           ..endOfLine();
 
-        var matcher = verbalExpression.toRegExp();
+        RegExp matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('5'), isTrue, reason: 'digit');
         expect(matcher.hasMatch('a'), isFalse, reason: 'non digit');
       });

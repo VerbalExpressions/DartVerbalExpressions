@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
 class RealWorldTests {
-  static run() {
+   static void run() {
     group('Real World', () {
       VerbalExpression verbalExpression;
 
@@ -137,26 +137,26 @@ class RealWorldTests {
         String logLine =
             "3\t4\t1\thttp://localhost:20001\t1\t63528800\t0\t63528800\t1000000000\t0\t63528800\tSTR1";
 
-        var digits = (new VerbalExpression()
+        String digits = (new VerbalExpression()
           ..beginCapture()
           ..digit()
           ..oneOrMore()
           ..endCapture()
           ..tab()).toString();
-        var range = (new VerbalExpression()
+        String range = (new VerbalExpression()
           ..beginCapture()
           ..range([new Range('0', '1')])
           ..count(1)
           ..endCapture()
           ..tab()).toString();
-        var host = (new VerbalExpression()
+        String host = (new VerbalExpression()
           ..beginCapture()
           ..find("http://localhost:20")
           ..digit()
           ..count(3)
           ..endCapture()
           ..tab()).toString();
-        var fake = (new VerbalExpression()
+        String fake = (new VerbalExpression()
           ..beginCapture()
           ..find("STR")
           ..range([new Range('0', '2')])

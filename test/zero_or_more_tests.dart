@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
 class ZeroOrMoreTests {
-  static run() {
+   static void run() {
     group('Zero or more', () {
       VerbalExpression verbalExpression;
 
@@ -30,7 +30,7 @@ class ZeroOrMoreTests {
           ..zeroOrMore()
           ..endOfLine();
 
-        var matcher = verbalExpression.toRegExp();
+        RegExp matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('a'), isTrue);
         expect(matcher.hasMatch('aaaaaaaaaaaaa'), isTrue);
         expect(matcher.hasMatch('ab'), isFalse);
@@ -44,7 +44,7 @@ class ZeroOrMoreTests {
           ..zeroOrMore()
           ..then('a');
 
-        var matcher = verbalExpression.toRegExp();
+        RegExp matcher = verbalExpression.toRegExp();
         expect(matcher.firstMatch('greedy can be dangerous at times').group(0), 'an be dangerous a');
       });
 
@@ -55,7 +55,7 @@ class ZeroOrMoreTests {
           ..zeroOrMore(true)
           ..then('a');
 
-        var matcher = verbalExpression.toRegExp();
+        RegExp matcher = verbalExpression.toRegExp();
         expect(matcher.firstMatch('greedy can be dangerous at times').group(0), 'an be da');
       });
     });

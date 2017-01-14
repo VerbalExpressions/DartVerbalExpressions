@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
 class AnythingButTests {
-  static run() {
+   static void run() {
     group('AnythingBut', () {
       VerbalExpression verbalExpression;
 
@@ -28,7 +28,7 @@ class AnythingButTests {
           ..anythingBut('w')
           ..endOfLine();
 
-        var matcher = verbalExpression.toRegExp();
+        RegExp matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('what'), isFalse, reason: 'starts with w');
         expect(matcher.hasMatch('that'), isTrue, reason: 'Not contain w');
         expect(matcher.hasMatch(' '), isTrue, reason: 'Not contain w');
@@ -40,7 +40,7 @@ class AnythingButTests {
           ..anythingBut('i')
           ..then('a');
 
-        var matcher = verbalExpression.toRegExp();
+        RegExp matcher = verbalExpression.toRegExp();
         expect(matcher.firstMatch('greedy can be dangerous at times, really').group(0), 'an be dangerous a');
       });
 
@@ -50,7 +50,7 @@ class AnythingButTests {
           ..anythingBut('i', true)
           ..then('a');
 
-        var matcher = verbalExpression.toRegExp();
+        RegExp matcher = verbalExpression.toRegExp();
         expect(matcher.firstMatch('greedy can be dangerous at times, really').group(0), 'an be da');
       });
     });

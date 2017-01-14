@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
 class OrTests {
-  static run() {
+   static void run() {
     group('Or', () {
       VerbalExpression verbalExpression;
 
@@ -29,7 +29,7 @@ class OrTests {
           ..then("abc")
           ..or("def");
 
-        var matcher = verbalExpression.toRegExp();
+        RegExp matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('defzzz'), isTrue,
             reason: 'Starts with abc or def');
         expect(matcher.hasMatch('xyzabc'), isFalse,
