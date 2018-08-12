@@ -9,7 +9,7 @@ class RealWorldTests {
       VerbalExpression verbalExpression;
 
       setUp(() {
-        verbalExpression = new VerbalExpression();
+        verbalExpression = VerbalExpression();
       });
 
       test('test url', () {
@@ -36,7 +36,7 @@ class RealWorldTests {
           ..startOfLine()
           ..then("+")
           ..beginCapture()
-          ..range([new Range('0', '9')])
+          ..range([Range('0', '9')])
           ..count(3)
           ..maybe("-")
           ..maybe(" ")
@@ -69,7 +69,7 @@ class RealWorldTests {
           ..endCapture()
           ..tab()
           ..beginCapture()
-          ..range([new Range('0', '1')])
+          ..range([Range('0', '1')])
           ..count(1)
           ..endCapture()
           ..tab()
@@ -80,7 +80,7 @@ class RealWorldTests {
           ..endCapture()
           ..tab()
           ..beginCapture()
-          ..range([new Range('0', '1')])
+          ..range([Range('0', '1')])
           ..count(1)
           ..endCapture()
           ..tab()
@@ -90,7 +90,7 @@ class RealWorldTests {
           ..endCapture()
           ..tab()
           ..beginCapture()
-          ..range([new Range('0', '1')])
+          ..range([Range('0', '1')])
           ..count(1)
           ..endCapture()
           ..tab()
@@ -105,7 +105,7 @@ class RealWorldTests {
           ..endCapture()
           ..tab()
           ..beginCapture()
-          ..range([new Range('0', '1')])
+          ..range([Range('0', '1')])
           ..count(1)
           ..endCapture()
           ..tab()
@@ -116,7 +116,7 @@ class RealWorldTests {
           ..tab()
           ..beginCapture()
           ..find("STR")
-          ..range([new Range('0', '2')])
+          ..range([Range('0', '2')])
           ..count(1)
           ..endCapture();
 
@@ -137,29 +137,29 @@ class RealWorldTests {
         String logLine =
             "3\t4\t1\thttp://localhost:20001\t1\t63528800\t0\t63528800\t1000000000\t0\t63528800\tSTR1";
 
-        String digits = (new VerbalExpression()
+        String digits = (VerbalExpression()
           ..beginCapture()
           ..digit()
           ..oneOrMore()
           ..endCapture()
           ..tab()).toString();
-        String range = (new VerbalExpression()
+        String range = (VerbalExpression()
           ..beginCapture()
-          ..range([new Range('0', '1')])
+          ..range([Range('0', '1')])
           ..count(1)
           ..endCapture()
           ..tab()).toString();
-        String host = (new VerbalExpression()
+        String host = (VerbalExpression()
           ..beginCapture()
           ..find("http://localhost:20")
           ..digit()
           ..count(3)
           ..endCapture()
           ..tab()).toString();
-        String fake = (new VerbalExpression()
+        String fake = (VerbalExpression()
           ..beginCapture()
           ..find("STR")
-          ..range([new Range('0', '2')])
+          ..range([Range('0', '2')])
           ..count(1)
           ..endCapture())
           .toString();

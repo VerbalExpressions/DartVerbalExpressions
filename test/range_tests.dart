@@ -9,20 +9,20 @@ class RangeTests {
       VerbalExpression verbalExpression;
 
       setUp(() {
-        verbalExpression = new VerbalExpression();
+        verbalExpression = VerbalExpression();
       });
 
       test('Should throw exception if range arguments are null or empty', () {
-        expect(() => new Range(null, 'to'),
+        expect(() => Range(null, 'to'),
             throwsA(predicate((Error e) => e is ArgumentError)),
             reason: 'From should not null');
-        expect(() => new Range('', 'to'),
+        expect(() => Range('', 'to'),
             throwsA(predicate((Error e) => e is ArgumentError)),
             reason: 'From should not be empty');
-        expect(() => new Range('from', null),
+        expect(() => Range('from', null),
             throwsA(predicate((Error e) => e is ArgumentError)),
             reason: 'To should not be empty');
-        expect(() => new Range('from', ''),
+        expect(() => Range('from', ''),
             throwsA(predicate((Error e) => e is ArgumentError)),
             reason: 'To should not be empty');
       });
@@ -30,7 +30,7 @@ class RangeTests {
       test('Should return correct regex', () {
         verbalExpression
           ..startOfLine()
-          ..range([new Range('a', 'b'), new Range('0', '9')])
+          ..range([Range('a', 'b'), Range('0', '9')])
           ..endOfLine();
 
         expect(verbalExpression.toString(), '^[a-b0-9]\$',
@@ -40,7 +40,7 @@ class RangeTests {
       test('Should match with multiple ranges', () {
         verbalExpression
           ..startOfLine()
-          ..range([new Range('a', 'z'), new Range('0', '5')])
+          ..range([Range('a', 'z'), Range('0', '5')])
           ..endOfLine();
 
         RegExp matcher = verbalExpression.toRegExp();

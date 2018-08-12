@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.4.0
+- Updated to Dart 2
+
 ## 0.3.1
 - Added .analysis_options and fixed common problems
 

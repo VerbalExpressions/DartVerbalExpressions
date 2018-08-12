@@ -24,7 +24,7 @@ main() {
   domain = getDomain('http://ru.wikipedia.org/wiki/Dart');
   print(domain); // .org
 
-  var expression = new VerbalExpression()
+  var expression = VerbalExpression()
     ..find('dog')
     ..stopAtFirst()
     ..withAnyCase();
@@ -35,7 +35,7 @@ main() {
 }
 
 String getDomain(String url) {
-  var expression = new VerbalExpression()
+  var expression = VerbalExpression()
     ..startOfLine()
     ..then("http")
     ..maybe("s")
@@ -53,11 +53,11 @@ String getDomain(String url) {
 }
 
 bool matchTelephoneNumber(String number) {
-  var regex = new VerbalExpression()
+  var regex = VerbalExpression()
     ..startOfLine()
     ..then("+")
     ..beginCapture()
-    ..range([new Range('0', '9')])
+    ..range([Range('0', '9')])
     ..count(3)
     ..maybe("-")..maybe(" ")
     ..endCapture()
@@ -68,7 +68,7 @@ bool matchTelephoneNumber(String number) {
 }
 
 bool matchUrl(String url) {
-  var regex = new VerbalExpression()
+  var regex = VerbalExpression()
     ..startOfLine()
     ..then("http")
     ..maybe("s")

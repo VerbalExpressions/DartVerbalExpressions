@@ -9,7 +9,7 @@ class EndOfLineTests {
       VerbalExpression verbalExpression;
 
       setUp(() {
-        verbalExpression = new VerbalExpression();
+        verbalExpression = VerbalExpression();
       });
 
       test('Should match .com in the end when add .comm in the end', () {

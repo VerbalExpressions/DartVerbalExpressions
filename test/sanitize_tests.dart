@@ -9,7 +9,7 @@ class SanitizeTests {
       VerbalExpression verbalExpression;
 
       setUp(() {
-        verbalExpression = new VerbalExpression();
+        verbalExpression = VerbalExpression();
       });
 
       test('Should throw exception if null or empty', () {

@@ -20,3 +20,6 @@ doc/api/
 *.iml
 *.ipr
 *.iws
+
+# dart tooling
+.dart_tool

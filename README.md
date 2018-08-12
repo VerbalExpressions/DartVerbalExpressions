@@ -12,7 +12,7 @@ Dart package info is here: https://pub.dartlang.org/packages/verbal_expressions
 ## Quick start
 
 ```dart
-  var regex = new VerbalExpression()
+  var regex = VerbalExpression()
    ..startOfLine()
    ..then("http").maybe("s")
    ..then("://")
@@ -30,7 +30,7 @@ Dart package info is here: https://pub.dartlang.org/packages/verbal_expressions
 ```
 
 ```dart
-  var regex = new VerbalExpression()..startOfLine()..then("abc")..or("def");
+  var regex = VerbalExpression()..startOfLine()..then("abc")..or("def");
 
   var testString = "defzzz";
   //Use VerbalExpression's hasMatch() method to test if parts if the string match the regex
@@ -39,7 +39,7 @@ Dart package info is here: https://pub.dartlang.org/packages/verbal_expressions
 
 Feel free to use any predefined char groups: 
 ```dart
-  var regex = new VerbalExpression()
+  var regex = VerbalExpression()
 	  ..wordChar()..nonWordChar()
 	  ..space()..nonSpace()
 	  ..digit()..nonDigit();
@@ -47,7 +47,7 @@ Feel free to use any predefined char groups:
 
 Define captures:
 ```dart 
-  var expression = new VerbalExpression()
+  var expression = VerbalExpression()
    ..find("a")
    ..beginCapture()..find("b")..anything()..endCapture()
    ..then("cd");
