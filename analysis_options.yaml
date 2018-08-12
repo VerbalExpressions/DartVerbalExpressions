@@ -4,7 +4,7 @@ linter:
     - always_declare_return_types
     - always_specify_types
     - annotate_overrides
-#    - avoid_as
+    - avoid_as
     - avoid_empty_else
     - avoid_init_to_null
     - avoid_return_types_on_setters
@@ -32,7 +32,7 @@ linter:
     - package_names
     - package_prefixed_library_names
     - prefer_is_not_empty
-   # - public_member_api_docs
+    - public_member_api_docs
     - slash_for_doc_comments
     - sort_constructors_first
     - sort_unnamed_constructors_first
