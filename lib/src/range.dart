@@ -11,9 +11,9 @@ class Range {
   /// Creates a [Range] object based on [from] and [to] values
   Range(this.from, this.to) {
     if (from == null || from.isEmpty)
-      throw new ArgumentError.notNull('from');
+      throw ArgumentError.notNull('from');
     
     if (to == null || to.isEmpty)
-      throw new ArgumentError.notNull('to');
+      throw ArgumentError.notNull('to');
   }
 }

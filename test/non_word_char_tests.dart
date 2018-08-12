@@ -9,7 +9,7 @@ class NonWordCharTests {
       VerbalExpression verbalExpression;
 
       setUp(() {
-        verbalExpression = new VerbalExpression();
+        verbalExpression = VerbalExpression();
       });
 
       test('Should return correct regex', () {

@@ -9,7 +9,7 @@ class StartOfLineTests {
       VerbalExpression verbalExpression;
 
       setUp(() {
-        verbalExpression = new VerbalExpression();
+        verbalExpression = VerbalExpression();
       });
 
       test('Should add "^" in the beginning when is enable', () {

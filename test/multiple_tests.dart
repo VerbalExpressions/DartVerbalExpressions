@@ -9,12 +9,12 @@ class MultipleTests {
       VerbalExpression verbalExpression;
 
       setUp(() {
-        verbalExpression = new VerbalExpression();
+        verbalExpression = VerbalExpression();
       });
 
       test('Should be same as then and one or more', () {
         VerbalExpression actual = verbalExpression..multiple('foo');
-        VerbalExpression expected = new VerbalExpression()
+        VerbalExpression expected = VerbalExpression()
           ..then('foo')
           ..oneOrMore();
 
@@ -23,7 +23,7 @@ class MultipleTests {
 
       test('Should be same as then and count', () {
         VerbalExpression actual = verbalExpression..multiple('foo', min: 3);
-        VerbalExpression expected = new VerbalExpression()
+        VerbalExpression expected = VerbalExpression()
           ..then('foo')
           ..count(3);
 
@@ -32,7 +32,7 @@ class MultipleTests {
 
       test('Should be same as then and count range from one', () {
         VerbalExpression actual = verbalExpression..multiple('foo', max: 5);
-        VerbalExpression expected = new VerbalExpression()
+        VerbalExpression expected = VerbalExpression()
           ..then('foo')
           ..countRange(1, 5);
 
@@ -41,7 +41,7 @@ class MultipleTests {
 
       test('Should be same as then and count range', () {
         VerbalExpression actual = verbalExpression..multiple('foo', min: 3, max: 10);
-        VerbalExpression expected = new VerbalExpression()
+        VerbalExpression expected = VerbalExpression()
           ..then('foo')
           ..countRange(3, 10);
 

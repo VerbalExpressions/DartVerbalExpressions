@@ -9,7 +9,7 @@ class ModifiersTests {
       VerbalExpression verbalExpression;
 
       setUp(() {
-        verbalExpression = new VerbalExpression();
+        verbalExpression = VerbalExpression();
       });
 
       test('Should throw exception if add incorrect modifier', () {
@@ -35,7 +35,7 @@ class ModifiersTests {
       VerbalExpression verbalExpression;
 
       setUp(() {
-        verbalExpression = new VerbalExpression();
+        verbalExpression = VerbalExpression();
       });
 
       test('Should not ignore case by default', () {
@@ -101,7 +101,7 @@ class ModifiersTests {
                test here''';
 
       setUp(() {
-        verbalExpression = new VerbalExpression();
+        verbalExpression = VerbalExpression();
       });
 
       test('Should be multiline search by default', () {
@@ -179,7 +179,7 @@ class ModifiersTests {
       VerbalExpression verbalExpression;
 
       setUp(() {
-        verbalExpression = new VerbalExpression();
+        verbalExpression = VerbalExpression();
       });
 
       test('Should be replace first', () {

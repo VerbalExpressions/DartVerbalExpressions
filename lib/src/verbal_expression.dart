@@ -22,7 +22,7 @@ class VerbalExpression {
   ///
   String sanitize(String value) {
     if (value == null || value.isEmpty) {
-      throw new ArgumentError('Value is empty');
+      throw ArgumentError('Value is empty');
     }
 
     return _escape(value);
@@ -30,7 +30,7 @@ class VerbalExpression {
 
   String _escape(String value) {
     String pattern = '[\\W]';
-    return value.replaceAllMapped(new RegExp(pattern), (Match match) {
+    return value.replaceAllMapped(RegExp(pattern), (Match match) {
       return '\\${match.group(0)}';
     });
   }
@@ -42,7 +42,7 @@ class VerbalExpression {
   /// All existing methods already use this, so for basic usage, you can just ignore this method.
   ///
   /// Example:
-  ///   var expression = new VerbalExpression()..add('\n.*');
+  ///   var expression = VerbalExpression()..add('\n.*');
   ///   expression.toRegExp(); // produce exact '\n.*' regexp
   ///
   void add(String expression) {
@@ -54,7 +54,7 @@ class VerbalExpression {
   /// Enable or disable the expression to start at the beginning of the line using [enable] flag
   ///
   /// Example:
-  ///   var expression = new VerbalExpression()..startOfLine()..add('abc');
+  ///   var expression = VerbalExpression()..startOfLine()..add('abc');
   ///   expression.toRegExp(); // produce '^abc' regexp
   ///
   void startOfLine([bool enable = true]) {
@@ -66,7 +66,7 @@ class VerbalExpression {
   /// Enable or disable the expression to end at the last character of the line using [enable] flag
   ///
   /// Example:
-  ///   var expression = new VerbalExpression()..add('abc')..endOfLine();
+  ///   var expression = VerbalExpression()..add('abc')..endOfLine();
   ///   expression.toRegExp(); // produce 'abc\$' regexp
   ///
   void endOfLine([bool enable = true]) {
@@ -79,7 +79,7 @@ class VerbalExpression {
   ///
   /// Example:
   /// The following matches all strings that contain http:// or https://
-  ///   var expression = new VerbalExpression()
+  ///   var expression = VerbalExpression()
   ///     ..find('http')
   ///     ..maybe('s')
   ///     ..then('://')
@@ -96,7 +96,7 @@ class VerbalExpression {
   /// Throws an [ArgumentError] if [value] is null or empty.
   ///
   /// Example:
-  ///   var expression = new VerbalExpression()..then('abc');
+  ///   var expression = VerbalExpression()..then('abc');
   ///   expression.toRegExp(); // produce 'abc' regexp
   ///
   void then(String value) {
@@ -109,7 +109,7 @@ class VerbalExpression {
   /// Throws an [ArgumentError] if [value] is null or empty.
   ///
   /// Example:
-  ///   var expression = new VerbalExpression()..find('abc');
+  ///   var expression = VerbalExpression()..find('abc');
   ///   expression.toRegExp(); // produce 'abc' regexp
   ///
   void find(String value) {
@@ -216,8 +216,8 @@ class VerbalExpression {
   /// Add expression to match a range (or multiply ranges)
   ///
   /// Example:
-  ///   var expression = new VerbalExpression()
-  ///     ..range([new Range('a', 'f'), new Range('0', '5')]);
+  ///   var expression = VerbalExpression()
+  ///     ..range([Range('a', 'f'), Range('0', '5')]);
   ///   expression.toRegExp(); // produce [a-f0-5]
   ///
   void range(List<Range> ranges) {
@@ -261,7 +261,7 @@ class VerbalExpression {
         _isGlobal = enable;
         break;
       default:
-        throw new ArgumentError('Unsupported modifier "$modifier"');
+        throw ArgumentError('Unsupported modifier "$modifier"');
     }
   }
 
@@ -270,7 +270,7 @@ class VerbalExpression {
   /// Case sensitive matching is default.
   ///
   /// Example:
-  ///   var regex = new VerbalExpression()..find('a')..withAnyCase();
+  ///   var regex = VerbalExpression()..find('a')..withAnyCase();
   ///   regex.hasMatch('a')   //true
   ///   regex.hasMatch('A')   //true
   ///
@@ -284,7 +284,7 @@ class VerbalExpression {
   /// Multi line search is default.
   ///
   /// Example:
-  ///   var regex = new VerbalExpression()..find('a')..searchOneLine();
+  ///   var regex = VerbalExpression()..find('a')..searchOneLine();
   ///   regex.hasMatch('first line \n a') //false
   ///   regex.hasMatch('a')               //true
   ///
@@ -298,7 +298,7 @@ class VerbalExpression {
   /// Global (all matches) search is default.
   ///
   /// Example:
-  ///   var expression = new VerbalExpression()..find('a')..stopAtFirst();
+  ///   var expression = VerbalExpression()..find('a')..stopAtFirst();
   ///   expression.replace('b') // baa
   ///   expression.stopAtFirst(false);
   ///   expression.replace('b') // bbb
@@ -330,7 +330,7 @@ class VerbalExpression {
   /// Add count of previous group
   ///
   /// Example:
-  ///   var regex = new VerbalExpression()
+  ///   var regex = VerbalExpression()
   ///     ..startOfLine()
   ///     ..find('a')
   ///     ..count(3)
@@ -345,7 +345,7 @@ class VerbalExpression {
   /// Add count of previous group
   ///
   /// Example:
-  ///   var regex = new VerbalExpression()
+  ///   var regex = VerbalExpression()
   ///     ..startOfLine()
   ///     ..find('a')
   ///     ..countRange(2,4)
@@ -363,7 +363,7 @@ class VerbalExpression {
   /// [min] is minimal number of occurrences
   ///
   /// Example:
-  ///   var regex = new VerbalExpression()
+  ///   var regex = VerbalExpression()
   ///     ..startOfLine()
   ///     ..find('a')
   ///     ..atLeast(2)
@@ -416,7 +416,7 @@ class VerbalExpression {
   ///
   /// Throws an [StateError] if call this method before call beginCapture().
   void endCapture() {
-    if (_sources.length == 1) throw new StateError('There is no started group capture. Call beginCapture() first.');
+    if (_sources.length == 1) throw StateError('There is no started group capture. Call beginCapture() first.');
 
     _sources[_sources.length - 2] += '${_sources.last})';
     _sources.removeLast();
@@ -438,8 +438,8 @@ class VerbalExpression {
   /// Throws an [ArgumentError] if [value] or [source] is null or empty.
   /// Returns replaced string.
   String replace(String source, String value) {
-    if (source == null) throw new ArgumentError.notNull('source');
-    if (value == null) throw new ArgumentError.notNull('value');
+    if (source == null) throw ArgumentError.notNull('source');
+    if (value == null) throw ArgumentError.notNull('value');
 
     if (_isGlobal) return source.replaceAll(toRegExp(), value);
 
@@ -456,7 +456,7 @@ class VerbalExpression {
       source += ')';
     }
 
-    return new RegExp('$_prefixes$source$_suffixes', caseSensitive: !_ignoreCase, multiLine: _isMultiLine);
+    return RegExp('$_prefixes$source$_suffixes', caseSensitive: !_ignoreCase, multiLine: _isMultiLine);
   }
 
   /// Overrides toString
