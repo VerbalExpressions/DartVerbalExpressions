@@ -4,13 +4,23 @@ import 'package:verbal_expressions/src/range.dart';
 
 /// Represents a VerbalExpression
 class VerbalExpression {
-  String _prefixes = '';
-  List<String> _sources = [''];
-  String _suffixes = '';
+  ///
+  final _sources = <String>[''];
 
-  bool _ignoreCase = false;
-  bool _isMultiLine = true;
-  bool _isGlobal = true;
+  ///
+  var _prefixes = '';
+
+  ///
+  var _suffixes = '';
+
+  ///
+  var _ignoreCase = false;
+
+  ///
+  var _isMultiLine = true;
+
+  ///
+  var _isGlobal = true;
 
   /// Escapes any non-word char with two backslashes used by any method, except [this.add]
   ///
@@ -21,19 +31,18 @@ class VerbalExpression {
   ///   sanitize('.\$^{abc 123'); // \\.\\$\\^\\{abc\\ 123
   ///
   String sanitize(String value) {
-    if (value == null || value.isEmpty) {
+    if (value.isEmpty) {
       throw ArgumentError('Value is empty');
     }
 
     return _escape(value);
   }
 
-  String _escape(String value) {
-    String pattern = '[\\W]';
-    return value.replaceAllMapped(RegExp(pattern), (Match match) {
-      return '\\${match.group(0)}';
-    });
-  }
+  ///
+  String _escape(String value) => value.replaceAllMapped(
+        RegExp('[\\W]'),
+        (Match match) => '\\${match.group(0)}',
+      );
 
   /// Append literal expression
   ///
@@ -45,9 +54,7 @@ class VerbalExpression {
   ///   var expression = VerbalExpression()..add('\n.*');
   ///   expression.toRegExp(); // produce exact '\n.*' regexp
   ///
-  void add(String expression) {
-    _sources[_sources.length - 1] += expression;
-  }
+  void add(String expression) => _sources[_sources.length - 1] += expression;
 
   /// Mark the expression to start at the beginning of the line
   ///
@@ -57,9 +64,7 @@ class VerbalExpression {
   ///   var expression = VerbalExpression()..startOfLine()..add('abc');
   ///   expression.toRegExp(); // produce '^abc' regexp
   ///
-  void startOfLine([bool enable = true]) {
-    _prefixes = enable ? '^' : '';
-  }
+  void startOfLine([bool enable = true]) => _prefixes = enable ? '^' : '';
 
   /// Mark the expression to end at the last character of the line
   ///
@@ -69,9 +74,7 @@ class VerbalExpression {
   ///   var expression = VerbalExpression()..add('abc')..endOfLine();
   ///   expression.toRegExp(); // produce 'abc\$' regexp
   ///
-  void endOfLine([bool enable = true]) {
-    _suffixes += enable ? '\$' : '';
-  }
+  void endOfLine([bool enable = true]) => _suffixes += enable ? '\$' : '';
 
   /// Adds a string to the expression that might appear once (or not)
   ///
@@ -87,9 +90,7 @@ class VerbalExpression {
   ///   expression.hasMatch('http://')    //true
   ///   expression.hasMatch('https://')   //true
   ///
-  void maybe(String value) {
-    add('(?:${sanitize(value)})?');
-  }
+  void maybe(String value) => add('(?:${sanitize(value)})?');
 
   /// Adds a string to the expression
   ///
@@ -99,9 +100,7 @@ class VerbalExpression {
   ///   var expression = VerbalExpression()..then('abc');
   ///   expression.toRegExp(); // produce 'abc' regexp
   ///
-  void then(String value) {
-    add('${sanitize(value)}');
-  }
+  void then(String value) => add(sanitize(value));
 
   /// Adds a string to the expression
   ///
@@ -112,9 +111,7 @@ class VerbalExpression {
   ///   var expression = VerbalExpression()..find('abc');
   ///   expression.toRegExp(); // produce 'abc' regexp
   ///
-  void find(String value) {
-    then(value);
-  }
+  void find(String value) => then(value);
 
   /// Adds expression that matches anything (includes empty string)
   ///
@@ -125,93 +122,62 @@ class VerbalExpression {
   ///   ..add('a')..anything()..then('a')      // 'an be dangerous a'
   ///   ..add('a')..anything(true)..then('a')  // 'an be da'
   ///
-  void anything([bool isLazy = false]) {
-    add(isLazy ? '(?:.*?)' : '(?:.*)');
-  }
+  void anything([bool isLazy = false]) => add(isLazy ? '(?:.*?)' : '(?:.*)');
 
   /// Adds expression that matches anything, but not [value]
   ///
   /// [isLazy] determines the type of search. Greedy search is default.
   /// Throws an [ArgumentError] if [value] is null or empty.
 
-  void anythingBut(String value, [bool isLazy = false]) {
-    add('(?:[^${sanitize(value)}]${isLazy ? '*?' : '*'})');
-  }
+  void anythingBut(String value, [bool isLazy = false]) =>
+      add('(?:[^${sanitize(value)}]${isLazy ? '*?' : '*'})');
 
   /// Adds expression that matches something that might appear once (or more)
-  void something() {
-    add('(?:.+)');
-  }
+  void something() => add('(?:.+)');
 
   /// Adds expression that matches something that might appear once (or more),
   /// but not [value]
   ///
   /// Throws an [ArgumentError] if [value] is null or empty.
-  void somethingBut(String value) {
-    add('(?:[^${sanitize(value)}]+)');
-  }
+  void somethingBut(String value) => add('(?:[^${sanitize(value)}]+)');
 
   /// Adds universal (Unix + Windows CRLF + Macintosh) line break expression
-  void lineBreak() {
-    add('(?:\\r\\n|\\r|\\n|\\r\\r)');
-  }
+  void lineBreak() => add('(?:\\r\\n|\\r|\\n|\\r\\r)');
 
   /// Shortcut for [this.lineBreak()]
-  void br() {
-    lineBreak();
-  }
+  void br() => lineBreak();
 
   /// Adds expression to match a tab character ('\u0009')
-  void tab() {
-    add('\\t');
-  }
+  void tab() => add('\\t');
 
   /// Adds word, same as [a-zA-Z_0-9]+
-  void word() {
-    add('\\w+');
-  }
+  void word() => add('\\w+');
 
   /// Adds word character, same as [a-zA-Z_0-9]
-  void wordChar() {
-    add('\\w');
-  }
+  void wordChar() => add('\\w');
 
   /// Adds non-word character, same as [^\w]
-  void nonWordChar() {
-    add('\\W');
-  }
+  void nonWordChar() => add('\\W');
 
   /// Adds digit, same as [0-9]
-  void digit() {
-    add('\\d');
-  }
+  void digit() => add('\\d');
 
   /// Adds non-digit, same as [^0-9]
-  void nonDigit() {
-    add('\\D');
-  }
+  void nonDigit() => add('\\D');
 
   /// Adds whitespace character, same as [ \t\n\x0B\f\r]
-  void space() {
-    add('\\s');
-  }
+  void space() => add('\\s');
 
   /// Adds non-whitespace character, same as [^\s]
-  void nonSpace() {
-    add('\\S');
-  }
+  void nonSpace() => add('\\S');
 
   /// Adds expression that any character from [value]
   ///
   /// Throws an [ArgumentError] if [value] is null or empty.
-  void anyOf(String value) {
-    add('[${sanitize(value)}]');
-  }
+  void anyOf(String value) => add('[${sanitize(value)}]');
 
   /// Shorthand for [this.anyOf()]
-  void any(String value) {
-    anyOf(value);
-  }
+  void any(String value) => anyOf(value);
 
   /// Add expression to match a range (or multiply ranges)
   ///
@@ -221,13 +187,14 @@ class VerbalExpression {
   ///   expression.toRegExp(); // produce [a-f0-5]
   ///
   void range(List<Range> ranges) {
-    String result = '[';
-    ranges.forEach((Range range) {
-      result += '${sanitize(range.from)}-${sanitize(range.to)}';
-    });
+    var result = '[';
+
+    ranges.forEach(
+      (Range range) =>
+          result += '${sanitize(range.from)}-${sanitize(range.to)}',
+    );
 
     result += ']';
-
     add(result);
   }
 
@@ -236,19 +203,16 @@ class VerbalExpression {
   /// Allows to set 'g', 'm' and 'i' flags in the regex
   /// Throws an [ArgumentError] if [modifier] is other then 'g', 'm' or 'i'.
   /// 'gm' is default.
-  void addModifier(String modifier) {
-    _applyModifier(modifier, true);
-  }
+  void addModifier(String modifier) => _applyModifier(modifier, true);
 
   /// Removes modifier flag
   ///
   /// Allows to unset 'g', 'm' and 'i' flags in the regex
   /// Throws an [ArgumentError] if [modifier] is other then 'g', 'm' or 'i'.
   /// 'gm' is default.
-  void removeModifier(String modifier) {
-    _applyModifier(modifier, false);
-  }
+  void removeModifier(String modifier) => _applyModifier(modifier, false);
 
+  ///
   void _applyModifier(String modifier, bool enable) {
     switch (modifier) {
       case 'i':
@@ -274,9 +238,7 @@ class VerbalExpression {
   ///   regex.hasMatch('a')   //true
   ///   regex.hasMatch('A')   //true
   ///
-  void withAnyCase([bool enable = true]) {
-    _applyModifier('i', enable);
-  }
+  void withAnyCase([bool enable = true]) => _applyModifier('i', enable);
 
   /// Enable or disable search in one line in prior
   /// to multi line search according to [enable] flag.
@@ -288,9 +250,7 @@ class VerbalExpression {
   ///   regex.hasMatch('first line \n a') //false
   ///   regex.hasMatch('a')               //true
   ///
-  void searchOneLine([bool enable = true]) {
-    _applyModifier('m', !enable);
-  }
+  void searchOneLine([bool enable = true]) => _applyModifier('m', !enable);
 
   /// Enable or disable search only for a first match in prior
   /// to all matches according to [enable] flag.
@@ -303,16 +263,12 @@ class VerbalExpression {
   ///   expression.stopAtFirst(false);
   ///   expression.replace('b') // bbb
   ///
-  void stopAtFirst([bool enable = true]) {
-    _applyModifier('g', !enable);
-  }
+  void stopAtFirst([bool enable = true]) => _applyModifier('g', !enable);
 
   /// Adds '+' char to regexp, means one or more times repeated
   ///
   /// Same effect as [this.atLeast(1)]
-  void oneOrMore() {
-    add('+');
-  }
+  void oneOrMore() => add('+');
 
   /// Adds zero or more times repeater.
   ///
@@ -323,9 +279,7 @@ class VerbalExpression {
   ///   ..add('a.')..zeroOrMore()..then('a')      // 'an be dangerous a'
   ///   ..add('a.')..zeroOrMore(true)..then('a')  // 'an be da'
   ///
-  void zeroOrMore([bool isLazy = false]) {
-    add(isLazy ? '*?' : '*');
-  }
+  void zeroOrMore([bool isLazy = false]) => add(isLazy ? '*?' : '*');
 
   /// Add count of previous group
   ///
@@ -338,9 +292,7 @@ class VerbalExpression {
   ///   regex.hasMatch('aa')  //false
   ///   regex.hasMatch('aaa') //true
   ///
-  void count(int count) {
-    add('{$count}');
-  }
+  void count(int? count) => add('{$count}');
 
   /// Add count of previous group
   ///
@@ -354,9 +306,7 @@ class VerbalExpression {
   ///   regex.hasMatch('aaaa')  //true
   ///   regex.hasMatch('aaaaa') //false
   ///
-  void countRange(int min, int max) {
-    add('{$min,$max}');
-  }
+  void countRange(int min, int max) => add('{$min,$max}');
 
   /// Produce range count with only minimal number of occurrences
   ///
@@ -371,9 +321,7 @@ class VerbalExpression {
   ///   regex.hasMatch('a')    //false
   ///   regex.hasMatch('aaa')  //true
   ///
-  void atLeast(int min) {
-    add('{$min,}');
-  }
+  void atLeast(int min) => add('{$min,}');
 
   /// Convenient method to show that string usage count is exact count, range count or simply one or more
   ///
@@ -385,7 +333,7 @@ class VerbalExpression {
   /// .multiply('abc', max: 5)            // Produces (abc){,5}
   /// .multiply('abc', min: 2, max: 5)    // Produces (abc){2,5}
   ///
-  void multiple(String value, {int min, int max}) {
+  void multiple(String value, {int? min, int? max}) {
     then(value);
 
     if (min == null && max == null) {
@@ -416,7 +364,9 @@ class VerbalExpression {
   ///
   /// Throws an [StateError] if call this method before call beginCapture().
   void endCapture() {
-    if (_sources.length == 1) throw StateError('There is no started group capture. Call beginCapture() first.');
+    if (_sources.length == 1)
+      throw StateError(
+          'There is no started group capture. Call beginCapture() first.');
 
     _sources[_sources.length - 2] += '${_sources.last})';
     _sources.removeLast();
@@ -438,10 +388,9 @@ class VerbalExpression {
   /// Throws an [ArgumentError] if [value] or [source] is null or empty.
   /// Returns replaced string.
   String replace(String source, String value) {
-    if (source == null) throw ArgumentError.notNull('source');
-    if (value == null) throw ArgumentError.notNull('value');
-
-    if (_isGlobal) return source.replaceAll(toRegExp(), value);
+    if (_isGlobal) {
+      return source.replaceAll(toRegExp(), value);
+    }
 
     return source.replaceFirst(toRegExp(), value);
   }
@@ -450,27 +399,26 @@ class VerbalExpression {
   ///
   /// Returns resulting regex object
   RegExp toRegExp() {
-    String source = _sources.reduce((String result, String item) => result + item);
+    String source = _sources.reduce(
+      (String result, String item) => result + item,
+    );
 
     for (int i = 0; i < _sources.length - 1; i++) {
       source += ')';
     }
 
-    return RegExp('$_prefixes$source$_suffixes', caseSensitive: !_ignoreCase, multiLine: _isMultiLine);
+    return RegExp('$_prefixes$source$_suffixes',
+        caseSensitive: !_ignoreCase, multiLine: _isMultiLine);
   }
 
   /// Overrides toString
   ///
   /// Returns resulting regex pattern
   @override
-  String toString() {
-    return toRegExp().pattern;
-  }
+  String toString() => toRegExp().pattern;
 
   /// Shorthand function for the Regex.hasMatch function
   ///
   /// Returns matching result.
-  bool hasMatch(String value) {
-    return toRegExp().hasMatch(value);
-  }
+  bool hasMatch(String value) => toRegExp().hasMatch(value);
 }

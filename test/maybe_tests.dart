@@ -3,14 +3,14 @@ library verbal_expressions.maybe_tests;
 import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
+///
 class MaybeTests {
-   static void run() {
+  ///
+  static void run() {
     group('Maybe', () {
-      VerbalExpression verbalExpression;
+      final verbalExpression = VerbalExpression();
 
-      setUp(() {
-        verbalExpression = VerbalExpression();
-      });
+      setUp(() {});
 
       test('Should return correct regex', () {
         verbalExpression
@@ -18,7 +18,7 @@ class MaybeTests {
           ..then('a')
           ..maybe('b');
 
-        expect(verbalExpression.toString(), '^a(?:b)?',
+        expect('$verbalExpression', '^a(?:b)?',
             reason: 'Regex should be "^a(?:b)?"');
       });
 
@@ -28,13 +28,22 @@ class MaybeTests {
           ..then('a')
           ..maybe('b');
 
-        RegExp matcher = verbalExpression.toRegExp();
-        expect(matcher.hasMatch('acb'), isTrue,
-            reason: 'Maybe has a "b" after an "a"');
-        expect(matcher.hasMatch('abc'), isTrue,
-            reason: 'Maybe has a "b" after an "a"');
-        expect(matcher.hasMatch('cab'), isFalse,
-            reason: 'Maybe has a "b" after an "a"');
+        final matcher = verbalExpression.toRegExp();
+        expect(
+          matcher.hasMatch('acb'),
+          isTrue,
+          reason: 'Maybe has a "b" after an "a"',
+        );
+        expect(
+          matcher.hasMatch('abc'),
+          isTrue,
+          reason: 'Maybe has a "b" after an "a"',
+        );
+        expect(
+          matcher.hasMatch('cab'),
+          isFalse,
+          reason: 'Maybe has a "b" after an "a"',
+        );
       });
     });
   }

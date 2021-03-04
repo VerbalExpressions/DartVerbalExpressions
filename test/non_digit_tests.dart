@@ -3,14 +3,14 @@ library verbal_expressions.non_digit_tests;
 import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
+///
 class NonDigitTests {
-   static void run() {
+  ///
+  static void run() {
     group('NonDigit', () {
-      VerbalExpression verbalExpression;
+      final verbalExpression = VerbalExpression();
 
-      setUp(() {
-        verbalExpression = VerbalExpression();
-      });
+      setUp(() {});
 
       test('Should return correct regex', () {
         verbalExpression
@@ -18,7 +18,7 @@ class NonDigitTests {
           ..nonDigit()
           ..endOfLine();
 
-        expect(verbalExpression.toString(), '^\\D\$',
+        expect('$verbalExpression', '^\\D\$',
             reason: 'Regex should be "^\\D\$"');
       });
 
@@ -28,7 +28,7 @@ class NonDigitTests {
           ..nonDigit()
           ..endOfLine();
 
-        RegExp matcher = verbalExpression.toRegExp();
+        final matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('5'), isFalse, reason: 'digit');
         expect(matcher.hasMatch('a'), isTrue, reason: 'non digit');
       });

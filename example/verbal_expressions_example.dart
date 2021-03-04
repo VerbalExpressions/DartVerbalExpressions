@@ -2,20 +2,17 @@ library verbal_expressions_example.example;
 
 import 'package:verbal_expressions/verbal_expressions.dart';
 
-main() {
-  var result = matchUrl('https://www.google.com'); // true
+void main() {
+  const phoneWithSpace = '+097 234 243';
+  matchTelephoneNumber(phoneWithSpace); //true
   // ...
 
-  String phoneWithSpace = "+097 234 243";
-  result = matchTelephoneNumber(phoneWithSpace); //true
+  const phoneWithoutSpace = '+097234243';
+  matchTelephoneNumber(phoneWithoutSpace); // true
   // ...
 
-  String phoneWithoutSpace = "+097234243";
-  result = matchTelephoneNumber(phoneWithoutSpace); // true
-  // ...
-
-  String phoneWithDash = "+097-234-243";
-  result = matchTelephoneNumber(phoneWithDash); // true
+  const phoneWithDash = '+097-234-243';
+  matchTelephoneNumber(phoneWithDash); // true
   // ...
 
   var domain = getDomain('https://www.google.com');
@@ -24,24 +21,27 @@ main() {
   domain = getDomain('http://ru.wikipedia.org/wiki/Dart');
   print(domain); // .org
 
-  var expression = VerbalExpression()
+  final expression = VerbalExpression()
     ..find('dog')
     ..stopAtFirst()
     ..withAnyCase();
 
-  var testString = expression.replace('Replace first DoG in the sentence but do not touch second dog', 'cat');
+  final testString = expression.replace(
+      'Replace first DoG in the sentence but do not touch second dog', 'cat');
 
-  print(testString); // Replace first cat in the sentence but do not touch second dog
+  // Replace first cat in the sentence but do not touch second dog
+  print(testString);
 }
 
+///
 String getDomain(String url) {
-  var expression = VerbalExpression()
+  final expression = VerbalExpression()
     ..startOfLine()
-    ..then("http")
-    ..maybe("s")
-    ..then("://")
-    ..maybe("www.")
-    ..anythingBut(" ")
+    ..then('http')
+    ..maybe('s')
+    ..then('://')
+    ..maybe('www.')
+    ..anythingBut(' ')
     ..beginCapture()
     ..then('.')
     ..anythingBut('/')
@@ -49,17 +49,19 @@ String getDomain(String url) {
     ..anything()
     ..endOfLine();
 
-  return expression.toRegExp().firstMatch(url).group(1);
+  return expression.toRegExp().firstMatch(url)!.group(1)!;
 }
 
+///
 bool matchTelephoneNumber(String number) {
-  var regex = VerbalExpression()
+  final regex = VerbalExpression()
     ..startOfLine()
-    ..then("+")
+    ..then('+')
     ..beginCapture()
     ..range([Range('0', '9')])
     ..count(3)
-    ..maybe("-")..maybe(" ")
+    ..maybe('-')
+    ..maybe(' ')
     ..endCapture()
     ..count(3)
     ..endOfLine();
@@ -67,14 +69,15 @@ bool matchTelephoneNumber(String number) {
   return regex.hasMatch(number);
 }
 
+///
 bool matchUrl(String url) {
-  var regex = VerbalExpression()
+  final regex = VerbalExpression()
     ..startOfLine()
-    ..then("http")
-    ..maybe("s")
-    ..then("://")
-    ..maybe("www.")
-    ..anythingBut(" ")
+    ..then('http')
+    ..maybe('s')
+    ..then('://')
+    ..maybe('www.')
+    ..anythingBut(' ')
     ..endOfLine();
 
   return regex.hasMatch(url);

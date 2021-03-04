@@ -3,14 +3,14 @@ library verbal_expressions.one_or_more_tests;
 import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
+///
 class OneOrMoreTests {
-   static void run() {
+  ///
+  static void run() {
     group('One or more', () {
-      VerbalExpression verbalExpression;
+      final verbalExpression = VerbalExpression();
 
-      setUp(() {
-        verbalExpression = VerbalExpression();
-      });
+      setUp(() {});
 
       test('Should return correct regex', () {
         verbalExpression
@@ -19,8 +19,7 @@ class OneOrMoreTests {
           ..oneOrMore()
           ..endOfLine();
 
-        expect(verbalExpression.toString(), '^a+\$',
-            reason: 'Regex should be "^a+\$"');
+        expect('$verbalExpression', '^a+\$', reason: 'Regex should be "^a+\$"');
       });
 
       test('Should match', () {
@@ -30,7 +29,7 @@ class OneOrMoreTests {
           ..oneOrMore()
           ..endOfLine();
 
-        RegExp matcher = verbalExpression.toRegExp();
+        final matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('a'), isTrue);
         expect(matcher.hasMatch('aaaaaaaaaaaaa'), isTrue);
         expect(matcher.hasMatch('ab'), isFalse);

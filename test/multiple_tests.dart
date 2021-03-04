@@ -3,18 +3,18 @@ library verbal_expressions.multiple_tests;
 import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
+///
 class MultipleTests {
-   static void run() {
+  ///
+  static void run() {
     group('Multiple', () {
-      VerbalExpression verbalExpression;
+      final verbalExpression = VerbalExpression();
 
-      setUp(() {
-        verbalExpression = VerbalExpression();
-      });
+      setUp(() {});
 
       test('Should be same as then and one or more', () {
-        VerbalExpression actual = verbalExpression..multiple('foo');
-        VerbalExpression expected = VerbalExpression()
+        final actual = verbalExpression..multiple('foo');
+        final expected = VerbalExpression()
           ..then('foo')
           ..oneOrMore();
 
@@ -22,8 +22,8 @@ class MultipleTests {
       });
 
       test('Should be same as then and count', () {
-        VerbalExpression actual = verbalExpression..multiple('foo', min: 3);
-        VerbalExpression expected = VerbalExpression()
+        final actual = verbalExpression..multiple('foo', min: 3);
+        final expected = VerbalExpression()
           ..then('foo')
           ..count(3);
 
@@ -31,8 +31,8 @@ class MultipleTests {
       });
 
       test('Should be same as then and count range from one', () {
-        VerbalExpression actual = verbalExpression..multiple('foo', max: 5);
-        VerbalExpression expected = VerbalExpression()
+        final actual = verbalExpression..multiple('foo', max: 5);
+        final expected = VerbalExpression()
           ..then('foo')
           ..countRange(1, 5);
 
@@ -40,8 +40,8 @@ class MultipleTests {
       });
 
       test('Should be same as then and count range', () {
-        VerbalExpression actual = verbalExpression..multiple('foo', min: 3, max: 10);
-        VerbalExpression expected = VerbalExpression()
+        final actual = verbalExpression..multiple('foo', min: 3, max: 10);
+        final expected = VerbalExpression()
           ..then('foo')
           ..countRange(3, 10);
 

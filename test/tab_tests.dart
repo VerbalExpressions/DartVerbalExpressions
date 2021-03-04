@@ -3,14 +3,14 @@ library verbal_expressions.tab_tests;
 import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
+///
 class TabTests {
-   static void run() {
+  ///
+  static void run() {
     group('tab', () {
-      VerbalExpression verbalExpression;
+      final verbalExpression = VerbalExpression();
 
-      setUp(() {
-        verbalExpression = VerbalExpression();
-      });
+      setUp(() {});
 
       test('Should return correct regex', () {
         verbalExpression
@@ -18,7 +18,7 @@ class TabTests {
           ..tab()
           ..endOfLine();
 
-        expect(verbalExpression.toString(), '^\\t\$',
+        expect('$verbalExpression', '^\\t\$',
             reason: 'Regex should be "^\\t\$"');
       });
 
@@ -26,10 +26,10 @@ class TabTests {
         verbalExpression
           ..startOfLine()
           ..tab()
-          ..then("abc")
+          ..then('abc')
           ..endOfLine();
 
-        RegExp matcher = verbalExpression.toRegExp();
+        final matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('\tabc'), isTrue, reason: 'tab then abc');
         expect(matcher.hasMatch('abc'), isFalse, reason: 'no tab then abc');
       });

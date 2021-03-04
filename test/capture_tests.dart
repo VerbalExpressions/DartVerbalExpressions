@@ -3,14 +3,14 @@ library verbal_expressions.capture_tests;
 import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
+///
 class CaptureTests {
-   static void run() {
+  ///
+  static void run() {
     group('Capture', () {
-      VerbalExpression verbalExpression;
+      final verbalExpression = VerbalExpression();
 
-      setUp(() {
-        verbalExpression = VerbalExpression();
-      });
+      setUp(() {});
 
       test('Should return correct regex', () {
         verbalExpression
@@ -19,11 +19,15 @@ class CaptureTests {
           ..or('org')
           ..endCapture();
 
-        expect(verbalExpression.toString(), '((?:com)|(?:org))', reason: 'Regex should be "((?:com)|(?:org))"');
+        expect('$verbalExpression', '((?:com)|(?:org))',
+            reason: 'Regex should be "((?:com)|(?:org))"');
       });
 
-      test('Should throw exception when call endCapture() before call beginCapture()', () {
-        expect(() => verbalExpression.endCapture(), throwsA(predicate((Error e) => e is StateError)));
+      test(
+          'Should throw exception when call endCapture() before call beginCapture()',
+          () {
+        expect(() => verbalExpression.endCapture(),
+            throwsA(predicate((Error e) => e is StateError)));
       });
 
       test('Should match', () {
@@ -32,11 +36,11 @@ class CaptureTests {
         verbalExpression
           ..find('a')
           ..beginCapture()
-          ..find("a")
+          ..find('a')
           ..count(2)
           ..endCapture()
           ..beginCapture()
-          ..find("b")
+          ..find('b')
           ..anything()
           ..beginCapture()
           ..find('_')
@@ -44,8 +48,8 @@ class CaptureTests {
           ..anything()
           ..endCapture();
 
-        RegExp matcher = verbalExpression.toRegExp();
-        Match match = matcher.firstMatch(testString);
+        final matcher = verbalExpression.toRegExp();
+        final match = matcher.firstMatch(testString)!;
         expect(match.groupCount, 3);
         expect(match.group(0), testString);
         expect(match.group(1), 'aa');
@@ -58,13 +62,13 @@ class CaptureTests {
 
         verbalExpression
           ..find('a')
-          ..find("a")
+          ..find('a')
           ..count(2)
-          ..find("b")
+          ..find('b')
           ..anything();
 
-        RegExp matcher = verbalExpression.toRegExp();
-        expect(matcher.firstMatch(testString).groupCount, 0);
+        final matcher = verbalExpression.toRegExp();
+        expect(matcher.firstMatch(testString)!.groupCount, 0);
       });
 
       test('Should end capturing of unterminated groups', () {
@@ -73,14 +77,14 @@ class CaptureTests {
         verbalExpression
           ..find('a')
           ..beginCapture()
-          ..find("a")
+          ..find('a')
           ..count(2)
           ..beginCapture()
-          ..find("b")
+          ..find('b')
           ..anything();
 
-        RegExp matcher = verbalExpression.toRegExp();
-        Match match = matcher.firstMatch(testString);
+        final matcher = verbalExpression.toRegExp();
+        final match = matcher.firstMatch(testString)!;
         expect(match.groupCount, 2);
         expect(match.group(0), 'aaabcd');
         expect(match.group(1), 'aabcd');

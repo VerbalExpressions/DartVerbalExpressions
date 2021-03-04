@@ -3,14 +3,14 @@ library verbal_expressions.non_word_char_tests;
 import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
+///
 class NonWordCharTests {
-   static void run() {
+  ///
+  static void run() {
     group('NonWordChar', () {
-      VerbalExpression verbalExpression;
+      final verbalExpression = VerbalExpression();
 
-      setUp(() {
-        verbalExpression = VerbalExpression();
-      });
+      setUp(() {});
 
       test('Should return correct regex', () {
         verbalExpression
@@ -18,7 +18,7 @@ class NonWordCharTests {
           ..nonWordChar()
           ..endOfLine();
 
-        expect(verbalExpression.toString(), '^\\W\$',
+        expect('$verbalExpression', '^\\W\$',
             reason: 'Regex should be "^\\W\$"');
       });
 
@@ -28,7 +28,7 @@ class NonWordCharTests {
           ..nonWordChar()
           ..endOfLine();
 
-        RegExp matcher = verbalExpression.toRegExp();
+        final matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('a'), isFalse, reason: 'word character');
         expect(matcher.hasMatch('5'), isFalse, reason: 'word character');
         expect(matcher.hasMatch('@'), isTrue, reason: 'non word character');

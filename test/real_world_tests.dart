@@ -3,50 +3,50 @@ library verbal_expressions.real_world_tests;
 import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
+///
 class RealWorldTests {
-   static void run() {
+  ///
+  static void run() {
     group('Real World', () {
-      VerbalExpression verbalExpression;
+      final verbalExpression = VerbalExpression();
 
-      setUp(() {
-        verbalExpression = VerbalExpression();
-      });
+      setUp(() {});
 
       test('test url', () {
         verbalExpression
           ..startOfLine()
-          ..then("http")
-          ..maybe("s")
-          ..then("://")
-          ..maybe("www.")
-          ..anythingBut(" ")
+          ..then('http')
+          ..maybe('s')
+          ..then('://')
+          ..maybe('www.')
+          ..anythingBut(' ')
           ..endOfLine();
 
-        String testUrl = "https://www.google.com";
+        const testUrl = 'https://www.google.com';
 
         expect(verbalExpression.hasMatch(testUrl), isTrue,
             reason: 'Matches Google\'s url');
-        expect(verbalExpression.toString(),
-            '^http(?:s)?\\:\\/\\/(?:www\\.)?(?:[^\\ ]*)\$',
+        expect(
+            '$verbalExpression', '^http(?:s)?\\:\\/\\/(?:www\\.)?(?:[^\\ ]*)\$',
             reason: 'Regex doesn\'t match same regex as in example');
       });
 
       test('test telephone number', () {
         verbalExpression
           ..startOfLine()
-          ..then("+")
+          ..then('+')
           ..beginCapture()
           ..range([Range('0', '9')])
           ..count(3)
-          ..maybe("-")
-          ..maybe(" ")
+          ..maybe('-')
+          ..maybe(' ')
           ..endCapture()
           ..count(3)
           ..endOfLine();
 
-        String phoneWithSpace = "+097 234 243";
-        String phoneWithoutSpace = "+097234243";
-        String phoneWithDash = "+097-234-243";
+        const phoneWithSpace = '+097 234 243';
+        const phoneWithoutSpace = '+097234243';
+        const phoneWithDash = '+097-234-243';
 
         expect(verbalExpression.hasMatch(phoneWithSpace), isTrue);
         expect(verbalExpression.hasMatch(phoneWithoutSpace), isTrue);
@@ -54,8 +54,8 @@ class RealWorldTests {
       });
 
       test('complex pattern with multiply captures', () {
-        String logLine =
-            "3\t4\t1\thttp://localhost:20001\t1\t63528800\t0\t63528800\t1000000000\t0\t63528800\tSTR1";
+        const logLine = '3\t4\t1\thttp://localhost:20001\t1\t63528800\t0\t'
+            '63528800\t1000000000\t0\t63528800\tSTR1';
 
         verbalExpression
           ..beginCapture()
@@ -74,7 +74,7 @@ class RealWorldTests {
           ..endCapture()
           ..tab()
           ..beginCapture()
-          ..find("http://localhost:20")
+          ..find('http://localhost:20')
           ..digit()
           ..count(3)
           ..endCapture()
@@ -115,7 +115,7 @@ class RealWorldTests {
           ..endCapture()
           ..tab()
           ..beginCapture()
-          ..find("STR")
+          ..find('STR')
           ..range([Range('0', '2')])
           ..count(1)
           ..endCapture();
@@ -134,35 +134,41 @@ class RealWorldTests {
       });
 
       test('complex pattern with multiply captures 2', () {
-        String logLine =
-            "3\t4\t1\thttp://localhost:20001\t1\t63528800\t0\t63528800\t1000000000\t0\t63528800\tSTR1";
+        const logLine = '3\t4\t1\thttp://localhost:20001\t1\t63528800\t'
+            '0\t63528800\t1000000000\t0\t63528800\tSTR1';
 
-        String digits = (VerbalExpression()
-          ..beginCapture()
-          ..digit()
-          ..oneOrMore()
-          ..endCapture()
-          ..tab()).toString();
-        String range = (VerbalExpression()
-          ..beginCapture()
-          ..range([Range('0', '1')])
-          ..count(1)
-          ..endCapture()
-          ..tab()).toString();
-        String host = (VerbalExpression()
-          ..beginCapture()
-          ..find("http://localhost:20")
-          ..digit()
-          ..count(3)
-          ..endCapture()
-          ..tab()).toString();
-        String fake = (VerbalExpression()
-          ..beginCapture()
-          ..find("STR")
-          ..range([Range('0', '2')])
-          ..count(1)
-          ..endCapture())
-          .toString();
+        final digits = (VerbalExpression()
+              ..beginCapture()
+              ..digit()
+              ..oneOrMore()
+              ..endCapture()
+              ..tab())
+            .toString();
+
+        final range = (VerbalExpression()
+              ..beginCapture()
+              ..range([Range('0', '1')])
+              ..count(1)
+              ..endCapture()
+              ..tab())
+            .toString();
+
+        final host = (VerbalExpression()
+              ..beginCapture()
+              ..find('http://localhost:20')
+              ..digit()
+              ..count(3)
+              ..endCapture()
+              ..tab())
+            .toString();
+
+        final fake = (VerbalExpression()
+              ..beginCapture()
+              ..find('STR')
+              ..range([Range('0', '2')])
+              ..count(1)
+              ..endCapture())
+            .toString();
 
         verbalExpression
           ..add(digits)
@@ -194,7 +200,7 @@ class RealWorldTests {
 
       test('unusual regex', () {
         verbalExpression.add('[A-Z0-1!-|]');
-        expect(verbalExpression.toString(), '[A-Z0-1!-|]');
+        expect('$verbalExpression', '[A-Z0-1!-|]');
       });
     });
   }

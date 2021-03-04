@@ -3,14 +3,14 @@ library verbal_expressions.zero_or_more_tests;
 import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
+///
 class ZeroOrMoreTests {
-   static void run() {
+  ///
+  static void run() {
     group('Zero or more', () {
-      VerbalExpression verbalExpression;
+      final verbalExpression = VerbalExpression();
 
-      setUp(() {
-        verbalExpression = VerbalExpression();
-      });
+      setUp(() {});
 
       test('Should return correct regex', () {
         verbalExpression
@@ -19,8 +19,7 @@ class ZeroOrMoreTests {
           ..zeroOrMore()
           ..endOfLine();
 
-        expect(verbalExpression.toString(), '^a*\$',
-            reason: 'Regex should be "^a*\$"');
+        expect('$verbalExpression', '^a*\$', reason: 'Regex should be "^a*\$"');
       });
 
       test('Should match', () {
@@ -30,7 +29,7 @@ class ZeroOrMoreTests {
           ..zeroOrMore()
           ..endOfLine();
 
-        RegExp matcher = verbalExpression.toRegExp();
+        final matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('a'), isTrue);
         expect(matcher.hasMatch('aaaaaaaaaaaaa'), isTrue);
         expect(matcher.hasMatch('ab'), isFalse);
@@ -44,8 +43,9 @@ class ZeroOrMoreTests {
           ..zeroOrMore()
           ..then('a');
 
-        RegExp matcher = verbalExpression.toRegExp();
-        expect(matcher.firstMatch('greedy can be dangerous at times').group(0), 'an be dangerous a');
+        final matcher = verbalExpression.toRegExp();
+        expect(matcher.firstMatch('greedy can be dangerous at times')!.group(0),
+            'an be dangerous a');
       });
 
       test('Should be lazy', () {
@@ -55,8 +55,9 @@ class ZeroOrMoreTests {
           ..zeroOrMore(true)
           ..then('a');
 
-        RegExp matcher = verbalExpression.toRegExp();
-        expect(matcher.firstMatch('greedy can be dangerous at times').group(0), 'an be da');
+        final matcher = verbalExpression.toRegExp();
+        expect(matcher.firstMatch('greedy can be dangerous at times')!.group(0),
+            'an be da');
       });
     });
   }
