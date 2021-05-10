@@ -3,14 +3,11 @@ library verbal_expressions.sanitize_tests;
 import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
-///
 class SanitizeTests {
-  ///
   static void run() {
     group('Sanitize', () {
-      final verbalExpression = VerbalExpression();
-
-      setUp(() {});
+      var verbalExpression = VerbalExpression();
+      setUp(() => verbalExpression = VerbalExpression());
 
       test('Should throw exception if null or empty', () {
         expect(() => verbalExpression.sanitize(''),

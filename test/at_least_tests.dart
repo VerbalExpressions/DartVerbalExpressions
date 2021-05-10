@@ -3,14 +3,11 @@ library verbal_expressions.at_least_tests;
 import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
-///
 class AtLeastTests {
-  ///
   static void run() {
     group('AtLeast', () {
-      final verbalExpression = VerbalExpression();
-
-      setUp(() {});
+      var verbalExpression = VerbalExpression();
+      setUp(() => verbalExpression = VerbalExpression());
 
       test('Should return correct regex', () {
         verbalExpression
@@ -19,7 +16,7 @@ class AtLeastTests {
           ..atLeast(3)
           ..endOfLine();
 
-        expect('$verbalExpression', '^a{3,}\$',
+        expect(verbalExpression.toString(), '^a{3,}\$',
             reason: 'Regex should be "^a{3,}\$"');
       });
 

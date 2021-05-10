@@ -3,14 +3,11 @@ library verbal_expressions.anything_tests;
 import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
-///
 class AnythingTests {
-  ///
   static void run() {
     group('Anything', () {
-      final verbalExpression = VerbalExpression();
-
-      setUp(() {});
+      var verbalExpression = VerbalExpression();
+      setUp(() => verbalExpression = VerbalExpression());
 
       test('Should return correct regex', () {
         verbalExpression
@@ -18,7 +15,7 @@ class AnythingTests {
           ..anything()
           ..endOfLine();
 
-        expect('$verbalExpression', '^(?:.*)\$',
+        expect(verbalExpression.toString(), '^(?:.*)\$',
             reason: 'Regex should be "^(?:.*)\$"');
       });
 
@@ -42,11 +39,10 @@ class AnythingTests {
 
         final matcher = verbalExpression.toRegExp();
         expect(
-          matcher
-              .firstMatch('greedy can be dangerous at times, really')!
-              .group(0),
-          'an be dangerous at times, rea',
-        );
+            matcher
+                .firstMatch('greedy can be dangerous at times, really')!
+                .group(0),
+            'an be dangerous at times, rea');
       });
 
       test('Should be lazy', () {
@@ -57,11 +53,10 @@ class AnythingTests {
 
         final matcher = verbalExpression.toRegExp();
         expect(
-          matcher
-              .firstMatch('greedy can be dangerous at times, really')!
-              .group(0),
-          'an be da',
-        );
+            matcher
+                .firstMatch('greedy can be dangerous at times, really')!
+                .group(0),
+            'an be da');
       });
     });
   }

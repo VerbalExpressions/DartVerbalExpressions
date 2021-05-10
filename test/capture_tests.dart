@@ -3,14 +3,11 @@ library verbal_expressions.capture_tests;
 import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
-///
 class CaptureTests {
-  ///
   static void run() {
     group('Capture', () {
-      final verbalExpression = VerbalExpression();
-
-      setUp(() {});
+      var verbalExpression = VerbalExpression();
+      setUp(() => verbalExpression = VerbalExpression());
 
       test('Should return correct regex', () {
         verbalExpression
@@ -19,7 +16,7 @@ class CaptureTests {
           ..or('org')
           ..endCapture();
 
-        expect('$verbalExpression', '((?:com)|(?:org))',
+        expect(verbalExpression.toString(), '((?:com)|(?:org))',
             reason: 'Regex should be "((?:com)|(?:org))"');
       });
 

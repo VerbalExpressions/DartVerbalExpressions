@@ -3,14 +3,11 @@ library verbal_expressions.non_digit_tests;
 import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
-///
 class NonDigitTests {
-  ///
   static void run() {
     group('NonDigit', () {
-      final verbalExpression = VerbalExpression();
-
-      setUp(() {});
+      var verbalExpression = VerbalExpression();
+      setUp(() => verbalExpression = VerbalExpression());
 
       test('Should return correct regex', () {
         verbalExpression
@@ -18,7 +15,7 @@ class NonDigitTests {
           ..nonDigit()
           ..endOfLine();
 
-        expect('$verbalExpression', '^\\D\$',
+        expect(verbalExpression.toString(), '^\\D\$',
             reason: 'Regex should be "^\\D\$"');
       });
 

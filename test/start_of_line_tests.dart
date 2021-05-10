@@ -3,23 +3,22 @@ library verbal_expressions.start_of_line_tests;
 import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
-///
 class StartOfLineTests {
-  ///
   static void run() {
     group('Start of line', () {
-      final verbalExpression = VerbalExpression();
-
-      setUp(() {});
+      var verbalExpression = VerbalExpression();
+      setUp(() => verbalExpression = VerbalExpression());
 
       test('Should add "^" in the beginning when is enable', () {
         verbalExpression.startOfLine(true);
-        expect('$verbalExpression', '^', reason: 'missing start of line regex');
+        expect(verbalExpression.toString(), '^',
+            reason: 'missing start of line regex');
       });
 
       test('Should not add "^" in the beginning when is not enable', () {
         verbalExpression.startOfLine(false);
-        expect('$verbalExpression', '', reason: 'missing start of line regex');
+        expect(verbalExpression.toString(), '',
+            reason: 'missing start of line regex');
       });
 
       test(

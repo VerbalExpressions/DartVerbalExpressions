@@ -3,14 +3,11 @@ library verbal_expressions.whitespace_tests;
 import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
-///
 class SpaceTests {
-  ///
   static void run() {
     group('Space', () {
-      final verbalExpression = VerbalExpression();
-
-      setUp(() {});
+      var verbalExpression = VerbalExpression();
+      setUp(() => verbalExpression = VerbalExpression());
 
       test('Should return correct regex', () {
         verbalExpression
@@ -18,7 +15,7 @@ class SpaceTests {
           ..space()
           ..endOfLine();
 
-        expect('$verbalExpression', '^\\s\$',
+        expect(verbalExpression.toString(), '^\\s\$',
             reason: 'Regex should be "^\\s\$"');
       });
 

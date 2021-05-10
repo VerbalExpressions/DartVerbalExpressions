@@ -3,14 +3,11 @@ library verbal_expressions.non_space_tests;
 import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
-///
 class NonSpaceTests {
-  ///
   static void run() {
     group('NonSpace', () {
-      final verbalExpression = VerbalExpression();
-
-      setUp(() {});
+      var verbalExpression = VerbalExpression();
+      setUp(() => verbalExpression = VerbalExpression());
 
       test('Should return correct regex', () {
         verbalExpression
@@ -18,7 +15,7 @@ class NonSpaceTests {
           ..nonSpace()
           ..endOfLine();
 
-        expect('$verbalExpression', '^\\S\$',
+        expect(verbalExpression.toString(), '^\\S\$',
             reason: 'Regex should be "^\\S\$"');
       });
 

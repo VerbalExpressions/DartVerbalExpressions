@@ -1,31 +1,26 @@
 ///
-/// The dart_verbal_expressions library.
 ///
-/// A library for Dart developers that helps to construct difficult regular expressions
 ///
 library verbal_expressions.range;
 
+///
 /// Represents a range object, which is used to setup validation ranges
+/// 
 class Range {
-  ///
-  factory Range(String from, String to) {
+  /// Creates a [Range] object based on [from] and [to] values
+  Range(this.from, this.to) {
     if (from.isEmpty) {
-      throw ArgumentError.value(from);
+      throw ArgumentError.notNull('from');
     }
 
     if (to.isEmpty) {
-      throw ArgumentError.value(to);
+      throw ArgumentError.notNull('to');
     }
-
-    return Range._(from, to);
   }
 
-  /// Creates a [Range] object based on [from] and [to] values
-  const Range._(this.from, this.to);
-
   /// Start range point
-  final String from;
+  String from;
 
   /// End range point
-  final String to;
+  String to;
 }

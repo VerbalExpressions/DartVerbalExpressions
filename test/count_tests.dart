@@ -3,14 +3,11 @@ library verbal_expressions.count_tests;
 import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
-///
 class CountTests {
-  ///
   static void run() {
     group('Count', () {
-      final verbalExpression = VerbalExpression();
-
-      setUp(() {});
+      var verbalExpression = VerbalExpression();
+      setUp(() => verbalExpression = VerbalExpression());
 
       test('Should return correct regex', () {
         verbalExpression
@@ -19,7 +16,7 @@ class CountTests {
           ..count(3)
           ..endOfLine();
 
-        expect('$verbalExpression', '^a{3}\$',
+        expect(verbalExpression.toString(), '^a{3}\$',
             reason: 'Regex should be "^a{3}\$"');
       });
 

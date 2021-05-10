@@ -3,14 +3,11 @@ library verbal_expressions.digit_tests;
 import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
-///
 class DigitTests {
-  ///
   static void run() {
     group('Digit', () {
-      final verbalExpression = VerbalExpression();
-
-      setUp(() {});
+      var verbalExpression = VerbalExpression();
+      setUp(() => verbalExpression = VerbalExpression());
 
       test('Should return correct regex', () {
         verbalExpression
@@ -18,7 +15,7 @@ class DigitTests {
           ..digit()
           ..endOfLine();
 
-        expect('$verbalExpression', '^\\d\$',
+        expect(verbalExpression.toString(), '^\\d\$',
             reason: 'Regex should be "^\\D\$"');
       });
 

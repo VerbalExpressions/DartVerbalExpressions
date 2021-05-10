@@ -3,14 +3,11 @@ library verbal_expressions.real_world_tests;
 import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
-///
 class RealWorldTests {
-  ///
   static void run() {
     group('Real World', () {
-      final verbalExpression = VerbalExpression();
-
-      setUp(() {});
+      var verbalExpression = VerbalExpression();
+      setUp(() => verbalExpression = VerbalExpression());
 
       test('test url', () {
         verbalExpression
@@ -26,8 +23,8 @@ class RealWorldTests {
 
         expect(verbalExpression.hasMatch(testUrl), isTrue,
             reason: 'Matches Google\'s url');
-        expect(
-            '$verbalExpression', '^http(?:s)?\\:\\/\\/(?:www\\.)?(?:[^\\ ]*)\$',
+        expect(verbalExpression.toString(),
+            '^http(?:s)?\\:\\/\\/(?:www\\.)?(?:[^\\ ]*)\$',
             reason: 'Regex doesn\'t match same regex as in example');
       });
 
@@ -54,8 +51,8 @@ class RealWorldTests {
       });
 
       test('complex pattern with multiply captures', () {
-        const logLine = '3\t4\t1\thttp://localhost:20001\t1\t63528800\t0\t'
-            '63528800\t1000000000\t0\t63528800\tSTR1';
+        const logLine =
+            '3\t4\t1\thttp://localhost:20001\t1\t63528800\t0\t63528800\t1000000000\t0\t63528800\tSTR1';
 
         verbalExpression
           ..beginCapture()
@@ -134,8 +131,8 @@ class RealWorldTests {
       });
 
       test('complex pattern with multiply captures 2', () {
-        const logLine = '3\t4\t1\thttp://localhost:20001\t1\t63528800\t'
-            '0\t63528800\t1000000000\t0\t63528800\tSTR1';
+        const logLine =
+            '3\t4\t1\thttp://localhost:20001\t1\t63528800\t0\t63528800\t1000000000\t0\t63528800\tSTR1';
 
         final digits = (VerbalExpression()
               ..beginCapture()
@@ -144,7 +141,6 @@ class RealWorldTests {
               ..endCapture()
               ..tab())
             .toString();
-
         final range = (VerbalExpression()
               ..beginCapture()
               ..range([Range('0', '1')])
@@ -152,7 +148,6 @@ class RealWorldTests {
               ..endCapture()
               ..tab())
             .toString();
-
         final host = (VerbalExpression()
               ..beginCapture()
               ..find('http://localhost:20')
@@ -161,7 +156,6 @@ class RealWorldTests {
               ..endCapture()
               ..tab())
             .toString();
-
         final fake = (VerbalExpression()
               ..beginCapture()
               ..find('STR')
@@ -200,7 +194,7 @@ class RealWorldTests {
 
       test('unusual regex', () {
         verbalExpression.add('[A-Z0-1!-|]');
-        expect('$verbalExpression', '[A-Z0-1!-|]');
+        expect(verbalExpression.toString(), '[A-Z0-1!-|]');
       });
     });
   }

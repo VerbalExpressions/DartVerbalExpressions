@@ -3,14 +3,11 @@ library verbal_expressions.any_of_tests;
 import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
-///
 class AnyOfTests {
-  ///
   static void run() {
     group('AnyOf', () {
-      final verbalExpression = VerbalExpression();
-
-      setUp(() {});
+      var verbalExpression = VerbalExpression();
+      setUp(() => verbalExpression = VerbalExpression());
 
       test('Should return correct regex', () {
         verbalExpression
@@ -18,7 +15,7 @@ class AnyOfTests {
           ..anyOf('xyz')
           ..endOfLine();
 
-        expect('$verbalExpression', '^[xyz]\$',
+        expect(verbalExpression.toString(), '^[xyz]\$',
             reason: 'Regex should be "^[xyz]\$"');
       });
 
@@ -30,18 +27,10 @@ class AnyOfTests {
           ..endOfLine();
 
         final matcher = verbalExpression.toRegExp();
-
-        expect(
-          matcher.hasMatch('ay'),
-          isTrue,
-          reason: 'Has an x, y, or z after a',
-        );
-
-        expect(
-          matcher.hasMatch('abc'),
-          isFalse,
-          reason: 'Doesn\'t have an x, y, or z after a',
-        );
+        expect(matcher.hasMatch('ay'), isTrue,
+            reason: 'Has an x, y, or z after a');
+        expect(matcher.hasMatch('abc'), isFalse,
+            reason: 'Doesn\'t have an x, y, or z after a');
       });
     });
   }

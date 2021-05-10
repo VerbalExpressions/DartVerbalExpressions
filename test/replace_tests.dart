@@ -3,14 +3,11 @@ library verbal_expressions.replace_tests;
 import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
-///
 class ReplaceTests {
-  ///
   static void run() {
     group('Replace', () {
-      final verbalExpression = VerbalExpression();
-
-      setUp(() {});
+      var verbalExpression = VerbalExpression();
+      setUp(() => verbalExpression = VerbalExpression());
 
       test('Should replace first', () {
         verbalExpression
@@ -20,20 +17,12 @@ class ReplaceTests {
           ..withAnyCase()
           ..stopAtFirst();
 
-        expect(
-          verbalExpression.replace('This is test here test', 'passed'),
-          'This is passed here test',
-        );
-
-        expect(
-          verbalExpression.replace('This is test_here test', 'passed'),
-          'This is passed test',
-        );
-
-        expect(
-          verbalExpression.replace('Testabc me test', 'passed'),
-          'passed me test',
-        );
+        expect(verbalExpression.replace('This is test here test', 'passed'),
+            'This is passed here test');
+        expect(verbalExpression.replace('This is test_here test', 'passed'),
+            'This is passed test');
+        expect(verbalExpression.replace('Testabc me test', 'passed'),
+            'passed me test');
       });
 
       test('Should replace all', () {
@@ -43,20 +32,12 @@ class ReplaceTests {
           ..anythingBut(' ')
           ..withAnyCase();
 
-        expect(
-          verbalExpression.replace('This is test here test', 'passed'),
-          'This is passed here passed',
-        );
-
-        expect(
-          verbalExpression.replace('This is test_here test', 'passed'),
-          'This is passed passed',
-        );
-
-        expect(
-          verbalExpression.replace('Testabc me test', 'passed'),
-          'passed me passed',
-        );
+        expect(verbalExpression.replace('This is test here test', 'passed'),
+            'This is passed here passed');
+        expect(verbalExpression.replace('This is test_here test', 'passed'),
+            'This is passed passed');
+        expect(verbalExpression.replace('Testabc me test', 'passed'),
+            'passed me passed');
       });
     });
   }

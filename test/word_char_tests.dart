@@ -3,14 +3,11 @@ library verbal_expressions.word_char_tests;
 import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
-///
 class WordCharTests {
-  ///
   static void run() {
     group('WordChar', () {
-      final verbalExpression = VerbalExpression();
-
-      setUp(() {});
+      var verbalExpression = VerbalExpression();
+      setUp(() => verbalExpression = VerbalExpression());
 
       test('Should return correct regex', () {
         verbalExpression
@@ -18,7 +15,7 @@ class WordCharTests {
           ..wordChar()
           ..endOfLine();
 
-        expect('$verbalExpression', '^\\w\$',
+        expect(verbalExpression.toString(), '^\\w\$',
             reason: 'Regex should be "^\\w\$"');
       });
 

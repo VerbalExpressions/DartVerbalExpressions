@@ -3,14 +3,11 @@ library verbal_expressions.multiple_tests;
 import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
-///
 class MultipleTests {
-  ///
   static void run() {
     group('Multiple', () {
-      final verbalExpression = VerbalExpression();
-
-      setUp(() {});
+      var verbalExpression = VerbalExpression();
+      setUp(() => verbalExpression = VerbalExpression());
 
       test('Should be same as then and one or more', () {
         final actual = verbalExpression..multiple('foo');

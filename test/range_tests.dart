@@ -3,26 +3,19 @@ library verbal_expressions.range_tests;
 import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
-///
 class RangeTests {
-  ///
   static void run() {
     group('Range', () {
-      final verbalExpression = VerbalExpression();
-
-      setUp(() {});
+      var verbalExpression = VerbalExpression();
+      setUp(() => verbalExpression = VerbalExpression());
 
       test('Should throw exception if range arguments are null or empty', () {
-        expect(
-          () => Range('', 'to'),
-          throwsA(predicate((Error e) => e is ArgumentError)),
-          reason: 'From should not be empty',
-        );
-        expect(
-          () => Range('from', ''),
-          throwsA(predicate((Error e) => e is ArgumentError)),
-          reason: 'To should not be empty',
-        );
+        expect(() => Range('', 'to'),
+            throwsA(predicate((Error e) => e is ArgumentError)),
+            reason: 'From should not be empty');
+        expect(() => Range('from', ''),
+            throwsA(predicate((Error e) => e is ArgumentError)),
+            reason: 'To should not be empty');
       });
 
       test('Should return correct regex', () {
@@ -31,7 +24,7 @@ class RangeTests {
           ..range([Range('a', 'b'), Range('0', '9')])
           ..endOfLine();
 
-        expect('$verbalExpression', '^[a-b0-9]\$',
+        expect(verbalExpression.toString(), '^[a-b0-9]\$',
             reason: 'Regex should be "^[a-b0-9]\$"');
       });
 
@@ -44,12 +37,9 @@ class RangeTests {
         final matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('b'), isTrue,
             reason: 'Regex don\'t matches letter');
-        expect(
-          matcher.hasMatch('A'),
-          isFalse,
-          reason:
-              'Regex matches capital leters, but should match only lower case',
-        );
+        expect(matcher.hasMatch('A'), isFalse,
+            reason:
+                'Regex matches capital leters, but should match only lower case');
       });
     });
   }

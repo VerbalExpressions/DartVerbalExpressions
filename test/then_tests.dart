@@ -3,14 +3,11 @@ library verbal_expressions.then_tests;
 import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
-///
 class ThenTests {
-  ///
   static void run() {
     group('Then', () {
-      final verbalExpression = VerbalExpression();
-
-      setUp(() {});
+      var verbalExpression = VerbalExpression();
+      setUp(() => verbalExpression = VerbalExpression());
 
       test('Should return correct regex', () {
         verbalExpression
@@ -18,7 +15,7 @@ class ThenTests {
           ..then('a')
           ..then('new');
 
-        expect('$verbalExpression', '^anew',
+        expect(verbalExpression.toString(), '^anew',
             reason: 'Regex should be "^(?:a)(?:new)"');
       });
 
@@ -30,21 +27,12 @@ class ThenTests {
           ..then('new');
 
         final matcher = verbalExpression.toRegExp();
-        expect(
-          matcher.hasMatch('anewb'),
-          isFalse,
-          reason: 'Correct order should be "a", "b", "c"',
-        );
-        expect(
-          matcher.hasMatch('abnew'),
-          isTrue,
-          reason: 'Correct order should be "a", "b", "c"',
-        );
-        expect(
-          matcher.hasMatch('newab'),
-          isFalse,
-          reason: 'Correct order should be "a", "b", "c"',
-        );
+        expect(matcher.hasMatch('anewb'), isFalse,
+            reason: 'Correct order should be "a", "b", "c"');
+        expect(matcher.hasMatch('abnew'), isTrue,
+            reason: 'Correct order should be "a", "b", "c"');
+        expect(matcher.hasMatch('newab'), isFalse,
+            reason: 'Correct order should be "a", "b", "c"');
       });
     });
   }

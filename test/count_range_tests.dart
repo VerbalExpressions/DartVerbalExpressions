@@ -3,14 +3,11 @@ library verbal_expressions.count_range_tests;
 import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
-///
 class CountRangeTests {
-  ///
   static void run() {
     group('CountRange', () {
-      final verbalExpression = VerbalExpression();
-
-      setUp(() {});
+      var verbalExpression = VerbalExpression();
+      setUp(() => verbalExpression = VerbalExpression());
 
       test('Should return correct regex', () {
         verbalExpression
@@ -19,7 +16,7 @@ class CountRangeTests {
           ..countRange(2, 5)
           ..endOfLine();
 
-        expect('$verbalExpression', '^a{2,5}\$',
+        expect(verbalExpression.toString(), '^a{2,5}\$',
             reason: 'Regex should be "^a{2,5}\$"');
       });
 

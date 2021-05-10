@@ -3,50 +3,34 @@ library verbal_expressions.modifiers_tests;
 import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
-///
 class ModifiersTests {
-  ///
   static void run() {
     group('Modifiers', () {
-      final verbalExpression = VerbalExpression();
-
-      setUp(() {});
+      var verbalExpression = VerbalExpression();
+      setUp(() => verbalExpression = VerbalExpression());
 
       test('Should throw exception if add incorrect modifier', () {
-        expect(
-          () => verbalExpression.addModifier('u'),
-          throwsA(predicate((Error e) => e is ArgumentError)),
-        );
-        expect(
-          () => verbalExpression.addModifier('unknown'),
-          throwsA(predicate((Error e) => e is ArgumentError)),
-        );
-        expect(
-          () => verbalExpression.addModifier('n'),
-          throwsA(predicate((Error e) => e is ArgumentError)),
-        );
+        expect(() => verbalExpression.addModifier('u'),
+            throwsA(predicate((Error e) => e is ArgumentError)));
+        expect(() => verbalExpression.addModifier('unknown'),
+            throwsA(predicate((Error e) => e is ArgumentError)));
+        expect(() => verbalExpression.addModifier('n'),
+            throwsA(predicate((Error e) => e is ArgumentError)));
       });
 
       test('Should throw exception if remove incorrect modifier', () {
-        expect(
-          () => verbalExpression.removeModifier('u'),
-          throwsA(predicate((Error e) => e is ArgumentError)),
-        );
-        expect(
-          () => verbalExpression.removeModifier('unknown'),
-          throwsA(predicate((Error e) => e is ArgumentError)),
-        );
-        expect(
-          () => verbalExpression.removeModifier('n'),
-          throwsA(predicate((Error e) => e is ArgumentError)),
-        );
+        expect(() => verbalExpression.removeModifier('u'),
+            throwsA(predicate((Error e) => e is ArgumentError)));
+        expect(() => verbalExpression.removeModifier('unknown'),
+            throwsA(predicate((Error e) => e is ArgumentError)));
+        expect(() => verbalExpression.removeModifier('n'),
+            throwsA(predicate((Error e) => e is ArgumentError)));
       });
     });
 
     group('Case modifier', () {
-      final verbalExpression = VerbalExpression();
-
-      setUp(() {});
+      var verbalExpression = VerbalExpression();
+      setUp(() => verbalExpression = VerbalExpression());
 
       test('Should not ignore case by default', () {
         verbalExpression
@@ -106,11 +90,11 @@ class ModifiersTests {
       });
     });
     group('MultiLine modifier', () {
-      final verbalExpression = VerbalExpression();
-      const multiLineText = '''multi line text
-               test here''';
+      var verbalExpression = VerbalExpression();
+      setUp(() => verbalExpression = VerbalExpression());
 
-      setUp(() {});
+      const String multiLineText = '''multi line text
+               test here''';
 
       test('Should be multiline search by default', () {
         verbalExpression
@@ -184,9 +168,8 @@ class ModifiersTests {
     });
 
     group('Global modifier', () {
-      final verbalExpression = VerbalExpression();
-
-      setUp(() {});
+      var verbalExpression = VerbalExpression();
+      setUp(() => verbalExpression = VerbalExpression());
 
       test('Should be replace first', () {
         verbalExpression
