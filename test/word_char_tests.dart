@@ -6,7 +6,7 @@ import 'package:verbal_expressions/verbal_expressions.dart';
 class WordCharTests {
   static void run() {
     group('WordChar', () {
-      var verbalExpression = VerbalExpression();
+      late VerbalExpression verbalExpression;
       setUp(() => verbalExpression = VerbalExpression());
 
       test('Should return correct regex', () {

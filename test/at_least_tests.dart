@@ -6,7 +6,7 @@ import 'package:verbal_expressions/verbal_expressions.dart';
 class AtLeastTests {
   static void run() {
     group('AtLeast', () {
-      var verbalExpression = VerbalExpression();
+      late VerbalExpression verbalExpression;
       setUp(() => verbalExpression = VerbalExpression());
 
       test('Should return correct regex', () {

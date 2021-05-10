@@ -6,7 +6,7 @@ import 'package:verbal_expressions/verbal_expressions.dart';
 class MaybeTests {
   static void run() {
     group('Maybe', () {
-      var verbalExpression = VerbalExpression();
+      late VerbalExpression verbalExpression;
       setUp(() => verbalExpression = VerbalExpression());
 
       test('Should return correct regex', () {

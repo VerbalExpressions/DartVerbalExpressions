@@ -6,7 +6,7 @@ import 'package:verbal_expressions/verbal_expressions.dart';
 class RealWorldTests {
   static void run() {
     group('Real World', () {
-      var verbalExpression = VerbalExpression();
+      late VerbalExpression verbalExpression;
       setUp(() => verbalExpression = VerbalExpression());
 
       test('test url', () {

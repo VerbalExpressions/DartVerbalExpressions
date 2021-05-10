@@ -6,7 +6,7 @@ import 'package:verbal_expressions/verbal_expressions.dart';
 class ReplaceTests {
   static void run() {
     group('Replace', () {
-      var verbalExpression = VerbalExpression();
+      late VerbalExpression verbalExpression;
       setUp(() => verbalExpression = VerbalExpression());
 
       test('Should replace first', () {

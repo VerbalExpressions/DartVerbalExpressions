@@ -6,7 +6,7 @@ import 'package:verbal_expressions/verbal_expressions.dart';
 class ZeroOrMoreTests {
   static void run() {
     group('Zero or more', () {
-      var verbalExpression = VerbalExpression();
+      late VerbalExpression verbalExpression;
       setUp(() => verbalExpression = VerbalExpression());
 
       test('Should return correct regex', () {

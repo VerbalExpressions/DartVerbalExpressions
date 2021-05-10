@@ -6,7 +6,7 @@ import 'package:verbal_expressions/verbal_expressions.dart';
 class LineBreakTests {
   static void run() {
     group('LineBreak', () {
-      var verbalExpression = VerbalExpression();
+      late VerbalExpression verbalExpression;
       setUp(() => verbalExpression = VerbalExpression());
 
       test('Should return correct regex', () {

@@ -6,7 +6,7 @@ import 'package:verbal_expressions/verbal_expressions.dart';
 class RangeTests {
   static void run() {
     group('Range', () {
-      var verbalExpression = VerbalExpression();
+      late VerbalExpression verbalExpression;
       setUp(() => verbalExpression = VerbalExpression());
 
       test('Should throw exception if range arguments are null or empty', () {

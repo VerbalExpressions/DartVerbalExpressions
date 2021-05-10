@@ -6,7 +6,7 @@ import 'package:verbal_expressions/verbal_expressions.dart';
 class ThenTests {
   static void run() {
     group('Then', () {
-      var verbalExpression = VerbalExpression();
+      late VerbalExpression verbalExpression;
       setUp(() => verbalExpression = VerbalExpression());
 
       test('Should return correct regex', () {

@@ -6,7 +6,7 @@ import 'package:verbal_expressions/verbal_expressions.dart';
 class EndOfLineTests {
   static void run() {
     group('End of line', () {
-      var verbalExpression = VerbalExpression();
+      late VerbalExpression verbalExpression;
       setUp(() => verbalExpression = VerbalExpression());
 
       test('Should match .com in the end when add .comm in the end', () {

@@ -6,7 +6,7 @@ import 'package:verbal_expressions/verbal_expressions.dart';
 class DigitTests {
   static void run() {
     group('Digit', () {
-      var verbalExpression = VerbalExpression();
+      late VerbalExpression verbalExpression;
       setUp(() => verbalExpression = VerbalExpression());
 
       test('Should return correct regex', () {

@@ -6,7 +6,7 @@ import 'package:verbal_expressions/verbal_expressions.dart';
 class StartOfLineTests {
   static void run() {
     group('Start of line', () {
-      var verbalExpression = VerbalExpression();
+      late VerbalExpression verbalExpression;
       setUp(() => verbalExpression = VerbalExpression());
 
       test('Should add "^" in the beginning when is enable', () {

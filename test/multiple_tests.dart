@@ -6,7 +6,7 @@ import 'package:verbal_expressions/verbal_expressions.dart';
 class MultipleTests {
   static void run() {
     group('Multiple', () {
-      var verbalExpression = VerbalExpression();
+      late VerbalExpression verbalExpression;
       setUp(() => verbalExpression = VerbalExpression());
 
       test('Should be same as then and one or more', () {

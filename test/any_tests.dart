@@ -6,7 +6,7 @@ import 'package:verbal_expressions/verbal_expressions.dart';
 class AnyTests {
   static void run() {
     group('Any', () {
-      var verbalExpression = VerbalExpression();
+      late VerbalExpression verbalExpression;
       setUp(() => verbalExpression = VerbalExpression());
 
       test('Should return correct regex', () {

@@ -6,7 +6,7 @@ import 'package:verbal_expressions/verbal_expressions.dart';
 class CountRangeTests {
   static void run() {
     group('CountRange', () {
-      var verbalExpression = VerbalExpression();
+      late VerbalExpression verbalExpression;
       setUp(() => verbalExpression = VerbalExpression());
 
       test('Should return correct regex', () {

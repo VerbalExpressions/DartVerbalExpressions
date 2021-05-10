@@ -6,7 +6,7 @@ import 'package:verbal_expressions/verbal_expressions.dart';
 class SanitizeTests {
   static void run() {
     group('Sanitize', () {
-      var verbalExpression = VerbalExpression();
+      late VerbalExpression verbalExpression;
       setUp(() => verbalExpression = VerbalExpression());
 
       test('Should throw exception if null or empty', () {

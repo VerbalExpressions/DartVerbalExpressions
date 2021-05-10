@@ -6,7 +6,7 @@ import 'package:verbal_expressions/verbal_expressions.dart';
 class ModifiersTests {
   static void run() {
     group('Modifiers', () {
-      var verbalExpression = VerbalExpression();
+      late VerbalExpression verbalExpression;
       setUp(() => verbalExpression = VerbalExpression());
 
       test('Should throw exception if add incorrect modifier', () {
@@ -29,7 +29,7 @@ class ModifiersTests {
     });
 
     group('Case modifier', () {
-      var verbalExpression = VerbalExpression();
+      late VerbalExpression verbalExpression;
       setUp(() => verbalExpression = VerbalExpression());
 
       test('Should not ignore case by default', () {
@@ -90,7 +90,7 @@ class ModifiersTests {
       });
     });
     group('MultiLine modifier', () {
-      var verbalExpression = VerbalExpression();
+      late VerbalExpression verbalExpression;
       setUp(() => verbalExpression = VerbalExpression());
 
       const String multiLineText = '''multi line text
@@ -168,7 +168,7 @@ class ModifiersTests {
     });
 
     group('Global modifier', () {
-      var verbalExpression = VerbalExpression();
+      late VerbalExpression verbalExpression;
       setUp(() => verbalExpression = VerbalExpression());
 
       test('Should be replace first', () {
