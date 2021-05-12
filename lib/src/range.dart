@@ -1,6 +1,3 @@
-///
-///
-///
 library verbal_expressions.range;
 
 ///
