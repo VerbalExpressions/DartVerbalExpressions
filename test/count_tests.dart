@@ -4,13 +4,10 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
 class CountTests {
-   static void run() {
+  static void run() {
     group('Count', () {
-      VerbalExpression verbalExpression;
-
-      setUp(() {
-        verbalExpression = VerbalExpression();
-      });
+      late VerbalExpression verbalExpression;
+      setUp(() => verbalExpression = VerbalExpression());
 
       test('Should return correct regex', () {
         verbalExpression
@@ -30,7 +27,7 @@ class CountTests {
           ..count(3)
           ..endOfLine();
 
-        RegExp matcher = verbalExpression.toRegExp();
+        final matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('a'), isFalse);
         expect(matcher.hasMatch('aaaa'), isFalse);
         expect(matcher.hasMatch('aaa'), isTrue);

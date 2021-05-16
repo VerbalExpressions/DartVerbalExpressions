@@ -4,13 +4,10 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
 class WordTests {
-   static void run() {
+  static void run() {
     group('Word', () {
-      VerbalExpression verbalExpression;
-
-      setUp(() {
-        verbalExpression = VerbalExpression();
-      });
+      late VerbalExpression verbalExpression;
+      setUp(() => verbalExpression = VerbalExpression());
 
       test('Should return correct regex', () {
         verbalExpression
@@ -28,7 +25,7 @@ class WordTests {
           ..word()
           ..endOfLine();
 
-        RegExp matcher = verbalExpression.toRegExp();
+        final matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('abc123'), isTrue, reason: 'word');
         expect(matcher.hasMatch('@#'), isFalse, reason: 'non-word');
       });

@@ -4,13 +4,10 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
 class DigitTests {
-   static void run() {
+  static void run() {
     group('Digit', () {
-      VerbalExpression verbalExpression;
-
-      setUp(() {
-        verbalExpression = VerbalExpression();
-      });
+      late VerbalExpression verbalExpression;
+      setUp(() => verbalExpression = VerbalExpression());
 
       test('Should return correct regex', () {
         verbalExpression
@@ -28,7 +25,7 @@ class DigitTests {
           ..digit()
           ..endOfLine();
 
-        RegExp matcher = verbalExpression.toRegExp();
+        final matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('5'), isTrue, reason: 'digit');
         expect(matcher.hasMatch('a'), isFalse, reason: 'non digit');
       });

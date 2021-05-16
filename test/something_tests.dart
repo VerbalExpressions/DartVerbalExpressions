@@ -4,13 +4,10 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
 class SomethingTests {
-   static void run() {
+  static void run() {
     group('Something', () {
-      VerbalExpression verbalExpression;
-
-      setUp(() {
-        verbalExpression = VerbalExpression();
-      });
+      late VerbalExpression verbalExpression;
+      setUp(() => verbalExpression = VerbalExpression());
 
       test('Should return correct regex', () {
         verbalExpression
@@ -28,7 +25,7 @@ class SomethingTests {
           ..something()
           ..endOfLine();
 
-        RegExp matcher = verbalExpression.toRegExp();
+        final matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('what'), isTrue, reason: 'what');
         expect(matcher.hasMatch(' '), isTrue, reason: 'Space');
         expect(matcher.hasMatch(''), isFalse,

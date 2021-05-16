@@ -4,13 +4,10 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
 class OneOrMoreTests {
-   static void run() {
+  static void run() {
     group('One or more', () {
-      VerbalExpression verbalExpression;
-
-      setUp(() {
-        verbalExpression = VerbalExpression();
-      });
+      late VerbalExpression verbalExpression;
+      setUp(() => verbalExpression = VerbalExpression());
 
       test('Should return correct regex', () {
         verbalExpression
@@ -30,7 +27,7 @@ class OneOrMoreTests {
           ..oneOrMore()
           ..endOfLine();
 
-        RegExp matcher = verbalExpression.toRegExp();
+        final matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('a'), isTrue);
         expect(matcher.hasMatch('aaaaaaaaaaaaa'), isTrue);
         expect(matcher.hasMatch('ab'), isFalse);

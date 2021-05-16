@@ -4,13 +4,10 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
 class AnythingTests {
-   static void run() {
+  static void run() {
     group('Anything', () {
-      VerbalExpression verbalExpression;
-
-      setUp(() {
-        verbalExpression = VerbalExpression();
-      });
+      late VerbalExpression verbalExpression;
+      setUp(() => verbalExpression = VerbalExpression());
 
       test('Should return correct regex', () {
         verbalExpression
@@ -28,7 +25,7 @@ class AnythingTests {
           ..anything()
           ..endOfLine();
 
-        RegExp matcher = verbalExpression.toRegExp();
+        final matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('what'), isTrue);
         expect(matcher.hasMatch(' '), isTrue);
         expect(matcher.hasMatch(''), isTrue);
@@ -40,8 +37,12 @@ class AnythingTests {
           ..anything()
           ..then('a');
 
-        RegExp matcher = verbalExpression.toRegExp();
-        expect(matcher.firstMatch('greedy can be dangerous at times, really').group(0), 'an be dangerous at times, rea');
+        final matcher = verbalExpression.toRegExp();
+        expect(
+            matcher
+                .firstMatch('greedy can be dangerous at times, really')!
+                .group(0),
+            'an be dangerous at times, rea');
       });
 
       test('Should be lazy', () {
@@ -50,8 +51,12 @@ class AnythingTests {
           ..anything(true)
           ..then('a');
 
-        RegExp matcher = verbalExpression.toRegExp();
-        expect(matcher.firstMatch('greedy can be dangerous at times, really').group(0), 'an be da');
+        final matcher = verbalExpression.toRegExp();
+        expect(
+            matcher
+                .firstMatch('greedy can be dangerous at times, really')!
+                .group(0),
+            'an be da');
       });
     });
   }

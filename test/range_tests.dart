@@ -4,24 +4,15 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
 class RangeTests {
-   static void run() {
+  static void run() {
     group('Range', () {
-      VerbalExpression verbalExpression;
-
-      setUp(() {
-        verbalExpression = VerbalExpression();
-      });
+      late VerbalExpression verbalExpression;
+      setUp(() => verbalExpression = VerbalExpression());
 
       test('Should throw exception if range arguments are null or empty', () {
-        expect(() => Range(null, 'to'),
-            throwsA(predicate((Error e) => e is ArgumentError)),
-            reason: 'From should not null');
         expect(() => Range('', 'to'),
             throwsA(predicate((Error e) => e is ArgumentError)),
             reason: 'From should not be empty');
-        expect(() => Range('from', null),
-            throwsA(predicate((Error e) => e is ArgumentError)),
-            reason: 'To should not be empty');
         expect(() => Range('from', ''),
             throwsA(predicate((Error e) => e is ArgumentError)),
             reason: 'To should not be empty');
@@ -43,7 +34,7 @@ class RangeTests {
           ..range([Range('a', 'z'), Range('0', '5')])
           ..endOfLine();
 
-        RegExp matcher = verbalExpression.toRegExp();
+        final matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('b'), isTrue,
             reason: 'Regex don\'t matches letter');
         expect(matcher.hasMatch('A'), isFalse,

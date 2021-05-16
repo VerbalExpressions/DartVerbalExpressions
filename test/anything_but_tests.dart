@@ -6,11 +6,8 @@ import 'package:verbal_expressions/verbal_expressions.dart';
 class AnythingButTests {
    static void run() {
     group('AnythingBut', () {
-      VerbalExpression verbalExpression;
-
-      setUp(() {
-        verbalExpression = VerbalExpression();
-      });
+      late VerbalExpression verbalExpression;
+      setUp(() => verbalExpression = VerbalExpression());
 
       test('Should return correct regex', () {
         verbalExpression
@@ -28,7 +25,7 @@ class AnythingButTests {
           ..anythingBut('w')
           ..endOfLine();
 
-        RegExp matcher = verbalExpression.toRegExp();
+        final matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('what'), isFalse, reason: 'starts with w');
         expect(matcher.hasMatch('that'), isTrue, reason: 'Not contain w');
         expect(matcher.hasMatch(' '), isTrue, reason: 'Not contain w');
@@ -40,8 +37,8 @@ class AnythingButTests {
           ..anythingBut('i')
           ..then('a');
 
-        RegExp matcher = verbalExpression.toRegExp();
-        expect(matcher.firstMatch('greedy can be dangerous at times, really').group(0), 'an be dangerous a');
+        final matcher = verbalExpression.toRegExp();
+        expect(matcher.firstMatch('greedy can be dangerous at times, really')!.group(0), 'an be dangerous a');
       });
 
       test('Should be lazy', () {
@@ -50,8 +47,8 @@ class AnythingButTests {
           ..anythingBut('i', true)
           ..then('a');
 
-        RegExp matcher = verbalExpression.toRegExp();
-        expect(matcher.firstMatch('greedy can be dangerous at times, really').group(0), 'an be da');
+        final matcher = verbalExpression.toRegExp();
+        expect(matcher.firstMatch('greedy can be dangerous at times, really')!.group(0), 'an be da');
       });
     });
   }

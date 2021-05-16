@@ -4,19 +4,16 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
 class OrTests {
-   static void run() {
+  static void run() {
     group('Or', () {
-      VerbalExpression verbalExpression;
-
-      setUp(() {
-        verbalExpression = VerbalExpression();
-      });
+      late VerbalExpression verbalExpression;
+      setUp(() => verbalExpression = VerbalExpression());
 
       test('Should return correct regex', () {
         verbalExpression
           ..startOfLine()
-          ..then("abc")
-          ..or("def")
+          ..then('abc')
+          ..or('def')
           ..endOfLine();
 
         expect(verbalExpression.toString(), '^(?:abc)|(?:def)\$',
@@ -26,10 +23,10 @@ class OrTests {
       test('Should match', () {
         verbalExpression
           ..startOfLine()
-          ..then("abc")
-          ..or("def");
+          ..then('abc')
+          ..or('def');
 
-        RegExp matcher = verbalExpression.toRegExp();
+        final matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('defzzz'), isTrue,
             reason: 'Starts with abc or def');
         expect(matcher.hasMatch('xyzabc'), isFalse,

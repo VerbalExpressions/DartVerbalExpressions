@@ -4,13 +4,10 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
 class ZeroOrMoreTests {
-   static void run() {
+  static void run() {
     group('Zero or more', () {
-      VerbalExpression verbalExpression;
-
-      setUp(() {
-        verbalExpression = VerbalExpression();
-      });
+      late VerbalExpression verbalExpression;
+      setUp(() => verbalExpression = VerbalExpression());
 
       test('Should return correct regex', () {
         verbalExpression
@@ -30,7 +27,7 @@ class ZeroOrMoreTests {
           ..zeroOrMore()
           ..endOfLine();
 
-        RegExp matcher = verbalExpression.toRegExp();
+        final matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('a'), isTrue);
         expect(matcher.hasMatch('aaaaaaaaaaaaa'), isTrue);
         expect(matcher.hasMatch('ab'), isFalse);
@@ -44,8 +41,9 @@ class ZeroOrMoreTests {
           ..zeroOrMore()
           ..then('a');
 
-        RegExp matcher = verbalExpression.toRegExp();
-        expect(matcher.firstMatch('greedy can be dangerous at times').group(0), 'an be dangerous a');
+        final matcher = verbalExpression.toRegExp();
+        expect(matcher.firstMatch('greedy can be dangerous at times')!.group(0),
+            'an be dangerous a');
       });
 
       test('Should be lazy', () {
@@ -55,8 +53,9 @@ class ZeroOrMoreTests {
           ..zeroOrMore(true)
           ..then('a');
 
-        RegExp matcher = verbalExpression.toRegExp();
-        expect(matcher.firstMatch('greedy can be dangerous at times').group(0), 'an be da');
+        final matcher = verbalExpression.toRegExp();
+        expect(matcher.firstMatch('greedy can be dangerous at times')!.group(0),
+            'an be da');
       });
     });
   }

@@ -4,20 +4,10 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
 class ReplaceTests {
-   static void run() {
+  static void run() {
     group('Replace', () {
-      VerbalExpression verbalExpression;
-
-      setUp(() {
-        verbalExpression = VerbalExpression();
-      });
-
-      test('Should throw exception if null or empty', () {
-        expect(() => verbalExpression.replace(null, 'value'),
-            throwsA(predicate((Error e) => e is ArgumentError)));
-        expect(() => verbalExpression.replace('source', null),
-            throwsA(predicate((Error e) => e is ArgumentError)));
-      });
+      late VerbalExpression verbalExpression;
+      setUp(() => verbalExpression = VerbalExpression());
 
       test('Should replace first', () {
         verbalExpression

@@ -4,13 +4,10 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
 class AnyOfTests {
-   static void run() {
+  static void run() {
     group('AnyOf', () {
-      VerbalExpression verbalExpression;
-
-      setUp(() {
-        verbalExpression = VerbalExpression();
-      });
+      late VerbalExpression verbalExpression;
+      setUp(() => verbalExpression = VerbalExpression());
 
       test('Should return correct regex', () {
         verbalExpression
@@ -29,7 +26,7 @@ class AnyOfTests {
           ..anyOf('xyz')
           ..endOfLine();
 
-        RegExp matcher = verbalExpression.toRegExp();
+        final matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('ay'), isTrue,
             reason: 'Has an x, y, or z after a');
         expect(matcher.hasMatch('abc'), isFalse,

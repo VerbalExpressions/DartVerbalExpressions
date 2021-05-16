@@ -4,13 +4,10 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
 class ModifiersTests {
-   static void run() {
+  static void run() {
     group('Modifiers', () {
-      VerbalExpression verbalExpression;
-
-      setUp(() {
-        verbalExpression = VerbalExpression();
-      });
+      late VerbalExpression verbalExpression;
+      setUp(() => verbalExpression = VerbalExpression());
 
       test('Should throw exception if add incorrect modifier', () {
         expect(() => verbalExpression.addModifier('u'),
@@ -32,11 +29,8 @@ class ModifiersTests {
     });
 
     group('Case modifier', () {
-      VerbalExpression verbalExpression;
-
-      setUp(() {
-        verbalExpression = VerbalExpression();
-      });
+      late VerbalExpression verbalExpression;
+      setUp(() => verbalExpression = VerbalExpression());
 
       test('Should not ignore case by default', () {
         verbalExpression
@@ -44,7 +38,7 @@ class ModifiersTests {
           ..find('test')
           ..endOfLine();
 
-        RegExp matcher = verbalExpression.toRegExp();
+        final matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('TeSt'), isFalse, reason: 'Should ignore case');
       });
 
@@ -55,7 +49,7 @@ class ModifiersTests {
           ..withAnyCase()
           ..endOfLine();
 
-        RegExp matcher = verbalExpression.toRegExp();
+        final matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('TeSt'), isTrue, reason: 'Should ignore case');
       });
 
@@ -66,7 +60,7 @@ class ModifiersTests {
           ..withAnyCase(false)
           ..endOfLine();
 
-        RegExp matcher = verbalExpression.toRegExp();
+        final matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('TeSt'), isFalse,
             reason: 'Should not ignore case');
       });
@@ -78,7 +72,7 @@ class ModifiersTests {
           ..addModifier('i')
           ..endOfLine();
 
-        RegExp matcher = verbalExpression.toRegExp();
+        final matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('TeSt'), isTrue, reason: 'Should ignore case');
       });
 
@@ -90,19 +84,17 @@ class ModifiersTests {
           ..removeModifier('i')
           ..endOfLine();
 
-        RegExp matcher = verbalExpression.toRegExp();
+        final matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('TeSt'), isFalse,
             reason: 'Should not ignore case');
       });
     });
     group('MultiLine modifier', () {
-      VerbalExpression verbalExpression;
-      String multiLineText = '''multi line text
-               test here''';
+      late VerbalExpression verbalExpression;
+      setUp(() => verbalExpression = VerbalExpression());
 
-      setUp(() {
-        verbalExpression = VerbalExpression();
-      });
+      const String multiLineText = '''multi line text
+               test here''';
 
       test('Should be multiline search by default', () {
         verbalExpression
@@ -112,7 +104,7 @@ class ModifiersTests {
           ..anything()
           ..endOfLine();
 
-        RegExp matcher = verbalExpression.toRegExp();
+        final matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch(multiLineText), isTrue,
             reason: 'Should search in multiple lines');
       });
@@ -126,7 +118,7 @@ class ModifiersTests {
           ..searchOneLine(false)
           ..endOfLine();
 
-        RegExp matcher = verbalExpression.toRegExp();
+        final matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch(multiLineText), isTrue,
             reason: 'Should search in multiple lines');
       });
@@ -140,7 +132,7 @@ class ModifiersTests {
           ..searchOneLine(true)
           ..endOfLine();
 
-        RegExp matcher = verbalExpression.toRegExp();
+        final matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch(multiLineText), isFalse,
             reason: 'Should search in multiple lines');
       });
@@ -154,7 +146,7 @@ class ModifiersTests {
           ..addModifier('m')
           ..endOfLine();
 
-        RegExp matcher = verbalExpression.toRegExp();
+        final matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch(multiLineText), isTrue,
             reason: 'Should search in multiple lines');
       });
@@ -169,18 +161,15 @@ class ModifiersTests {
           ..removeModifier('m')
           ..endOfLine();
 
-        RegExp matcher = verbalExpression.toRegExp();
+        final matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch(multiLineText), isFalse,
             reason: 'Should search in multiple lines');
       });
     });
 
     group('Global modifier', () {
-      VerbalExpression verbalExpression;
-
-      setUp(() {
-        verbalExpression = VerbalExpression();
-      });
+      late VerbalExpression verbalExpression;
+      setUp(() => verbalExpression = VerbalExpression());
 
       test('Should be replace first', () {
         verbalExpression

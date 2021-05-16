@@ -4,13 +4,10 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
 class StartOfLineTests {
-   static void run() {
+  static void run() {
     group('Start of line', () {
-      VerbalExpression verbalExpression;
-
-      setUp(() {
-        verbalExpression = VerbalExpression();
-      });
+      late VerbalExpression verbalExpression;
+      setUp(() => verbalExpression = VerbalExpression());
 
       test('Should add "^" in the beginning when is enable', () {
         verbalExpression.startOfLine(true);
@@ -32,7 +29,7 @@ class StartOfLineTests {
           ..then('ing')
           ..startOfLine();
 
-        RegExp matcher = verbalExpression.toRegExp();
+        final matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('testing1234'), isTrue,
             reason: 'Should match that the text starts with test');
       });
@@ -43,7 +40,7 @@ class StartOfLineTests {
           ..then('http')
           ..maybe('www');
 
-        RegExp matcher = verbalExpression.toRegExp();
+        final matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('http'), isTrue,
             reason: 'Should match http in start');
       });
@@ -54,7 +51,7 @@ class StartOfLineTests {
           ..then('http')
           ..maybe('www');
 
-        RegExp matcher = verbalExpression.toRegExp();
+        final matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('www'), isFalse,
             reason: 'Should not match www in start');
       });

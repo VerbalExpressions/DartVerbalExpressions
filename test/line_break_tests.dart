@@ -4,13 +4,10 @@ import 'package:test/test.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
 
 class LineBreakTests {
-   static void run() {
+  static void run() {
     group('LineBreak', () {
-      VerbalExpression verbalExpression;
-
-      setUp(() {
-        verbalExpression = VerbalExpression();
-      });
+      late VerbalExpression verbalExpression;
+      setUp(() => verbalExpression = VerbalExpression());
 
       test('Should return correct regex', () {
         verbalExpression
@@ -25,12 +22,12 @@ class LineBreakTests {
       test('Should match', () {
         verbalExpression
           ..startOfLine()
-          ..then("abc")
+          ..then('abc')
           ..lineBreak()
-          ..then("def")
+          ..then('def')
           ..endOfLine();
 
-        RegExp matcher = verbalExpression.toRegExp();
+        final matcher = verbalExpression.toRegExp();
         expect(matcher.hasMatch('abc\r\ndef'), isTrue,
             reason: 'abc then line break then def');
         expect(matcher.hasMatch('abc\ndef'), isTrue,

@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.5.0-nullsafety
+- Updated to Dart 2.12 with nullsafety
+
 ## 0.4.0
 - Updated to Dart 2
 

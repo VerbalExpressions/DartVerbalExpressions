@@ -2,14 +2,26 @@ library verbal_expressions.verbal_expression;
 
 import 'package:verbal_expressions/src/range.dart';
 
+///
 /// Represents a VerbalExpression
+///
 class VerbalExpression {
+  ///
   String _prefixes = '';
-  List<String> _sources = [''];
+
+  ///
+  final _sources = [''];
+
+  ///
   String _suffixes = '';
 
+  ///
   bool _ignoreCase = false;
+
+  ///
   bool _isMultiLine = true;
+
+  ///
   bool _isGlobal = true;
 
   /// Escapes any non-word char with two backslashes used by any method, except [this.add]
@@ -21,7 +33,7 @@ class VerbalExpression {
   ///   sanitize('.\$^{abc 123'); // \\.\\$\\^\\{abc\\ 123
   ///
   String sanitize(String value) {
-    if (value == null || value.isEmpty) {
+    if (value.isEmpty) {
       throw ArgumentError('Value is empty');
     }
 
@@ -29,7 +41,7 @@ class VerbalExpression {
   }
 
   String _escape(String value) {
-    String pattern = '[\\W]';
+    const pattern = '[\\W]';
     return value.replaceAllMapped(RegExp(pattern), (Match match) {
       return '\\${match.group(0)}';
     });
@@ -100,7 +112,7 @@ class VerbalExpression {
   ///   expression.toRegExp(); // produce 'abc' regexp
   ///
   void then(String value) {
-    add('${sanitize(value)}');
+    add(sanitize(value));
   }
 
   /// Adds a string to the expression
@@ -338,7 +350,7 @@ class VerbalExpression {
   ///   regex.hasMatch('aa')  //false
   ///   regex.hasMatch('aaa') //true
   ///
-  void count(int count) {
+  void count(int? count) {
     add('{$count}');
   }
 
@@ -385,7 +397,7 @@ class VerbalExpression {
   /// .multiply('abc', max: 5)            // Produces (abc){,5}
   /// .multiply('abc', min: 2, max: 5)    // Produces (abc){2,5}
   ///
-  void multiple(String value, {int min, int max}) {
+  void multiple(String value, {int? min, int? max}) {
     then(value);
 
     if (min == null && max == null) {
@@ -416,7 +428,9 @@ class VerbalExpression {
   ///
   /// Throws an [StateError] if call this method before call beginCapture().
   void endCapture() {
-    if (_sources.length == 1) throw StateError('There is no started group capture. Call beginCapture() first.');
+    if (_sources.length == 1)
+      throw StateError(
+          'There is no started group capture. Call beginCapture() first.');
 
     _sources[_sources.length - 2] += '${_sources.last})';
     _sources.removeLast();
@@ -438,10 +452,9 @@ class VerbalExpression {
   /// Throws an [ArgumentError] if [value] or [source] is null or empty.
   /// Returns replaced string.
   String replace(String source, String value) {
-    if (source == null) throw ArgumentError.notNull('source');
-    if (value == null) throw ArgumentError.notNull('value');
-
-    if (_isGlobal) return source.replaceAll(toRegExp(), value);
+    if (_isGlobal) {
+      return source.replaceAll(toRegExp(), value);
+    }
 
     return source.replaceFirst(toRegExp(), value);
   }
@@ -450,13 +463,15 @@ class VerbalExpression {
   ///
   /// Returns resulting regex object
   RegExp toRegExp() {
-    String source = _sources.reduce((String result, String item) => result + item);
+    String source =
+        _sources.reduce((String result, String item) => result + item);
 
     for (int i = 0; i < _sources.length - 1; i++) {
       source += ')';
     }
 
-    return RegExp('$_prefixes$source$_suffixes', caseSensitive: !_ignoreCase, multiLine: _isMultiLine);
+    return RegExp('$_prefixes$source$_suffixes',
+        caseSensitive: !_ignoreCase, multiLine: _isMultiLine);
   }
 
   /// Overrides toString

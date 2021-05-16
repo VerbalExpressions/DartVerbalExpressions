@@ -23,3 +23,9 @@ doc/api/
 
 # dart tooling
 .dart_tool
+
+# macOS files
+.DS_Store
+
+# VSCode files
+.vscode/
