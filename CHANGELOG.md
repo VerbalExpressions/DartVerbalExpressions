@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.0
+- Cleaned up according to latest Dart best practices 
+- Release 1st stable version
+
 ## 0.5.0-nullsafety
 - Updated to Dart 2.12 with nullsafety
 

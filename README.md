@@ -1,7 +1,7 @@
 [![Pub Package](https://img.shields.io/pub/v/verbal_expressions.svg)](https://pub.dartlang.org/packages/verbal_expressions)
 [![Build Status](https://travis-ci.org/VerbalExpressions/DartVerbalExpressions.svg)](https://travis-ci.org/VerbalExpressions/DartVerbalExpressions)
 [![Coverage Status](https://coveralls.io/repos/github/VerbalExpressions/DartVerbalExpressions/badge.svg?branch=master)](https://coveralls.io/github/VerbalExpressions/DartVerbalExpressions?branch=master)
-[![Github Issues](http://githubbadges.herokuapp.com/VerbalExpressions/DartVerbalExpressions/issues.svg)](https://github.com/VerbalExpressions/DartVerbalExpressions/issues)
+[![Github Issues](https://githubbadges.herokuapp.com/VerbalExpressions/DartVerbalExpressions/issues.svg)](https://github.com/VerbalExpressions/DartVerbalExpressions/issues)
 
 # verbal_expressions
 
@@ -71,7 +71,7 @@ Please find feature requests and bugs at the [issue tracker][tracker].
 [tracker]: https://github.com/VerbalExpressions/DartVerbalExpressions/issues
 
 ## Other implementations  
-You can view all implementations on [VerbalExpressions.github.io](http://VerbalExpressions.github.io) 
+You can view all implementations on [VerbalExpressions.github.io](https://VerbalExpressions.github.io) 
 
 [
 [Javascript](https://github.com/VerbalExpressions/JSVerbalExpressions) - 

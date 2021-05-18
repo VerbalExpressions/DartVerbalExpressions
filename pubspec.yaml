@@ -1,7 +1,6 @@
 name: verbal_expressions
 description: A package that helps to construct difficult regular expressions.
-version: 0.5.0-nullsafety
-author: Ne4istb <anechytailov@gmail.com>
+version: 1.0.0
 contributors: sergiolisan <sergiolisan@gmail.com>
 homepage: https://github.com/VerbalExpressions/DartVerbalExpressions
 

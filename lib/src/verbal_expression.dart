@@ -428,10 +428,11 @@ class VerbalExpression {
   ///
   /// Throws an [StateError] if call this method before call beginCapture().
   void endCapture() {
-    if (_sources.length == 1)
+    if (_sources.length == 1) {
       throw StateError(
           'There is no started group capture. Call beginCapture() first.');
-
+    }
+    
     _sources[_sources.length - 2] += '${_sources.last})';
     _sources.removeLast();
   }
